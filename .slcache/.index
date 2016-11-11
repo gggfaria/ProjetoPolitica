@@ -4508,3 +4508,11 @@ n:1385:java_io_File$deleteOnExit$7
 n:1489:java_io_File$delete$8
 n:3351:_GrailsRun_groovy$_run_closure5_closure10
 n:1567:java_io_File$equals$9
+n:583:groovyjarjarantlr/TokenStreamRecognitionException
+n:523:groovyjarjarantlr/TokenStreamException
+n:2316:org/codehaus/groovy/syntax/SyntaxException
+n:1134:org/codehaus/groovy/GroovyException
+n:1853:org/codehaus/groovy/control/messages/SyntaxErrorMessage
+n:3115:org/codehaus/groovy/tools/ErrorReporter
+n:3660:org/apache/log4j/NDC
+n:1568:java_io_File$equals$10

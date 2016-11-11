@@ -15,46 +15,50 @@
 </head>
 
 <body>
-
-    <h2>Cadstrar-se</h2>
+<div class="container-fluid">
+    <h2>Cadastrar-se</h2>
     <hr/>
-<g:formRemote name="formEleitor" url="[controller:'eleitor', action:'cadastrar']" onSuccess="exibirMensagem(data)">
+<g:formRemote name="formEleitor" url="[controller:'eleitor', action:'cadastrar']" onSuccess="exibirMensagem(data)" class="form-group">
     <div class="row">
         <div class="col-md-12" style="margin-left: 25px">
             <div class="row">
                 <div class="col-md-6">
+                    <span class="obrigatorio">*</span>
                     <label>Nome</label>
-                    <input type="text" name="nome" class="form-control">
+                    <input type="text" name="nome"  placeholder="Nome"  required="" class="form-control">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
+                    <span class="obrigatorio"> * </span>
                     <label>Data de nascimento</label>
-                    <input type="date" name="dataNascimento" class="form-control">
+                    <input type="date" name="dataNascimento" placeholder="dd/mm/yyyy"  id="dataNascimento"  required="" class="form-control">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
+                    <span class="obrigatorio">*</span>
                     <label>E-mail</label>
-                    <input type="email" name="email" class="form-control">
+                    <input type="email" name="email"  placeholder="email"   required="" class="form-control">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
+                    <span class="obrigatorio">*</span>
                     <label>Senha</label>
-                    <input type="password" name="senha" class="form-control">
+                    <input type="password" name="senha"  placeholder="senha"  required="" class="form-control">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
-
+                    <span class="obrigatorio">*</span>
                     <label>Sexo</label>
 
-                    <select name="sexo" class="form-control">
+                    <select name="sexo" class="form-control" required="">
                         <option value="0">Selecione</option>
                         <option value="MASCULINO">Masculino</option>
                         <option value="FEMININO">Feminino</option>
@@ -62,6 +66,7 @@
                     </select>
                 </div>
             </div>
+
 
         <!--<div class="row">
             <div class="col-md-6">
@@ -93,19 +98,50 @@
     <br/>
 
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="mensagemModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Informação</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="mensagem" role="alert"></div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
 </g:formRemote>
-
+</div>
 
 <script>
     function exibirMensagem(data) {
         if(data.erro){
-            alert("Erro")
+            document.getElementById('mensagem').textContent = 'Não foi possível concluir a operação.'
+            document.getElementById('mensagem').setAttribute('class','alert alert-danger')
+            $('#mensagemModal').modal('show')
         }else {
-            alert("OK")
-
+            document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso.'
+            document.getElementById('mensagem').setAttribute('class','alert alert-success')
+            $('#mensagemModal').modal('show')
         }
     }
+
+    $(document).ready(function(){
+        var date_input=$('input[name="dataNascimento"]');
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+            format: 'dd/mm/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        };
+        date_input.datepicker(options);
+    })
+
 
 </script>
 <script type="text/javascript" src="../js/select.js"></script>

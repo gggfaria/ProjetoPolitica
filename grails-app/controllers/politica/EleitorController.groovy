@@ -22,6 +22,8 @@ class EleitorController {
 
         eleitor.validate()
 
+
+
         if(eleitor.hasErrors()){
             def mensagem = ["erro": eleitor.errors.allErrors]
             render mensagem as JSON

@@ -1,4 +1,4 @@
-package politica
+
 
 abstract class Pessoa {
 
@@ -7,10 +7,15 @@ abstract class Pessoa {
     String email
     String senha
     boolean isAtivado
-    String sexo
+    EnumSexo sexo
+
 
 
     static constraints = {
-        sexo inList:["MASCULINO", "FEMININO", "OUTROS"]
+        nome size: 5..300, blank: false, nullable: false
+        senha size: 5..200, blank: false, nullable: false
+        email email: true, blank: false, unique: true
+        dataNascimento date: true, nullable: true
+        sexo nullable: false
     }
 }
