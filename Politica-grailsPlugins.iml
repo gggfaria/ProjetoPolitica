@@ -187,6 +187,7 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant-launcher/1.8.4/ant-launcher-1.8.4.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/jline/jline/2.11/jline-2.11.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/ant/ant/1.8.4/ant-1.8.4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.27/mysql-connector-java-5.1.27.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
