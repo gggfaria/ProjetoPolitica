@@ -6,7 +6,9 @@ class EleitorController {
 
     def index() {
         render (view:"index")
+        print('vai')
     }
+
     def cadastrar(){
         Eleitor eleitor
 

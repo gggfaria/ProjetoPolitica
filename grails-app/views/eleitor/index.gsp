@@ -10,6 +10,7 @@
 <head>
     <title>Eleitor - Cadastro</title>
     <link href="/Politica/css/select.css" rel="stylesheet">
+    <link href="/Politica/css/bootstrap-datepicker.css" rel="stylesheet">
     <meta name="layout" content="main">
 
 </head>
@@ -25,7 +26,10 @@
                 <div class="col-md-6">
                     <span class="obrigatorio">*</span>
                     <label>Nome</label>
-                    <input type="text" name="nome"  placeholder="Nome"  required="" class="form-control">
+                    <div class="input-group">
+                        <span class="input-group-addon" for="email">N</span>
+                        <input type="text" name="nome"  placeholder="Nome"  required="" class="form-control">
+                    </div>
                 </div>
             </div>
 
@@ -33,7 +37,12 @@
                 <div class="col-md-6">
                     <span class="obrigatorio"> * </span>
                     <label>Data de nascimento</label>
-                    <input type="date" name="dataNascimento" placeholder="dd/mm/yyyy"  id="dataNascimento"  required="" class="form-control">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </span>
+                        <input type="date" name="dataNascimento" placeholder="dd/mm/yyyy"  id="dataNascimento"  required="" class="form-control">
+                    </div>
                 </div>
             </div>
 
@@ -41,7 +50,10 @@
                 <div class="col-md-6">
                     <span class="obrigatorio">*</span>
                     <label>E-mail</label>
-                    <input type="email" name="email"  placeholder="email"   required="" class="form-control">
+                    <div class="input-group">
+                        <span class="input-group-addon" for="email">@</span>
+                        <input type="email" name="email"  placeholder="email"   required="" class="form-control">
+                   </div>
                 </div>
             </div>
 
@@ -49,7 +61,13 @@
                 <div class="col-md-6">
                     <span class="obrigatorio">*</span>
                     <label>Senha</label>
-                    <input type="password" name="senha"  placeholder="senha"  required="" class="form-control">
+                    <div class="input-group">
+                        <span class="input-group-addon" for="email">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                        <input type="password" name="senha"  placeholder="senha"  required="" class="form-control">
+                    </div>
+
                 </div>
             </div>
 
@@ -57,13 +75,18 @@
                 <div class="col-md-6">
                     <span class="obrigatorio">*</span>
                     <label>Sexo</label>
+                    <div class="input-group">
+                        <span class="input-group-addon" for="email">
+                            <i class="fa fa-venus-mars" aria-hidden="true"></i>
+                        </span>
+                        <select name="sexo" class="form-control" required="">
+                            <option value="0">Selecione</option>
+                            <option value="MASCULINO">Masculino</option>
+                            <option value="FEMININO">Feminino</option>
+                            <option value="OUTROS">Outros</option>
+                        </select>
+                    </div>
 
-                    <select name="sexo" class="form-control" required="">
-                        <option value="0">Selecione</option>
-                        <option value="MASCULINO">Masculino</option>
-                        <option value="FEMININO">Feminino</option>
-                        <option value="OUTROS">Outros</option>
-                    </select>
                 </div>
             </div>
 
@@ -145,5 +168,7 @@
 
 </script>
 <script type="text/javascript" src="../js/select.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
+
 </body>
 </html>
