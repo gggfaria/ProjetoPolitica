@@ -18,4 +18,11 @@ abstract class Pessoa {
         dataNascimento date: true, nullable: true
         sexo nullable: false
     }
+
+    static mapping = {
+        table name :"pessoas"
+        //id column: "pes_id"
+        shows cascade: "all-delete-orphan"
+    }
+
 }
