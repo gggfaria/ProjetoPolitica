@@ -63,7 +63,10 @@
 
 # "temporary" build files
 /target
+
 .slcache/
+
+/bower-components
 
 
 ### Intellij ###
