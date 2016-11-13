@@ -1,13 +1,13 @@
+package politica
 
-
-abstract class Pessoa {
+public abstract class Pessoa {
 
     String nome
     Date dataNascimento
     String email
     String senha
     boolean isAtivado
-    EnumSexo sexo
+    politica.EnumSexo sexo
 
 
 
@@ -19,10 +19,5 @@ abstract class Pessoa {
         sexo nullable: false
     }
 
-    static mapping = {
-        table name :"pessoas"
-        //id column: "pes_id"
-        shows cascade: "all-delete-orphan"
-    }
 
 }

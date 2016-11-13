@@ -1,3 +1,5 @@
+package politica
+
 
 public enum EnumSexo {
     MASCULINO('Masculino'),
