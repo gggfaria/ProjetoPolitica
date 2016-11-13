@@ -1,17 +1,15 @@
 package politica
 
 
-class Eleitor extends politica.Pessoa {
+class Eleitor extends Pessoa {
 
     static hasMany = [perguntas: Pergunta, notas:Nota]
-    static hasOne = [pessoa: politica.Pessoa]
-    static belongsTo = [politica.Pessoa]
 
     static constraints = {
     }
 
     static mapping ={
-        //discriminator value: "ELEITOR"
+        discriminator value: "ELEITOR"
     }
 
 
