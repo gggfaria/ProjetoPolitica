@@ -14,9 +14,9 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/politica"
-            username = "politica"
-            password = "politicaMunicipal"
+            url = "jdbc:mysql://localhost/ppm"
+            username = "root"
+            password = "aluno"
         }
         hibernate {
             show_sql = true
@@ -25,27 +25,27 @@ environments {
     test {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/politica"
-            username = "politica"
-            password = "politicaMunicipal"
+            url = "jdbc:mysql://localhost/ppm"
+            username = "root"
+            password = "aluno"
         }
     }
     production {
         dataSource {
             //dbCreate = "update"
-            url = "jdbc:mysql://localhost/politica"
-            username = "politica"
-            password = "politicaMunicipal"
+            url = "jdbc:mysql://localhost/ppm"
+            username = "teste"
+            password = "teste"
             properties {
                 maxActive = -1
-                minEvictableIdleTimeMillis = 1800000
-                timeBetweenEvictionRunsMillis = 1800000
-                numTestsPerEvictionRun = 3
-                testOnBorrow = true
-                testWhileIdle = true
-                testOnReturn = false
-                validationQuery = "SELECT 1"
-                jdbcInterceptors = "ConnectionState"
+                minEvictableIdleTimeMillis=1800000
+                timeBetweenEvictionRunsMillis=1800000
+                numTestsPerEvictionRun=3
+                testOnBorrow=true
+                testWhileIdle=true
+                testOnReturn=false
+                validationQuery="SELECT 1"
+                jdbcInterceptors="ConnectionState"
             }
         }
     }

@@ -1,6 +1,7 @@
 package politica
 
-public abstract class Pessoa {
+
+abstract class Pessoa {
 
     String nome
     Date dataNascimento
@@ -11,13 +12,14 @@ public abstract class Pessoa {
 
 
 
-    static constraints = {
-        nome size: 5..300, blank: false, nullable: false
-        senha size: 5..200, blank: false, nullable: false
-        email email: true, blank: false, unique: true
-        dataNascimento date: true, nullable: true
-        sexo nullable: false
-    }
+    String sexo
+    static hasOne = [politico: Politico, eleitor: Eleitor]
 
+
+    static constraints = {
+        sexo inList:["MASCULINO", "FEMININO", "OUTROS"]
+        politico nullable: true
+        eleitor nullable: true
+    }
 
 }
