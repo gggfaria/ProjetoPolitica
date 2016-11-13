@@ -4656,3 +4656,6 @@ n:1820:grails/util/BuildSettings$getBaseDir$1
 n:1899:grails/util/PluginBuildSettings$getSupportedPluginInfos$14
 n:1900:grails/util/PluginBuildSettings$getPluginSourceDirectories$15
 n:1146:org/codehaus/groovy/grails/cli/ScriptExitException
+n:1568:java_io_File$equals$10
+n:1820:grails/util/BuildSettings$getBaseDir$3
+n:1408:java_io_File$getCanonicalPath$9

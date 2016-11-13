@@ -6,7 +6,9 @@ class EleitorController {
 
     def index() {
         render (view:"index")
+
     }
+
     def cadastrar(){
         Eleitor eleitor
 
@@ -21,6 +23,8 @@ class EleitorController {
         eleitor.isAtivado = true
 
         eleitor.validate()
+
+
 
         if(eleitor.hasErrors()){
             def mensagem = ["erro": eleitor.errors.allErrors]

@@ -8,4 +8,8 @@ class Politico {
     static belongsTo = [Pessoa]
     static constraints = {
     }
+
+    static mapping = {
+        tablePerHierarchy false
+    }
 }
