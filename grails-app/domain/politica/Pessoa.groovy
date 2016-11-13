@@ -11,8 +11,6 @@ abstract class Pessoa {
     politica.EnumSexo sexo
 
 
-
-    String sexo
     static hasOne = [politico: Politico, eleitor: Eleitor]
 
 
