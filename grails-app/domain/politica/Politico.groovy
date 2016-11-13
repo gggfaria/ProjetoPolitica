@@ -9,7 +9,8 @@ class Politico {
     static constraints = {
     }
 
-    static mapping = {
-        tablePerHierarchy false
+
+    static mapping ={
+        //discriminator value: "POLITICO"
     }
 }

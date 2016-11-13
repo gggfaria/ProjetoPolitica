@@ -54,15 +54,16 @@
 
 
 # plugin release files
-#/*.zip
-#/plugin.xml
+/*.zip
+/plugin.xml
 
 # older plugin install locations
-#/plugins
-#/web-app/plugins
+/plugins
+/web-app/plugins
 
 # "temporary" build files
-#/target
+/target
+.slcache/
 
 
 ### Intellij ###

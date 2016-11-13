@@ -26,4 +26,8 @@ public class Pessoa {
         eleitor nullable: true
     }
 
+    static mapping ={
+        //discriminator column: "tipo", value: "GERAL"
+    }
+
 }
