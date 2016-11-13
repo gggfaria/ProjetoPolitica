@@ -9,10 +9,10 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title><g:layoutTitle default="Grails"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="text/javascript" src="/Politica/js/jquery-3.1.1.min.js"></script>
 		<link href="/Politica/css/bootstrap.css" rel="stylesheet">
 		<link href="/Politica/css/button.css" rel="stylesheet">
         <link href="/Politica/css/site.css" rel="stylesheet">
-		<script type="text/javascript" src="/Politica/js/jquery-3.1.1.min.js"></script>
 		<script src="/Politica/js/bootstrap.js"></script>
 		<g:layoutHead/>
 		<g:javascript library="application"/>

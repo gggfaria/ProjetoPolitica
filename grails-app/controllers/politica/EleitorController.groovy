@@ -16,7 +16,7 @@ class EleitorController {
 
 
         eleitor.nome = params.nome
-        eleitor.dataNascimento = new Date()
+        eleitor.dataNascimento = new Date().parse("dd/MM/yyyy",params.dataNascimento)
         eleitor.email = params.email
         eleitor.senha = params.senha
         eleitor.sexo = params.sexo
@@ -25,10 +25,15 @@ class EleitorController {
         eleitor.validate()
 
 
-
         if(eleitor.hasErrors()){
-            def mensagem = ["erro": eleitor.errors.allErrors]
+            def listaErros = []
+            eleitor.errors.each{ erro ->
+                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+            }
+
+            def mensagem = ["erro": listaErros]
             render mensagem as JSON
+
         }else{
             eleitor =  eleitor.save(flush: true)
             render eleitor as JSON

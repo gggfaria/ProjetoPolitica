@@ -11,11 +11,19 @@
     <title>Eleitor - Cadastro</title>
     <link href="/Politica/css/select.css" rel="stylesheet">
     <link href="/Politica/css/bootstrap-datepicker.css" rel="stylesheet">
+
+
+
+
     <meta name="layout" content="main">
+
 
 </head>
 
 <body>
+
+
+
 <div class="container-fluid">
     <h2>Cadastrar-se</h2>
     <hr/>
@@ -130,6 +138,7 @@
                 </div>
                 <div class="modal-body">
                     <div id="mensagem" role="alert"></div>
+                    <div id="mensagemErros" role="alert"></div>
                 </div>
 
             </div><!-- /.modal-content -->
@@ -140,35 +149,45 @@
 </g:formRemote>
 </div>
 
+<script type="text/javascript" src="../js/select.js"></script>
+<script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
 <script>
     function exibirMensagem(data) {
         if(data.erro){
             document.getElementById('mensagem').textContent = 'Não foi possível concluir a operação.'
             document.getElementById('mensagem').setAttribute('class','alert alert-danger')
+
+            var divMensagemErro
+            var erros = data.erro
+            $('#mensagemErros').empty()
+            for(var i=0; i < erros.length; i++){
+                $('#mensagemErros').append("<div class='alert alert-danger'>"+erros[i]+"</div>"+"<br/>")
+                console.log(erros[i])
+            }
+
             $('#mensagemModal').modal('show')
         }else {
             document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso.'
             document.getElementById('mensagem').setAttribute('class','alert alert-success')
+            $('#mensagemErros').empty()
             $('#mensagemModal').modal('show')
         }
     }
 
-    $(document).ready(function(){
-        var date_input=$('input[name="dataNascimento"]');
-        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-        var options={
-            format: 'dd/mm/yyyy',
-            container: container,
-            todayHighlight: true,
-            autoclose: true,
-        };
-        date_input.datepicker(options);
-    })
+    $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+    $('#dataNascimento').datepicker({
+        format: "dd/mm/yyyy",
+        startView: 2,
+        clearBtn: true,
+        language: "pt-BR",
+        orientation: "bottom auto",
+        autoclose: true
+    });
+
 
 
 </script>
-<script type="text/javascript" src="../js/select.js"></script>
-<script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
+
 
 </body>
 </html>
