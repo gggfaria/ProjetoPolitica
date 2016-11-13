@@ -1,18 +1,26 @@
+
 package politica
 
-abstract class Pessoa {
 
+ class Pessoa {
     String nome
     Date dataNascimento
     String email
     String senha
     boolean isAtivado
-    String sexo
+    politica.EnumSexo sexo
     static hasOne = [politico: Politico, eleitor: Eleitor]
 
+
     static constraints = {
-        sexo inList:["MASCULINO", "FEMININO", "OUTROS"]
+        nome size: 5..300, blank: false, nullable: false
+        senha size: 5..200, blank: false, nullable: false
+        email email: true, blank: false, unique: true
+        dataNascimento date: true, nullable: true
+        sexo nullable: false
         politico nullable: true
         eleitor nullable: true
     }
+
+
 }
