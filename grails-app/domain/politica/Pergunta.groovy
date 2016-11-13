@@ -3,9 +3,9 @@ package politica
 class Pergunta {
 
 
-    static hasOne = [pessoa: Pessoa, proposta: Proposta]
+    static hasOne = [eleitor: Eleitor, proposta: Proposta]
     static hasMany = [respostas: Resposta]
-    static belongsTo = [Proposta, Pessoa]
+    static belongsTo = [Proposta, Eleitor]
     String descricao
     boolean isResposta
     Date date
