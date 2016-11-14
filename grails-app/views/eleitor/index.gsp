@@ -33,9 +33,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <span class="obrigatorio">*</span>
-                    <label>Nome</label>
+                    <label>Nome completo</label>
                     <div class="input-group">
-                        <span class="input-group-addon" for="email">N</span>
+                        <span class="input-group-addon" for="email">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
                         <input type="text" name="nome"  placeholder="Nome"  required="" class="form-control">
                     </div>
                 </div>
@@ -73,7 +75,7 @@
                         <span class="input-group-addon" for="email">
                             <i class="fa fa-key" aria-hidden="true"></i>
                         </span>
-                        <input type="password" name="senha"  placeholder="senha"  required="" class="form-control">
+                        <input type="password" min="5" name="senha"  placeholder="senha"  required="" class="form-control">
                     </div>
 
                 </div>
