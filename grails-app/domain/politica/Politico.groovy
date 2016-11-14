@@ -1,6 +1,6 @@
 package politica
 
-class Politico {
+class Politico extends Pessoa {
 
     static hasMany = [propostas: Proposta, respostas: Resposta]
     boolean isCandidato
