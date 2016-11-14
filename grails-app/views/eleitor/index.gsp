@@ -35,7 +35,7 @@
                     <span class="obrigatorio">*</span>
                     <label>Nome completo</label>
                     <div class="input-group">
-                        <span class="input-group-addon" for="email">
+                        <span class="input-group-addon">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                         <input type="text" name="nome"  placeholder="Nome"  required="" class="form-control">
@@ -61,7 +61,7 @@
                     <span class="obrigatorio">*</span>
                     <label>E-mail</label>
                     <div class="input-group">
-                        <span class="input-group-addon" for="email">@</span>
+                        <span class="input-group-addon">@</span>
                         <input type="email" name="email"  placeholder="email"   required="" class="form-control">
                    </div>
                 </div>
@@ -72,10 +72,13 @@
                     <span class="obrigatorio">*</span>
                     <label>Senha</label>
                     <div class="input-group">
-                        <span class="input-group-addon" for="email">
+                        <span class="input-group-addon">
                             <i class="fa fa-key" aria-hidden="true"></i>
                         </span>
-                        <input type="password" min="5" name="senha"  placeholder="senha"  required="" class="form-control">
+                        <input type="password" min="5" name="senha" id="senha"  placeholder="senha"  required="" class="form-control">
+                        <span class="input-group-addon" style="cursor: pointer;" onmousedown="exibirSenha()" onmouseup="esconderSenha()">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </span>
                     </div>
 
                 </div>
@@ -86,7 +89,7 @@
                     <span class="obrigatorio">*</span>
                     <label>Sexo</label>
                     <div class="input-group">
-                        <span class="input-group-addon" for="email">
+                        <span class="input-group-addon">
                             <i class="fa fa-venus-mars" aria-hidden="true"></i>
                         </span>
                         <select name="sexo" class="form-control" required="">
@@ -152,6 +155,7 @@
 </div>
 
 <script type="text/javascript" src="../js/select.js"></script>
+<script type="text/javascript" src="../js/comum.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
 <script>
     function exibirMensagem(data) {
@@ -173,6 +177,8 @@
             document.getElementById('mensagem').setAttribute('class','alert alert-success')
             $('#mensagemErros').empty()
             $('#mensagemModal').modal('show')
+            $('input').val('')
+            $('select').val('0')
         }
     }
 
@@ -185,6 +191,7 @@
         orientation: "bottom auto",
         autoclose: true
     });
+
 
 
 
