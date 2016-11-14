@@ -158,29 +158,6 @@
 <script type="text/javascript" src="../js/comum.js"></script>
 <script type="text/javascript" src="../js/bootstrap-datepicker.js"></script>
 <script>
-    function exibirMensagem(data) {
-        if(data.erro){
-            document.getElementById('mensagem').textContent = 'Não foi possível concluir a operação.'
-            document.getElementById('mensagem').setAttribute('class','alert alert-danger')
-
-            var divMensagemErro
-            var erros = data.erro
-            $('#mensagemErros').empty()
-            for(var i=0; i < erros.length; i++){
-                $('#mensagemErros').append("<div class='alert alert-danger'>"+erros[i]+"</div>"+"<br/>")
-                console.log(erros[i])
-            }
-
-            $('#mensagemModal').modal('show')
-        }else {
-            document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso.'
-            document.getElementById('mensagem').setAttribute('class','alert alert-success')
-            $('#mensagemErros').empty()
-            $('#mensagemModal').modal('show')
-            $('input').val('')
-            $('select').val('0')
-        }
-    }
 
     $.fn.datepicker.defaults.format = "mm/dd/yyyy";
     $('#dataNascimento').datepicker({
@@ -191,8 +168,6 @@
         orientation: "bottom auto",
         autoclose: true
     });
-
-
 
 
 </script>
