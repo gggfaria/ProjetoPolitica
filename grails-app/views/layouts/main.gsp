@@ -13,8 +13,11 @@
 		<link href="/Politica/css/bootstrap.css" rel="stylesheet">
 		<link href="/Politica/css/button.css" rel="stylesheet">
         <link href="/Politica/css/site.css" rel="stylesheet">
+
 		<script src="/Politica/js/bootstrap.js"></script>
-		<g:layoutHead/>
+        <script src="/Politica/js/notify.min.js"></script>
+
+    <g:layoutHead/>
 		<g:javascript library="application"/>
 		<r:layoutResources />
 	</head>
@@ -32,7 +35,7 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse navbar-right">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Cadastrar</a></li>
+						<li><a href="#" onclick="exibirCadastro()">Cadastrar</a></li>
 					</ul>
 				</div>
 				<ul class="nav navbar-nav navbar-right">
@@ -49,12 +52,52 @@
 			</div>
 		</nav>
 
+        <!--Modal cadastrar -->
+        <div class="modal fade" id="modalForm" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                        <h4 class="modal-title">Cadastrar-se</h4>
+                    </div>
+                    <div class="modal-body">
+                        <g:render template="cadastrar"></g:render>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-			<g:layoutBody/>
+        <g:layoutBody/>
 
-		<div class="footer" role="contentinfo"></div>
-		<r:layoutResources />
 
+
+		<div class="footer" role="contentinfo">
+
+        </div>
+
+        <r:layoutResources />
+
+    <script type="text/javascript" src="/Politica/js/select.js"></script>
+    <script type="text/javascript" src="/Politica/js/comum.js"></script>
+    <script type="text/javascript" src="/Politica/js/bootstrap-datepicker.js"></script>
+    <script>
+
+        $.fn.datepicker.defaults.format = "mm/dd/yyyy";
+        $('#dataNascimento').datepicker({
+            format: "dd/mm/yyyy",
+            startView: 2,
+            clearBtn: true,
+            language: "pt-BR",
+            orientation: "bottom auto",
+            autoclose: true
+        });
+
+        function exibirCadastro() {
+            $('#modalForm').modal('show')
+        }
+    </script>
 
 	</body>
 </html>
