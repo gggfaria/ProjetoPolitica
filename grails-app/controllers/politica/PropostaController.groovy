@@ -40,4 +40,23 @@ class PropostaController {
 
     }
 
+    def pergunta() {
+
+        if (!params.id) {
+            render(view: '/erro404', model: [mensagem: 'Proposta não especificada']);
+        } else {
+            Proposta proposta = Proposta.findById(params.id);
+
+            if (proposta == null) {
+                render(view: '/erro404', model: [mensagem: 'Proposta não encontrada']);
+            } else {
+                render(view: "pergunta", model: [proposta: proposta]);
+            }
+        }
+    }
+
+    def erro404() {
+        render(view: "/error", model: [status: 404, exception: "Id da Proposta não especificado"]);
+    }
+
 }
