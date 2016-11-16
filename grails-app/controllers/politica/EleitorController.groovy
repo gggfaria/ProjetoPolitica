@@ -5,12 +5,14 @@ import grails.converters.JSON
 class EleitorController {
 
     def index() {
+
         render (view:"index")
 
     }
 
     def cadastrar(){
         Eleitor eleitor
+
 
         eleitor = new Eleitor()
 
@@ -28,7 +30,7 @@ class EleitorController {
         if(eleitor.hasErrors()){
             def listaErros = []
             eleitor.errors.each{ erro ->
-                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+                listaErros.add(g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError))
             }
 
             def mensagem = ["erro": listaErros]
@@ -41,6 +43,7 @@ class EleitorController {
 
 
     }
+
 
 
 }

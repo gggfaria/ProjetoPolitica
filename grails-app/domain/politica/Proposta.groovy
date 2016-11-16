@@ -5,7 +5,9 @@ class Proposta {
     String titulo
     String descricao
     String resumo
-    static hasOne = [area: Area, politico: Politico]
+    Area area
+    Politico politico
+
     static hasMany = [perguntas: Pergunta, notas: Nota]
     static belongsTo = [Politico]
     static constraints = {

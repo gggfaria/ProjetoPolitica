@@ -9,7 +9,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
-                        <input type="text" name="nome"  placeholder="Nome"  required="" class="form-control">
+                        <input type="text" name="nome" placeholder="Nome" id="nome" required="" class="form-control">
                     </div>
                 </div>
             </div>
@@ -92,11 +92,12 @@
             </div>
         </div>-->
 
+        <button class="button button-5 button-5b icon-cart" name="cadastrar">
+            <i class="fa fa-check"></i>
+            <span>Cadastrar</span>
+        </button>
 
-        <button class="button button-3 button-3e icon-arrow-right" name="cadastrar">
-            <i class="fa fa-check" aria-hidden="true"></i>
-            Cadastrar
-       </button>
+
 
         </div>
     </div>

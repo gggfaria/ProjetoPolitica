@@ -1,18 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Gabriel
-  Date: 07/11/2016
-  Time: 22:09
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Eleitor - Cadastro</title>
     <link href="/Politica/css/select.css" rel="stylesheet">
     <link href="/Politica/css/bootstrap-datepicker.css" rel="stylesheet">
-
-
 
 
     <meta name="layout" content="main">
@@ -27,7 +18,7 @@
 <div class="container-fluid">
     <h2>Cadastrar-se</h2>
     <hr/>
-<g:formRemote name="formEleitor" url="[controller:'eleitor', action:'cadastrar']" onSuccess="exibirMensagem(data)" class="form-group">
+<g:formRemote name="formEleitor" url="[controller:'eleitor', action:'cadastrar']" onSuccess="exibirMensagemModal(data)" class="form-group">
     <div class="row">
         <div class="col-md-12" style="margin-left: 25px">
             <div class="row">
@@ -62,7 +53,7 @@
                     <label>E-mail</label>
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="email" name="email"  placeholder="email"   required="" class="form-control">
+                        <input type="email" name="email"  placeholder="email"  required="" class="form-control">
                    </div>
                 </div>
             </div>
@@ -123,7 +114,7 @@
 
 
             <button class="button button-3 button-3e icon-arrow-right" name="cadastrar">
-                <i class="fa fa-arrow-right"></i>
+            <i class="fa fa-check" aria-hidden="true"></i>
                 Cadastrar
             </button>
 

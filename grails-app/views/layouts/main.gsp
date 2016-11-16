@@ -13,6 +13,7 @@
 		<link href="/Politica/css/bootstrap.css" rel="stylesheet">
 		<link href="/Politica/css/button.css" rel="stylesheet">
         <link href="/Politica/css/site.css" rel="stylesheet">
+		<link href="/Politica/css/bootstrap-datepicker.css" rel="stylesheet">
 
 		<script src="/Politica/js/bootstrap.js"></script>
         <script src="/Politica/js/notify.min.js"></script>
@@ -31,7 +32,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">Política Municipal</a>
+					<a class="navbar-brand" href="/Politica/">Política Municipal</a>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse navbar-right">
 					<ul class="nav navbar-nav">
@@ -57,13 +58,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" title="Fechar" class="close" data-dismiss="modal" aria-label="Close">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
                         <h4 class="modal-title">Cadastrar-se</h4>
                     </div>
                     <div class="modal-body">
-                        <g:render template="cadastrar"></g:render>
+                        <g:render template="../eleitor/cadastrar"></g:render>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -96,6 +97,7 @@
 
         function exibirCadastro() {
             $('#modalForm').modal('show')
+			$("#nome").focus()
         }
     </script>
 

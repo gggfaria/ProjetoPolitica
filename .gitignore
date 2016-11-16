@@ -120,3 +120,7 @@ fabric.properties
  modules.xml
  .idea/misc.xml 
  *.ipr
+
+#arquivos de imagem e pdf
+/images
+/arquivos
