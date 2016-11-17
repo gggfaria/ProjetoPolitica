@@ -1,5 +1,7 @@
 package politica
 
+import grails.converters.JSON
+
 class PoliticoController {
 
     def index() {
@@ -21,7 +23,15 @@ class PoliticoController {
            }
 
         }
-        render(template: "proposta", model: [propostas: propostas])
+        if(propostas != null) {
+
+            //render(template: "proposta", model: [propostas: propostas])
+            render propostas as JSON
+        }else
+        {
+            //TODO ERRO
+        }
+
     }
 
 

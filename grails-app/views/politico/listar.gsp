@@ -28,7 +28,7 @@
                     </div>
                     <div class="bottom">
 
-                        <button class="button button-5 button-5b icon-cart" style="width: 100%" name="cadastrar">
+                        <button class="button button-5 button-5b icon-cart" style="width: 100%" name="cadastrar" >
                             <i class="fa fa-plus"></i>
                             <span>sobre</span>
                         </button>
@@ -73,16 +73,25 @@
 </div><!-- /.modal -->
 
 <script>
+
+
+
+
     function mostrarProposta(propostas){
         $('#modalProposta').modal('show')
 
-        for(var i=0;i<propostas.length;i++)
-        {
-            $("#conteudoProposta").append(progress[i].descricao)
+
+         if(propostas[0].id != undefined){
+            for(var i=0; i<propostas.length; i++){
+                $("#conteudoProposta").append("<h1>"+ propostas[i].titulo+"</h1><br/>")
+                $("#conteudoProposta").append("<label>"+ propostas[i].descricao+"</label><br/>")
+                $("#conteudoProposta").append("<label>"+ propostas[i].id+"</label><br/>")
+
+            }
         }
 
-
     }
+
 </script>
 
 </body>
