@@ -20,7 +20,7 @@ public class Pessoa {
     };
 
     static mapping = {
-//        discriminator column: "tipo", value: "GERAL" //TODO: não insere perguntas em função desta linha
+        discriminator column: "tipo", value: "GERAL" //TODO: não insere perguntas em função desta linha
         perguntas cascade: "all-delete-orphan"
     };
 }

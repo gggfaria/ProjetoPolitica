@@ -100,13 +100,13 @@ a:active {
     color: inherit;
     background: none;
     cursor: pointer;
-    padding: 25px 80px;
+    padding: 15px 15px;
     display: inline-block;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-right: 10px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-weight: 700;
+    font-weight: 500;
     outline: none;
     position: relative;
     -webkit-transition: all 0.3s;
@@ -585,8 +585,6 @@ a:active {
 .button-5 {
     background: #165F8E;
     color: #fff;
-    min-height: 70px;
-    min-width: 260px;
     line-height: 24px;
     font-size: 16px;
     overflow: hidden;
@@ -595,7 +593,7 @@ a:active {
     backface-visibility: hidden;
 }
 .button-5:active {
-    background: #1871A9;
+    background: #0ca990;
     top: 2px;
 }
 .button-5 span {
@@ -613,14 +611,14 @@ a:active {
     position: absolute;
     height: 100%;
     width: 100%;
-    line-height: 2.5;
+    line-height: 1.85;
     font-size: 180%;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
 }
 .button-5:active>.fa {
-    color: #53AFE8;
+    color: #fffbff;
 }
 /* Button 5a */
 .button-5a:hover span {
