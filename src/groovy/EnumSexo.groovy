@@ -4,7 +4,7 @@ package politica
 public enum EnumSexo {
     MASCULINO('Masculino'),
     FEMININO('Feminino'),
-    OUTRO('Outros')
+    OUTROS('Outros')
 
     String id;
 
