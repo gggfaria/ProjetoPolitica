@@ -22,7 +22,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                         </span>
-                        <input type="date" name="dataNascimento" placeholder="dd/mm/aaaa"  id="dataNascimento"  class="form-control">
+                        <input type="text" name="dataNascimento" placeholder="dd/mm/aaaa"  id="dataNascimento"  class="form-control">
                     </div>
                 </div>
             </div>
