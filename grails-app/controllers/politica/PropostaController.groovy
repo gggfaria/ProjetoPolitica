@@ -5,35 +5,39 @@ import grails.converters.JSON
 class PropostaController {
 
     def index() {
-        render (view:"index")
+        def politicos = Politico.list()
+        def areas = Area.createCriteria().list { order("nome") }
+
+        render(view: "index", model: [listaAreas: areas, listaPoliticos: politicos])
     }
 
-    def cadastrar(){
-
-
+    def salvar() {
         Proposta proposta
-        proposta = new Proposta()
+        Integer politicoId = params.politico?.toInteger()
+        Integer areaId = params.area?.toInteger()
+        if(params.id) // se o formulario tem id, pega o objeto do BD
+        {
+            proposta.id = proposta.get(params.id)
+        } else {
+            proposta = new Proposta()
+        }
         proposta.titulo = params.titulo
         proposta.resumo = params.resumo
         proposta.descricao = params.descricao
-        proposta.politico = params.politico
-        proposta.area = params.area
-
-
-       proposta.validate()
-
-
-        if(proposta.hasErrors()){
+        proposta.politico = Politico.get(politicoId)
+        proposta.area = Area.get(areaId)
+        proposta.validate()
+        if (proposta.hasErrors()) {
             def listaErros = []
-            proposta.errors.each{ erro ->
+            proposta.errors.each { erro ->
                 listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
             }
-
             def mensagem = ["erro": listaErros]
             render mensagem as JSON
 
-        }else{
-            proposta =  proposta.save(flush: true)
+        } else {
+            proposta = proposta.save(flush: true)
+            params.
             render proposta as JSON
         }
 
