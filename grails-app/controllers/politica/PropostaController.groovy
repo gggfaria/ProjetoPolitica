@@ -38,6 +38,7 @@ class PropostaController {
         } else {
             proposta = proposta.save(flush: true)
 
+            proposta controller
             render proposta as JSON
         }
 
