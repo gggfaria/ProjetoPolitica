@@ -76,6 +76,7 @@
 
 <script>
 
+
     function redirecionarPerguntaProposta(id) {
         window.location="../proposta/pergunta/"+id;
     }

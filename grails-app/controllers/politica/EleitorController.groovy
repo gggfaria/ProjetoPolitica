@@ -29,11 +29,17 @@ class EleitorController {
 
         if(eleitor.hasErrors()){
             def listaErros = []
-            eleitor.errors.each{ erro ->
-                listaErros.add(g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError))
+
+            print(eleitor.errors.allErrors)
+            eleitor.errors.allErrors.each{ erro ->
+
+                println(erro)
+                listaErros.add(g.message(message: erro.defaultMessage, error: erro))
             }
 
+
             def mensagem = ["erro": listaErros]
+            println(mensagem)
             render mensagem as JSON
 
         }else{

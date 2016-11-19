@@ -21,6 +21,7 @@ function exibirMensagem(data) {
 
 
         var erros = data.erro
+        console.log(erros)
         $('#mensagemErros').empty()
         for(var i=0; i < erros.length; i++){
             $.notify(erros[i], "error");
