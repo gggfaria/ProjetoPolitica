@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Eleitor - Cadastro</title>
+    <title>Cadastro de Proposta</title>
     <link href="/Politica/css/select.css" rel="stylesheet">
     <link href="/Politica/css/bootstrap-datepicker.css" rel="stylesheet">
     <meta name="layout" content="main">
