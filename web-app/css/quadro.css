@@ -3,7 +3,7 @@
     margin: 10px 0 20px 0;
     background-color: #ffffff;
     border: 1px solid #d8d8d8;
-    border-top-width: 0;
+    border-top-width: 1px;
     border-bottom-width: 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
