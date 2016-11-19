@@ -16,9 +16,9 @@
     <g:each in="${lista}" var="politico">
            <div class="col-md-3">
                 <div class="card hovercard">
-                    <img src="http://placehold.it/300x200/000000/&text=Header" alt=""/>
+                    <img src="${politico.partido.bandeira}" alt=""/>
                     <div class="avatar">
-                        <img src="http://placehold.it/80X80/333333/&text=Head" alt="" />
+                        <img src="${politico.foto}" alt="" />
                     </div>
                     <div class="info">
                         <div class="title">
@@ -54,10 +54,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" title="Fechar" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
-                <h4 class="modal-title">Modal title</h4>
+                <h4 class="modal-title">Propostas</h4>
             </div>
             <div class="modal-body">
                 <div id="conteudoProposta">
@@ -65,28 +65,29 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+
 <script>
 
-
-
+    function redirecionarPerguntaProposta(id) {
+        window.location="../proposta/pergunta/"+id;
+    }
 
     function mostrarProposta(propostas){
         $('#modalProposta').modal('show')
 
+        $('#conteudoProposta').empty()
 
          if(propostas[0].id != undefined){
             for(var i=0; i<propostas.length; i++){
-                $("#conteudoProposta").append("<h1>"+ propostas[i].titulo+"</h1><br/>")
-                $("#conteudoProposta").append("<label>"+ propostas[i].descricao+"</label><br/>")
-                $("#conteudoProposta").append("<label>"+ propostas[i].id+"</label><br/>")
-
+                $("#conteudoProposta").append("<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>"+ propostas[i].titulo+"</h3></div> <div class='panel-body'>"+ propostas[i].resumo+" </div> <div class='panel-footer' ><button type='button' class='btn btn-default' onclick='redirecionarPerguntaProposta("+propostas[i].id+")' title='Faça uma pergunta sobre o assunto'>Questione <i class='fa fa-comment' aria-hidden='true'></i></button></div></div>")
             }
         }
 

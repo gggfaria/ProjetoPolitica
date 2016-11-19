@@ -6,6 +6,7 @@ class PerguntaController {
     def index() {}
 
     def enviar() {
+
         def RespostaRequisicao = [mensagem: '', erro: [errors: []], objeto: []];
 
         if (!params.propostaId.isNumber()) {

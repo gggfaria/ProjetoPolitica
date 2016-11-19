@@ -122,5 +122,6 @@ fabric.properties
  *.ipr
 
 #arquivos de imagem e pdf
-/images
-/arquivos
+*.jpg
+*.png
+*.pdf
