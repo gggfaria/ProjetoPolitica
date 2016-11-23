@@ -24,10 +24,12 @@ function exibirMensagem(data) {
         console.log(erros)
         $('#mensagemErros').empty()
         for(var i=0; i < erros.length; i++){
-            $.notify(erros[i], "error");
+            $.notify(erros[i], "error", {autoHideDelay: 15000});
             console.log(erros[i])
         }
-        $.notify("Não foi possível concluir a operação", "error");
+        $.notify("Não foi possível concluir a operação", "error", {autoHideDelay: 15000});
+
+
 
     }else {
         $.notify("Cadastro realizado com sucesso", "success");

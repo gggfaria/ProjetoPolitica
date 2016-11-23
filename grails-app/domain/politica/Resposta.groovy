@@ -2,9 +2,12 @@ package politica
 
 class Resposta {
 
-    static hasOne = [politico: Politico]
+    //static hasOne = [politico: Politico]
+    Politico politico
     String descricao
-    boolean  isAtivo
+    boolean  isAtivada
+    Pergunta pergunta
+
     static belongsTo = [Pergunta, Politico]
     static constraints = {
     }

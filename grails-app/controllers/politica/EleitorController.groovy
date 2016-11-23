@@ -22,7 +22,7 @@ class EleitorController {
         eleitor.email = params.email
         eleitor.senha = params.senha
         eleitor.sexo = params.sexo
-        eleitor.isAtivado = true
+        eleitor.isAtivada = true
 
         eleitor.validate()
 

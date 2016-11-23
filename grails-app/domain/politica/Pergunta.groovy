@@ -2,14 +2,17 @@ package politica
 
 class Pergunta {
 
-    static hasOne = [pessoa: Pessoa, proposta: Proposta];
-    static hasMany = [respostas: Resposta];
+    //static hasOne = [pessoa: Pessoa, proposta: Proposta];
+
     static belongsTo = [Proposta, Pessoa];
 
+    Pessoa pessoa
+    Proposta proposta
+    Resposta resposta
     String descricao;
     boolean isResposta;
     Date date;
-    boolean isAtivo;
+    boolean isAtivada;
 
     static constraints = {
     };

@@ -58,6 +58,7 @@
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
                 <h4 class="modal-title">Propostas</h4>
+                <h5 class="modal-title">Áreas</h5>
             </div>
             <div class="modal-body">
                 <div id="conteudoProposta">
@@ -81,16 +82,12 @@
         window.location="../proposta/pergunta/"+id;
     }
 
-    function mostrarProposta(propostas){
+    function mostrarProposta(data){
+        /*var propostas = data.propostas
+        var areas = data.areas*/
         $('#modalProposta').modal('show')
 
-        $('#conteudoProposta').empty()
-
-         if(propostas[0].id != undefined){
-            for(var i=0; i<propostas.length; i++){
-                $("#conteudoProposta").append("<div class='panel panel-primary'><div class='panel-heading'><h3 class='panel-title'>"+ propostas[i].titulo+"</h3></div> <div class='panel-body'>"+ propostas[i].resumo+" </div> <div class='panel-footer' ><button type='button' class='btn btn-default' onclick='redirecionarPerguntaProposta("+propostas[i].id+")' title='Faça uma pergunta sobre o assunto'>Questione <i class='fa fa-comment' aria-hidden='true'></i></button></div></div>")
-            }
-        }
+        $('#conteudoProposta').html(data)
 
     }
 

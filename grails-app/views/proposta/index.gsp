@@ -151,7 +151,7 @@
 </script>
 
 <script>
-    function exibirMensagem(data) {
+ /*   function exibirMensagem(data) {
         if (data.erro) {
             document.getElementById('mensagem').textContent = 'Não foi possível concluir a operação.'
             document.getElementById('mensagem').setAttribute('class', 'alert alert-danger')
@@ -174,7 +174,7 @@
             $('select').val('0')
         }
     }
-
+*/
 </script>
 
 </body>

@@ -6,7 +6,7 @@ public class Pessoa {
     Date dataNascimento;
     String email;
     String senha;
-    boolean isAtivado;
+    boolean isAtivada;
     politica.EnumSexo sexo;
 
     static hasMany = [perguntas: Pergunta];
@@ -20,7 +20,7 @@ public class Pessoa {
     };
 
     static mapping = {
-        discriminator column: "tipo", value: "GERAL" //TODO: não insere perguntas em função desta linha
+        discriminator column: "tipo", value: "GERAL"
         perguntas cascade: "all-delete-orphan"
     };
 }

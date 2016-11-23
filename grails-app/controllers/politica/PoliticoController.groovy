@@ -25,9 +25,14 @@ class PoliticoController {
            }
 
         }
+
+        def areas = Area.list()
+
+        def resposta =["propostas":propostas, "areas":areas]
+
         if(propostas != null) {
             //render(template: "proposta", model: [propostas: propostas])
-            render propostas as JSON
+            render(view: "proposta", model: ["resposta":resposta])
         }else
         {
             //TODO ERRO
