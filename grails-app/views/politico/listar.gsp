@@ -35,7 +35,7 @@
 
                     </div>
                     <div class="bottom">
-                        <g:remoteLink controller="politico" action="exibirPropostas"  style="width: 100%"  id="${politico.id}"
+                        <g:remoteLink controller="politico" action="exibirPropostas"  id="${politico.id}"
                                       class="button button-5 button-5b icon-cart"
                                       onSuccess="mostrarProposta(data)">
                             <i class="fa fa-eye" style="color: white"></i>

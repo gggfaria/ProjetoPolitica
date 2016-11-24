@@ -9,11 +9,12 @@ class Pergunta {
     Pessoa pessoa
     Proposta proposta
     Resposta resposta
-    String descricao;
-    boolean isResposta;
-    Date date;
-    boolean isAtivada;
+    String descricao
+    Date data
+    boolean isAtivada
+    boolean isRespondida
 
     static constraints = {
+        resposta nullable: true
     };
 }

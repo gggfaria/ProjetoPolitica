@@ -3,7 +3,9 @@ package politica
 import grails.converters.JSON
 
 class PerguntaController {
-    def index() {}
+    def index() {
+        preparar()
+    }
 
     def enviar() {
 
@@ -37,12 +39,12 @@ class PerguntaController {
             return render(RespostaRequisicao as JSON);
         }
 
-        pergunta.date = new Date();
+        pergunta.data = new Date();
         pergunta.descricao = params.descricao;
         pergunta.pessoa = pessoaPergunta;
         pergunta.proposta = proposta;
-        pergunta.isAtivo = true;
-        pergunta.isResposta = false;
+        pergunta.isAtivada = true;
+
 
         pergunta.save();
 
@@ -55,12 +57,12 @@ class PerguntaController {
         RespostaRequisicao.erro = null;
         RespostaRequisicao.objeto = [
                 id        : pergunta.id,
-                date      : pergunta.date,
+                data      : pergunta.data,
                 descricao : pergunta.descricao,
                 pessoaId    : pergunta.pessoa.id,
                 propostaId  : pergunta.proposta.id,
-                isAtivo   : pergunta.isAtivo,
-                isResposta: pergunta.isResposta
+                isAtivada   : pergunta.isAtivada,
+
         ];
 
         return render(RespostaRequisicao as JSON);
@@ -71,12 +73,12 @@ class PerguntaController {
         // Ao chamar esta action é inserido uma proposta
         // para que possa ser possível inserir uma pergunta
 
-        Pessoa pessoa = new Pessoa();
+        Pessoa pessoa = new Politico();
 
         pessoa.version = 1;
         pessoa.dataNascimento = Date.parse('dd/MM/yyyy', '12/11/1990');
         pessoa.email = 'pessoa1@gmail.com';
-        pessoa.isAtivado = true;
+        pessoa.isAtivada = true;
         pessoa.sexo = politica.EnumSexo.MASCULINO;
         pessoa.nome = 'Pessoa1';
         pessoa.senha = '123456';

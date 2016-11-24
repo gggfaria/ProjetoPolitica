@@ -1,6 +1,7 @@
 package politica
 
 import grails.converters.JSON
+import org.hibernate.criterion.CriteriaSpecification
 
 class PropostaController {
 
@@ -60,6 +61,19 @@ class PropostaController {
 
     def erro404() {
         render(view: "/error", model: [status: 404, exception: "Id da Proposta não especificado"]);
+    }
+
+    def listarPerguntas(){
+
+        def perguntas = Pergunta.createCriteria().list {
+            eq("isAtivada",true)
+            proposta{
+                idEq(params.id.toLong())
+            }
+
+        }
+
+        render(view: "perguntas", model: ["perguntas":perguntas])
     }
 
 }
