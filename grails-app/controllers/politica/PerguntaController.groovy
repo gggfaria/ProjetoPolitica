@@ -63,6 +63,7 @@ class PerguntaController {
                 propostaId  : pergunta.proposta.id,
                 isAtivada   : pergunta.isAtivada,
 
+
         ];
 
         return render(RespostaRequisicao as JSON);

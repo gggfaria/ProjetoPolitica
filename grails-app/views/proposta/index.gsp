@@ -9,134 +9,109 @@
 
 <body>
 <div class="container-fluid">
-    <h2>Cadastrar Proposta</h2>
-    <hr/>
-    <g:formRemote name="formProposta" url="[controller: 'proposta', action: 'salvar']" onSuccess="exibirMensagem(data)"
-                  class="form-group">
-        <div class="row">
-            <div class="col-md-12" style="margin-left: 25px">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="obrigatorio">*</span>
-                        <label>Politico</label>
+<h2>Cadastrar Proposta</h2>
+<hr/>
+<g:formRemote name="formProposta" url="[controller: 'proposta', action: 'salvar']" onSuccess="exibirMensagem(data)"
+              class="form-group">
 
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                            </span>
-                            <g:select name="politico" from="${listaPoliticos}" optionValue="nome" optionKey="id"
-                                      class="form-control"></g:select>
-                        </div>
-                    </div>
-                </div>
+    <div class="col-md-12">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="obrigatorio">*</span>
-                        <label>Area</label>
+        <div class="col-md-6">
+            <span class="obrigatorio">*</span>
+            <label>Politico</label>
 
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-university" aria-hidden="true"></i>
-                            </span>
-                            <g:select name="area" from="${listaAreas}" class="form-control" optionValue="nome"
-                                      optionKey="id"></g:select>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+                <g:select name="politico" from="${listaPoliticos}" optionValue="nome" optionKey="id"
+                          class="form-control"></g:select>
+            </div>
+            <span class="obrigatorio">*</span>
+            <label>Area</label>
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="obrigatorio">*</span>
-                        <label>Titulo</label>
-
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-hashtag" aria-hidden="true"></i>
-                            </span>
-
-                            <input type="text" name="titulo" placeholder="Titulo" required="" class="form-control">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-11">
-                        <span class="obrigatorio">*</span>
-                        <label>Resumo</label>
-
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-align-left" aria-hidden="true"></i>
-                            </span>
-                            <textarea type="text" min="5" rows="3" name="resumo" id="resumo" placeholder="resumo"
-                                      required="" class="form-control">
-                            </textarea>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-11">
-                        <span class="obrigatorio">*</span>
-                        <label>Descrição</label>
-
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-list" aria-hidden="true"></i>
-                            </span>
-                            <textarea type="text" min="5" rows="15" name="descricao" placeholder="Descricao" required=""
-                                      class="form-control">
-                            </textarea>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="form-inline">
-                    <div class="form-group">
-                        <a class="button button-2 button-3e icon-arrow-left" name="cancelar" href="http://localhost:8080/Politica">
-                            <i class="fa fa-arrow-left"></i>
-                            Cancelar
-                        </a>
-                    </div>
-
-                    <div class="form-group">
-                        <button class="button button-3 button-3e icon-arrow-right" name="cadastrar">
-                            <i class="fa fa-arrow-right"></i>
-                            Cadastrar
-                        </button>
-                    </div>
-                </div>
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-university" aria-hidden="true"></i>
+                </span>
+                <g:select name="area" from="${listaAreas}" class="form-control" optionValue="nome"
+                          optionKey="id"></g:select>
 
             </div>
+
+
+            <span class="obrigatorio">*</span>
+            <label>Titulo</label>
+
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i class="fa fa-hashtag" aria-hidden="true"></i>
+                </span>
+
+                <input type="text" name="titulo" placeholder="Titulo" required="" class="form-control">
+            </div>
+
         </div>
 
-        <br/>
+        <div class="col-md-6">
+            <span class="obrigatorio">*</span>
+            <label>Resumo</label>
 
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="mensagemModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Informação</h4>
-                    </div>
+            <textarea type="text" min="5" rows="6" name="resumo" id="resumo" placeholder="resumo"
+                      required="" class="form-control">
+            </textarea>
 
-                    <div class="modal-body">
-                        <div id="mensagem" role="alert"></div>
+        </div>
 
-                        <div id="mensagemErros" role="alert"></div>
-                    </div>
+        <div class="col-md-12">
+            <br>
+            <span class="obrigatorio">*</span>
+            <label>Descrição</label>
 
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
 
-    </g:formRemote>
+            <textarea type="text" min="5" rows="15" name="descricao" placeholder="Descricao" required=""
+                      class="form-control">
+            </textarea>
+
+        </div>
+    </div>
+    <div class="form-inline col-md-offset-10">
+
+        <div class="form-group">
+            <button class="button button-5 button-5b icon-cart" name="cadastrar">
+            <i class="fa fa-check"></i>
+            <span>Cadastrar</span>
+        </button>
+        </div>
+    </div>
+
+    </div>
+
+
+    <br/>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="mensagemModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Informação</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div id="mensagem" role="alert"></div>
+
+                    <div id="mensagemErros" role="alert"></div>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</g:formRemote>
 </div>
 
 <script type="text/javascript" src="../js/select.js"></script>

@@ -75,9 +75,9 @@
 
 
 
-		<div class="footer" role="contentinfo">
-
-        </div>
+    <footer class="footer text-center">
+        2016 Projeto Politica Municipal - 2º Modulo Pós Web.
+    </footer>
 
         <r:layoutResources />
 
