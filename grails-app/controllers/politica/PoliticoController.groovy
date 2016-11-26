@@ -26,7 +26,12 @@ class PoliticoController {
 
         }
 
-        def areas = Area.list()
+        def areas = Area.createCriteria().list{
+            setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+            createAlias("proposta","prop", CriteriaSpecification.INNER_JOIN)
+            createAlias("prop.politico","pol", CriteriaSpecification.INNER_JOIN)
+            eq("prop.politico.id",params.id.toLong())
+        }
 
         def resposta =["propostas":propostas, "areas":areas]
 
