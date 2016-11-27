@@ -117,11 +117,7 @@
 
     }
 
-    function carregarPerguntas(id) {
 
-        //TODO FAZER POR AJAX
-
-    }
 
     function atualizarPerguntas(id) {
         $.ajax({
