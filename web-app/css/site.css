@@ -1,22 +1,44 @@
 .obrigatorio {
-    color:red;
+    color: red;
 }
 
-input{
+input {
     border-radius: 0 !important;
 }
 
-nav{
-    border-radius: 0 !important;
-}
-div{
+nav {
     border-radius: 0 !important;
 }
 
-a:link{
+div {
+    border-radius: 0 !important;
+}
+
+a:link {
+    color: white !important;
+}
+/*MENU*/
+.navbar-default {
+    background-color: #0072c6 !important;
+    border-color: #0072c6 !important;
+   /* box-shadow: 0 4px 2px -2px gray;*/
+}
+
+.navbar-default a {
     color: white !important;
 }
 
+.navbar-default a:hover {
+    background-color: #0093ff !important;
+    border-color: #0093ff !important;
+}
+
+.navbar-default a:active {
+    background-color: #0093ff !important;
+    border-color: #0093ff !important;
+}
+
+/*FIM MENU*/
 
 
 
