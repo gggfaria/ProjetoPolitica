@@ -19,6 +19,7 @@
     <h2>Enviar Pergunta</h2>
     <hr/>
     <h4>Proposta de ${proposta.politico.nome}</h4>
+
     <div class="row">
         <div class="col-md-11">
             <div class="panel panel-primary">
@@ -43,8 +44,8 @@
                 <div class="row">
                     <div class="col-md-10">
                         <span class="obrigatorio">*</span>
-                        <label>Descrição da Pergunta</label>
-                        <textarea name="descricao" class="form-control" style="max-width: 80%;"></textarea>
+                        <label>Faça sua pergunta</label>
+                        <textarea name="descricao" class="form-control" style="max-width: 100%;"></textarea>
                     </div>
                 </div>
             </div>
@@ -94,7 +95,7 @@
         <g:each in="${proposta.perguntas}" var="pergunta">
 
             <div class="col-md-10" id="perguntasAntigas">
-                <div class="col-sm-6">
+                <div class="col-md-6">
                     <div class="testimonial testimonial-default">
                         <div class="testimonial-section">
                             ${pergunta.descricao}
@@ -112,6 +113,28 @@
                     </div>
                 </div>
             </div>
+
+            <g:if test="${pergunta.resposta!=null}">
+                <div class="col-md-10" style="margin-left: 50px" id="perguntasAntigas">
+                    <div class="col-md-6">
+                        <div class="testimonial testimonial-primary">
+                            <div class="testimonial-section">
+                                ${pergunta.resposta?.descricao}
+                            </div>
+
+                            <div class="testimonial-desc">
+
+                                <div class="testimonial-writer">
+                                    <div class="testimonial-writer-name">${pergunta.resposta?.politico?.nome}</div>
+
+                                    <div class="testimonial-writer-designation">${pergunta.resposta?.data?.format("dd/MM/yyyy hh:mm")}</div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </g:if>
 
         </g:each>
     </div>
