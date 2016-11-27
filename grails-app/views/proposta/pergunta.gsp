@@ -22,17 +22,17 @@
     <hr/>
 
         <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'enviar']" class="form-group"
-                  onSuccess="ModalServico.exibirRespostaPadrao(data)"
+                  onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})"
                   onFailure="ModalServico.exibirRespostaErroPadrao(XMLHttpRequest)">
         <input type="hidden" name="propostaId" value="${proposta?.id}"/>
 
         <div class="row">
             <div class="col-md-12" style="margin-left: 25px">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         <span class="obrigatorio">*</span>
                         <label>Descrição da Pergunta</label>
-                        <textarea name="descricao" class="form-control"></textarea>
+                        <textarea name="descricao" class="form-control" style="max-width: 80%;"></textarea>
                     </div>
                 </div>
             </div>
@@ -83,14 +83,12 @@
 
             <div class="col-md-10" id="perguntasAntigas">
                 <div class="col-sm-6">
-                    <div id="tb-testimonial" class="testimonial testimonial-default">
+                    <div class="testimonial testimonial-default">
                         <div class="testimonial-section">
                             ${pergunta.descricao}
                         </div>
 
                         <div class="testimonial-desc">
-                            <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"
-                                 alt=""/>
 
                             <div class="testimonial-writer">
                                 <div class="testimonial-writer-name">${pergunta.pessoa.nome}</div>
@@ -114,16 +112,28 @@
 <script>
 
     function mostrarProposta(data) {
-        $("input").val('')
+
         $('#ListaPerguntas').html(data)
 
     }
 
     function carregarPerguntas(id) {
-        <g:remoteLink controller="proposta" action="listarPerguntas" id="'+id+'" update="ListaPerguntas">
-        </g:remoteLink>
+
         //TODO FAZER POR AJAX
 
+    }
+
+    function atualizarPerguntas(id) {
+        $.ajax({
+            url:"../listarPerguntas/"+id,
+            data : {
+                id : id
+            },
+            method: "post",
+            success: function (data) {
+                mostrarProposta(data)
+            }
+        })
     }
 
 

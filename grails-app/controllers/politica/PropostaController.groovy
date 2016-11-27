@@ -49,7 +49,10 @@ class PropostaController {
         if (!params.id) {
             render(view: '/erro404', model: [mensagem: 'Proposta não especificada']);
         } else {
-            Proposta proposta = Proposta.findById(params.id);
+
+            Proposta proposta = Proposta.findById(params.id.toLong())
+
+
 
             if (proposta == null) {
                 render(view: '/erro404', model: [mensagem: 'Proposta não encontrada']);
@@ -70,8 +73,10 @@ class PropostaController {
             proposta{
                 idEq(params.id.toLong())
             }
+            order("data","desc")
 
         }
+
 
         render(view: "perguntas", model: ["perguntas":perguntas])
     }

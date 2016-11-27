@@ -7,6 +7,7 @@ class Resposta {
     String descricao
     boolean  isAtivada
     Pergunta pergunta
+    Date data
 
     static belongsTo = [Pergunta, Politico]
     static constraints = {

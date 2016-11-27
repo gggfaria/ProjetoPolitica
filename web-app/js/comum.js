@@ -27,6 +27,7 @@ function exibirMensagem(data) {
             $.notify(erros[i], "error", {autoHideDelay: 15000});
             console.log(erros[i])
         }
+
         $.notify("Não foi possível concluir a operação", "error", {autoHideDelay: 15000});
 
 
@@ -63,3 +64,30 @@ function exibirMensagemModal(data) {
         $('select').val('0')
     }
 }
+
+
+//funcao de exibir mensagem de sucesso adicionar pergunta, recebe o id da proposta
+function exibirMensagemAdicionarPergunta(data, id) {
+    if(data.erro){
+        var erros = data.erro
+        console.log(erros)
+        $('#mensagemErros').empty()
+        for(var i=0; i < erros.length; i++){
+            $.notify(erros[i], "error", {autoHideDelay: 15000});
+            console.log(erros[i])
+        }
+
+        $.notify("Não foi possível concluir a operação", "error", {autoHideDelay: 15000});
+
+
+
+    }else {
+        $.notify("Pergunta enviada com sucesso", "success");
+        $('input').val('')
+        atualizarPerguntas(id)
+
+    }
+}
+
+
+
