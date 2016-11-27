@@ -18,10 +18,22 @@
 <div class="container-fluid">
     <h2>Enviar Pergunta</h2>
     <hr/>
-    <h4><strong>Proposta:</strong> ${proposta?.titulo}</h4>
+    <h4>Proposta de ${proposta.politico.nome}</h4>
+    <div class="row">
+        <div class="col-md-11">
+            <div class="panel panel-primary">
+                <div class="panel-heading">${proposta?.titulo}</div>
+
+                <div class="panel-body">
+                    <p>${proposta?.descricao}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr/>
 
-        <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'enviar']" class="form-group"
+    <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'enviar']" class="form-group"
                   onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})"
                   onFailure="ModalServico.exibirRespostaErroPadrao(XMLHttpRequest)">
         <input type="hidden" name="propostaId" value="${proposta?.id}"/>
@@ -118,12 +130,11 @@
     }
 
 
-
     function atualizarPerguntas(id) {
         $.ajax({
-            url:"../listarPerguntas/"+id,
-            data : {
-                id : id
+            url: "../listarPerguntas/" + id,
+            data: {
+                id: id
             },
             method: "post",
             success: function (data) {
