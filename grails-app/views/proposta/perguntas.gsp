@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <g:if test="${pergunta.resposta}==null">
+    <g:if test="${pergunta.resposta}!=null">
         <div class="col-md-10" id="perguntasAntigas">
             <div class="col-sm-6">
                 <div class="testimonial testimonial-primary">
