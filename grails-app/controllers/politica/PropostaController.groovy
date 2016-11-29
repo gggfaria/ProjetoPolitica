@@ -16,7 +16,19 @@ class PropostaController {
         render(view: "index", model: [listaAreas: areas, listaPoliticos: politicos])
     }
 
+
     @Secured(['ROLE_POLITICO'])
+
+    def listar()
+    {
+        def politicos = Politico.list()
+        def areas = Area.createCriteria().list { order("nome") }
+        def propostas =  Proposta.list()
+        render(view: "listar", model: [listaAreas: areas, listaPoliticos: politicos, listaProposta: propostas])
+
+        }
+
+
     def salvar() {
         Proposta proposta
         //Pegar usuario logado (politoc)
