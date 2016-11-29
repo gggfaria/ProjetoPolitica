@@ -2,6 +2,7 @@ package politica
 
 import grails.converters.JSON
 import org.hibernate.criterion.CriteriaSpecification
+import grails.plugin.springsecurity.annotation.Secured
 
 class PropostaController {
 
@@ -12,6 +13,7 @@ class PropostaController {
         render(view: "index", model: [listaAreas: areas, listaPoliticos: politicos])
     }
 
+    @Secured(['ROLE_POLITICO'])
     def salvar() {
         Proposta proposta
         Integer politicoId = params.politico?.toInteger()

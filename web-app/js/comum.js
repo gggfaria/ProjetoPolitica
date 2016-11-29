@@ -4,12 +4,12 @@
 
 function exibirSenha()
 {
-    $("#senha").attr("type", "text");
+    $("[name='j_password']").attr("type", "text");
 }
 
 function esconderSenha()
 {
-    $("#senha").attr("type", "password");
+    $("[name='j_password']").attr("type", "password");
 }
 
 

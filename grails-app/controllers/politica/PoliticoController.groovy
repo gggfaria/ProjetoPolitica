@@ -1,8 +1,10 @@
 package politica
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 import org.hibernate.criterion.CriteriaSpecification
 
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class PoliticoController {
 
     def index() {
