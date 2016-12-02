@@ -1,12 +1,21 @@
 package politica
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 
+
+
+@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class PerguntaController {
+    transient springSecurityService
+
+
     def index() {
         preparar()
     }
 
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def enviar() {
 
         def RespostaRequisicao = [mensagem: '', erro: [errors: []], objeto: []];
@@ -31,8 +40,8 @@ class PerguntaController {
 
         Pessoa pessoaPergunta;
 
-        //TODO: Quando a pessoa puder logar substituir esta pessoa fixa
-        pessoaPergunta = Pessoa.findByEmail('pessoa1@gmail.com')
+        Usuario usuarioLogado = springSecurityService.currentUser
+        pessoaPergunta = Pessoa.findByUsuario(usuarioLogado)
 
         if (pessoaPergunta == null) {
             RespostaRequisicao.erro.errors.push('Pessoa não encontrada');

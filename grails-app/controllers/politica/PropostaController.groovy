@@ -4,8 +4,11 @@ import grails.converters.JSON
 import org.hibernate.criterion.CriteriaSpecification
 import grails.plugin.springsecurity.annotation.Secured
 
-class PropostaController {
 
+class PropostaController {
+    transient springSecurityService
+
+    @Secured(['ROLE_POLITICO'])
     def index() {
         def politicos = Politico.list()
         def areas = Area.createCriteria().list { order("nome") }
@@ -16,18 +19,25 @@ class PropostaController {
     @Secured(['ROLE_POLITICO'])
     def salvar() {
         Proposta proposta
-        Integer politicoId = params.politico?.toInteger()
+        //Pegar usuario logado (politoc)
+        Usuario usuarioLogado = springSecurityService.currentUser
+        Politico politico = Politico.findByUsuario(usuarioLogado)
+
         Integer areaId = params.area?.toInteger()
-        if(params.id) // se o formulario tem id, pega o objeto do BD
+
+        /*if(params.id) // se o formulario tem id, pega o objeto do BD
         {
             proposta.id = proposta.get(params.id)
         } else {
             proposta = new Proposta()
-        }
+        }*/
+
+        proposta = new Proposta()
+
         proposta.titulo = params.titulo
         proposta.resumo = params.resumo
         proposta.descricao = params.descricao
-        proposta.politico = Politico.get(politicoId)
+        proposta.politico = politico
         proposta.area = Area.get(areaId)
         proposta.validate()
         if (proposta.hasErrors()) {
@@ -46,6 +56,7 @@ class PropostaController {
 
     }
 
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def pergunta() {
 
         if (!params.id) {
@@ -64,10 +75,12 @@ class PropostaController {
         }
     }
 
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def erro404() {
         render(view: "/error", model: [status: 404, exception: "Id da Proposta não especificado"]);
     }
 
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def listarPerguntas(){
 
         def perguntas = Pergunta.createCriteria().list {

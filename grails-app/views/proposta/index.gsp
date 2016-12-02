@@ -17,16 +17,7 @@
         <div class="col-md-12">
 
             <div class="col-md-6">
-                <span class="obrigatorio">*</span>
-                <label>Politico</label>
 
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-user" aria-hidden="true"></i>
-                    </span>
-                    <g:select name="politico" from="${listaPoliticos}" optionValue="nome" optionKey="id"
-                              class="form-control"></g:select>
-                </div>
                 <span class="obrigatorio">*</span>
                 <label>Area</label>
 
@@ -58,7 +49,7 @@
                 <label>Resumo</label>
 
 
-                <textarea type="text" min="5" rows="6" name="resumo" id="resumo" placeholder="resumo"
+                <textarea type="text" min="5" rows="4" name="resumo" id="resumo" placeholder="resumo"
                           required="" class="form-control">
                 </textarea>
 
@@ -114,9 +105,9 @@
     </g:formRemote>
 </div>
 
-<script type="text/javascript" src="../js/select.js"></script>
-<script type="text/javascript" src="../js/comum.js"></script>
-<script type="text/javascript" src="../js/nicEdit.js"></script>
+
+
+<script type="text/javascript" src="/Politica/js/nicEdit.js"></script>
 <script type="text/javascript">
     //<![CDATA[
     bkLib.onDomLoaded(function () {

@@ -40,6 +40,18 @@ a:link {
 
 /*FIM MENU*/
 
+.dropdown li a{
+    color: #0093ff !important;
+
+}
+.dropdown li a:hover{
+    color: white !important;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color:  #0093ff !important;
+}
+
 
 
 

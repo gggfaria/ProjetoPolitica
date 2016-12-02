@@ -1,7 +1,7 @@
 <g:each in="${perguntas}" var="pergunta">
 
     <div class="col-md-10" id="perguntasAntigas">
-        <div class="col-sm-6">
+        <div class="col-md-10">
             <div class="testimonial testimonial-default">
                 <div class="testimonial-section">
                     ${pergunta.descricao}
@@ -20,9 +20,9 @@
         </div>
     </div>
 
-    <g:if test="${pergunta.resposta}!=null">
+    <g:if test="${pergunta.resposta != null}">
         <div class="col-md-10" id="perguntasAntigas">
-            <div class="col-sm-6">
+            <div class="col-md-10">
                 <div class="testimonial testimonial-primary">
                     <div class="testimonial-section">
                         ${pergunta.resposta?.descricao}

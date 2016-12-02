@@ -4,13 +4,13 @@
             <div class="panel-heading">
                 <h4 class="panel-title">
                     <i class="fa ${area.icone}" aria-hidden="true"></i>
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse${area.nome}" aria-expanded="false">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse${area.nome.replaceAll(" ","")}" aria-expanded="false">
                         ${area.nome}
                     </a>
                 </h4>
             </div>
             <g:each in="${resposta.propostas.findAll{p -> p.area.nome.equals(area.nome)}}" var="proposta">
-                <div id="collapse${area.nome}" class="panel-collapse collapse" style="margin: 5px">
+                <div id="collapse${area.nome.replaceAll(" ","")}" class="panel-collapse collapse" style="margin: 5px">
                     <div class='panel panel-default'>
                         <div class='panel-heading'>
                             <h3 class='panel-title'>
@@ -23,12 +23,23 @@
                         </div>
 
                         <div class='panel-footer'>
+                            <sec:ifAllGranted roles="ROLE_ELEITOR">
+                                <button type='button' class='btn btn-primary'
+                                        onclick='redirecionarPerguntaProposta(${proposta.id})'
+                                        title='Faça uma pergunta sobre o assunto'>
+                                     Questione
+                                    <i class='fa fa-comment' aria-hidden='true'></i>
+                                </button>
+                            </sec:ifAllGranted>
+                            <sec:ifNotGranted roles="ROLE_ELEITOR">
+                                <button type='button' class='btn btn-primary'
+                                        onclick='redirecionarPerguntaProposta(${proposta.id})'
+                                        title='Visualizar mais informações sobre a proposta'>
+                                    <i class='fa fa-plus'  aria-hidden='true'></i>
+                                    Sobre
+                                </button>
+                            </sec:ifNotGranted>
 
-                            <button type='button' class='btn btn-default'
-                                    onclick='redirecionarPerguntaProposta(${proposta.id})'
-                                    title='Faça uma pergunta sobre o assunto'>Questione <i class='fa fa-comment'
-                                                                                           aria-hidden='true'></i>
-                            </button>
                         </div>
                     </div>
                 </div>
