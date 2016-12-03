@@ -5,17 +5,17 @@ import grails.plugin.springsecurity.annotation.Secured
 
 
 
-@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+
 class PerguntaController {
     transient springSecurityService
 
-
+    @Secured(['ROLE_ELEITOR'])
     def index() {
-        preparar()
+
     }
 
 
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    @Secured(['ROLE_ELEITOR'])
     def enviar() {
 
         def RespostaRequisicao = [mensagem: '', erro: [errors: []], objeto: []];
@@ -78,6 +78,27 @@ class PerguntaController {
         return render(RespostaRequisicao as JSON);
     }
 
+    @Secured(['ROLE_POLITICO'])
+    def responder(){
+        def pergunta = Pergunta.findById(params.id)
+        render (view:"responder", model: ["pergunta":pergunta])
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Secured(['ROLE_ADMIN'])
     def preparar() {
         // Preparar para perguntar
         // Ao chamar esta action é inserido uma proposta

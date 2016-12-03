@@ -52,6 +52,13 @@ a:link {
     background-color:  #0093ff !important;
 }
 
+table tr a{
+    color: #0093ff !important;
+}
+table tr a:link{
+    color: #0093ff !important;
+}
+
 
 
 

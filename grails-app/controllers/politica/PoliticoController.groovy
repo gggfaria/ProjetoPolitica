@@ -8,7 +8,13 @@ import org.hibernate.criterion.CriteriaSpecification
 class PoliticoController {
 
     def index() {
-        render (view:"index")
+        def perguntas = Pergunta.createCriteria().list {
+            order("isRespondida", 'desc')
+            eq('isAtivada',true)
+        }
+
+
+        render (view:"index", model: ["perguntas": perguntas])
 
     }
 
