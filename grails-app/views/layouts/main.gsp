@@ -46,8 +46,13 @@
 
                 <ul class="nav navbar-nav">
                     <li><a href="/Politica/politico/listar">Políticos</a></li>
+                    <sec:ifNotLoggedIn>
+                        <li><a href="#" onclick="exibirCadastro()">Cadastrar</a></li>
+                    </sec:ifNotLoggedIn>
+                    <sec:ifNotLoggedIn>
+                        <li><g:link controller='login' action='logar'>Login</g:link></li>
+                    </sec:ifNotLoggedIn>
                 </ul>
-
             </div>
 
         </div>
