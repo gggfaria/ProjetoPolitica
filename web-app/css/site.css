@@ -18,24 +18,38 @@ a:link {
     color: white !important;
 }
 /*MENU*/
-.navbar-default {
+.navbar{
     background-color: #0072c6 !important;
     border-color: #0072c6 !important;
    /* box-shadow: 0 4px 2px -2px gray;*/
 }
 
-.navbar-default a {
+.navbar a {
     color: white !important;
 }
 
-.navbar-default a:hover {
+
+.navbar a:hover {
     background-color: #0093ff !important;
     border-color: #0093ff !important;
 }
 
-.navbar-default a:active {
+.navbar a:active {
     background-color: #0093ff !important;
     border-color: #0093ff !important;
+}
+
+nav button{
+    background-color: #0072c6 !important;
+
+}
+nav button:hover{
+    background-color: white !important;
+}
+
+.dropdown-menu a{
+    background-color: white !important;
+
 }
 
 /*FIM MENU*/
@@ -48,7 +62,9 @@ a:link {
     color: white !important;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+
+
+.navbar .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     background-color:  #0093ff !important;
 }
 

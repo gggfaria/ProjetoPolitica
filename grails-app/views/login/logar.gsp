@@ -24,7 +24,7 @@
 
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="email" name="j_username" value="${session['SPRING_SECURITY_LAST_USERNAME']}"
+                        <input type="email" name="j_username"
                                placeholder="email" required="" class="form-control">
                     </div>
                 </div>
@@ -50,9 +50,10 @@
                 </div>
             </div>
             <br/>
+
             <div class="row">
                 <div class="col-md-6">
-                    <g:if test="${session['SPRING_SECURITY_LAST_EXCEPTION'] != null}">
+                    <g:if test="${error=='1'}">
                         <div class="alert alert-danger">
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                             Erro ao logar no sistema, tente novamente.<br/>

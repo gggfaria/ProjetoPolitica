@@ -1,6 +1,7 @@
 package politica
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityUtils;
 
 @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class LoginController {
@@ -10,7 +11,9 @@ class LoginController {
     }
 
     def logar(){
-        render(view : "logar")
+
+
+        render(view : "logar", model:[error:params.login_error])
     }
 
     def logout(){

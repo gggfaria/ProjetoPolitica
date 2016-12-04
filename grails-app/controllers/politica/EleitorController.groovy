@@ -4,11 +4,17 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 class EleitorController {
+    transient springSecurityService
 
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    @Secured(['ROLE_ELEITOR'])
     def index() {
 
-        render (view:"index")
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def pessoa = Pessoa.findByUsuario(usuarioLogado)
+
+
+
+        render (view:"index", model:["pessoa":pessoa])
 
     }
 

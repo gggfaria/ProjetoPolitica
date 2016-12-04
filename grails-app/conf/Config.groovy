@@ -129,7 +129,7 @@ grails.plugin.springsecurity.authority.className = 'politica.Permissao'
 grails.plugin.springsecurity.auth.loginFormUrl = '/login/logar'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/login/logout'
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/'
-grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/logar'
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/login/logar?login_error=1'
 grails.plugin.springsecurity.successHandler.alwaysUseDefault = false
 grails.plugin.springsecurity.dao.hideUserNotFoundExceptions = false
 grails.plugin.springsecurity.adh.errorPage="/j_spring_security_logout"
