@@ -6,6 +6,7 @@ import org.hibernate.criterion.CriteriaSpecification
 
 @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class PoliticoController {
+    transient springSecurityService
 
     def index() {
         def perguntas = Pergunta.createCriteria().list {
@@ -15,6 +16,15 @@ class PoliticoController {
 
 
         render (view:"index", model: ["perguntas": perguntas])
+    }
+
+    @Secured(['ROLE_POLITICO'])
+    def meusDados() {
+
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def pessoa = Politico.findByUsuario(usuarioLogado)
+
+        render (view:"meusDados", model:["pessoa":pessoa])
 
     }
 

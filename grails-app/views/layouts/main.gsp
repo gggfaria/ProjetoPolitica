@@ -37,37 +37,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Politica/">Política Municipal</a>
+                <g:link controller="eleitor" action="index" class="navbar-brand">
+                    Política Municipal
+                </g:link>
             </div>
 
             <div id="bs-collapse" class="collapse navbar-collapse navbar-right">
-                <ul class="nav navbar-nav">
-                    <sec:ifAllGranted roles="ROLE_POLITICO">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">Propostas</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/Politica/proposta/">Cadastrar</a></li>
-                                <li><a href="#">Editar</a></li>
-                                <!-- <li role="separator" class="divider"></li>
-                        <li><a href="#"></a></li>-->
-                            </ul>
-                        </li>
-                    </sec:ifAllGranted>
-                </ul>
 
                 <ul class="nav navbar-nav">
                     <li><a href="/Politica/politico/listar">Políticos</a></li>
-                    <sec:ifNotLoggedIn>
-                        <li><a href="#" onclick="exibirCadastro()">Cadastrar</a></li>
-                    </sec:ifNotLoggedIn>
-                    <sec:ifNotLoggedIn>
-                        <li><g:link controller='login' action='logar'>Login</g:link></li>
-                    </sec:ifNotLoggedIn>
-                    <sec:ifLoggedIn>
-                        <li><a href="/Politica/j_spring_security_logout">Sair</a></li>
-                    </sec:ifLoggedIn>
                 </ul>
 
             </div>
@@ -78,6 +56,10 @@
 
 <sec:ifAllGranted roles="ROLE_ELEITOR">
     <g:render template="../layouts/menuEleitor"></g:render>
+</sec:ifAllGranted>
+
+<sec:ifAllGranted roles="ROLE_POLITICO">
+    <g:render template="../layouts/menuPolitico"></g:render>
 </sec:ifAllGranted>
 
 
