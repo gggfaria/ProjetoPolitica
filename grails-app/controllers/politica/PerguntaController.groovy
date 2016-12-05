@@ -4,8 +4,6 @@ import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
 
-
-
 class PerguntaController {
     transient springSecurityService
 
@@ -68,9 +66,9 @@ class PerguntaController {
                 id        : pergunta.id,
                 data      : pergunta.data,
                 descricao : pergunta.descricao,
-                pessoaId    : pergunta.pessoa.id,
-                propostaId  : pergunta.proposta.id,
-                isAtivada   : pergunta.isAtivada,
+                pessoaId  : pergunta.pessoa.id,
+                propostaId: pergunta.proposta.id,
+                isAtivada : pergunta.isAtivada,
 
 
         ];
@@ -79,20 +77,20 @@ class PerguntaController {
     }
 
     @Secured(['ROLE_POLITICO'])
-    def responder(){
+    def responder() {
         def pergunta = Pergunta.findById(params.id)
-        render (view:"responder", model: ["pergunta":pergunta])
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def politico = Politico.findByUsuario(usuarioLogado)
+
+        if (pergunta.isRespondida) {
+            render(view: "index", controller:"politico")
+        } else if (pergunta.proposta.politico.id != politico.id) {
+            render(view: "index", controller:"politico")
+        } else {
+            render(view: "responder", model: ["pergunta": pergunta])
+        }
+
     }
-
-
-
-
-
-
-
-
-
-
 
 
 

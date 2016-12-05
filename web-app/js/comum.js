@@ -30,11 +30,10 @@ function exibirMensagem(data) {
 
         $.notify("Não foi possível concluir a operação", "error", {autoHideDelay: 15000});
 
-
-
     }else {
         $.notify("Cadastro realizado com sucesso", "success");
-        $('input').val('')
+        $("input[type=text]").val('')
+        $('textarea').val('')
         $('select').val('0')
         $('#modalForm').modal('hide')
     }

@@ -24,20 +24,26 @@
         <div class="col-md-11">
             <div class="panel panel-primary">
                 <div class="panel-heading">${pergunta.proposta.titulo}</div>
-
                 <div class="panel-body">
                     <p>${pergunta.proposta.descricao}</p>
                 </div>
             </div>
+        </div>
+
+        <div class="col-md-1" style="margin-left: 25px">
+            <button class="button button-5 button-5b icon-cart" onclick="voltar()">
+                <i class="fa fa-arrow-left"></i>
+                <span>voltar</span>
+            </button>
         </div>
     </div>
 
 
     <hr/>
     <g:formRemote name="formResposta" url="[controller: 'resposta', action: 'salvar']" class="form-group"
-                  onSuccess="exibirMensagemAdicionarPergunta(data,${pergunta.id})"
-                  onFailure="ModalServico.exibirRespostaErroPadrao(XMLHttpRequest)">
-        <input type="hidden" name="propostaId" value="${pergunta?.id}"/>
+                  onSuccess="exibirMensagem(data)">
+
+        <input type="hidden" name="perguntaId" value="${pergunta?.id}"/>
 
         <div class="row">
             <div class="col-md-12" style="margin-left: 25px">
@@ -45,27 +51,33 @@
                     <div class="col-md-10">
                         <span class="obrigatorio">*</span>
                         <label>Resposta</label>
-                        <textarea name="descricao" class="form-control" style="max-width: 100%;"></textarea>
+                        <textarea name="descricao" id="descricao" class="form-control" style="max-width: 100%;"></textarea>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="row">
-            <div class="col-md-12" style="margin-left: 25px">
+            <div class="col-md-2" style="margin-left: 25px">
                 <button class="button button-5 button-5b icon-cart" name="enviar">
                     <i class="fa fa-check"></i>
-                    <span>enviar</span>
+                    <span>responder</span>
                 </button>
             </div>
+
+
         </div>
-
-
-
-        <br/>
     </g:formRemote>
 
+
+
 </div>
+
+<script>
+    function voltar() {
+        window.location='/Politica/politico';
+    }
+</script>
+
 </body>
 </html>

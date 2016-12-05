@@ -10,7 +10,7 @@ class PoliticoController {
 
     def index() {
         def perguntas = Pergunta.createCriteria().list {
-            order("isRespondida", 'desc')
+            order("isRespondida", 'asc')
             eq('isAtivada',true)
         }
 

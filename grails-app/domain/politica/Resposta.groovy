@@ -11,5 +11,7 @@ class Resposta {
 
     static belongsTo = [Pergunta, Politico]
     static constraints = {
+        pergunta nullable: false
+        descricao nullable: false
     }
 }

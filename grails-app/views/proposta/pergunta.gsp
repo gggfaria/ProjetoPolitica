@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Enviar Pergunta</title>
+    <title>Proposta - Perguntas</title>
     <link href="/Politica/css/Testimonials.css" rel="stylesheet">
     <meta name="layout" content="main">
 </head>
@@ -16,7 +16,7 @@
 <body>
 
 <div class="container-fluid">
-    <h2>Enviar Pergunta</h2>
+    <h2>Proposta</h2>
     <hr/>
     <h4>Proposta de ${proposta.politico.nome}</h4>
 
@@ -34,6 +34,7 @@
 
 
     <sec:ifAllGranted roles="ROLE_ELEITOR">
+        <h2>Enviar pergunta</h2>
         <hr/>
         <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'enviar']" class="form-group"
                       onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})"
@@ -150,8 +151,8 @@
 
     function mostrarProposta(data) {
 
-        $('#ListaPerguntas').html(data)
-
+        $('#ListaPerguntas').fadeToggle()
+        $('#ListaPerguntas').html(data).fadeToggle();
     }
 
 

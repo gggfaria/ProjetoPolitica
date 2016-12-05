@@ -21,7 +21,7 @@
     </div>
 
     <g:if test="${pergunta.resposta != null}">
-        <div class="col-md-10" id="perguntasAntigas">
+        <div class="col-md-10" style="margin-left: 50px" id="perguntasAntigas">
             <div class="col-md-10">
                 <div class="testimonial testimonial-primary">
                     <div class="testimonial-section">

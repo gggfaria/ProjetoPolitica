@@ -29,24 +29,33 @@
                     ${pergunta.pessoa.nome}
                 </td>
                 <td>${pergunta.proposta.titulo}</td>
-                <td>${pergunta.data.format("dd/MM/yyyy")}
+            <td>${pergunta.data.format("dd/MM/yyyy")}
                 <g:if test="${pergunta.isRespondida}">
                     <td title="Está repondida">
                         <i class="fa fa-check" aria-hidden="true"></i>
-                         Sim
+                        Sim
                     </td>
 
                 </g:if>
                 <g:else>
                     <td title="Não está repondida">
                         <i class="fa fa-times" aria-hidden="true"></i>
-                         Não
+                        Não
                     </td>
                 </g:else>
                 <td>
-                    <g:link controller="pergunta" action="responder" id="${pergunta.id}" title="Responder à pergunta">
-                        Responder
-                    </g:link>
+                    <g:if test="${pergunta.isRespondida}">
+                        <g:link id="${pergunta.id}" title="Editar resposta">
+                            Editar
+                        </g:link>
+
+                    </g:if>
+                    <g:else>
+                        <g:link controller="pergunta" action="responder" id="${pergunta.id}"
+                                title="Responder à pergunta">
+                            Responder
+                        </g:link>
+                    </g:else>
 
                 </td>
             </tr>

@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <g:link controller="eleitor" action="index" class="navbar-brand">
+            <g:link controller="politico" action="index" class="navbar-brand">
                 Política Municipal
             </g:link>
         </div>
@@ -22,13 +22,14 @@
                         <ul class="dropdown-menu">
                             <li><a href="/Politica/proposta/">Cadastrar</a></li>
                             <li><a href="#">Editar</a></li>
-                            <!-- <li role="separator" class="divider"></li>
-                        <li><a href="#"></a></li>-->
+                            <li role="separator" class="divider"></li>
+                            <li><g:link controller="politico" action="index">
+                                Perguntas
+                            </g:link></li>
                         </ul>
                     </li>
                 </sec:ifAllGranted>
             </ul>
-
 
             <ul class="nav navbar-nav">
                 <li>
