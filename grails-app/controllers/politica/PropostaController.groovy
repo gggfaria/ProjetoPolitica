@@ -18,17 +18,21 @@ class PropostaController {
 
 
     @Secured(['ROLE_POLITICO'])
-
-    def listar()
-    {
+    def listar() {
         def politicos = Politico.list()
         def areas = Area.createCriteria().list { order("nome") }
-        def propostas =  Proposta.list()
+        def propostas = Proposta.list()
         render(view: "listar", model: [listaAreas: areas, listaPoliticos: politicos, listaProposta: propostas])
 
-        }
+    }
+    @Secured(['ROLE_POLITICO'])
+    def listarProposta()
+    {
+        def proposta = Proposta.findById(params.id)
+    }
 
 
+    @Secured(['ROLE_POLITICO'])
     def salvar() {
         Proposta proposta
         //Pegar usuario logado (politoc)
@@ -50,6 +54,7 @@ class PropostaController {
         proposta.resumo = params.resumo
         proposta.descricao = params.descricao
         proposta.politico = politico
+        proposta.politico.id = politico.id
         proposta.area = Area.get(areaId)
         proposta.validate()
         if (proposta.hasErrors()) {
