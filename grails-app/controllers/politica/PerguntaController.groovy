@@ -78,22 +78,27 @@ class PerguntaController {
 
     @Secured(['ROLE_POLITICO'])
     def responder() {
-        def pergunta = Pergunta.findById(params.id)
+
         Usuario usuarioLogado = springSecurityService.currentUser
         def politico = Politico.findByUsuario(usuarioLogado)
 
-        if (pergunta.isRespondida) {
-            render(view: "index", controller:"politico")
-        } else if (pergunta.proposta.politico.id != politico.id) {
-            render(view: "index", controller:"politico")
-        } else {
-            render(view: "responder", model: ["pergunta": pergunta])
+
+        if (params.id) {
+            def pergunta = Pergunta.findById(params.id)
+            if (pergunta.proposta.politico.id != politico.id) {
+                render(controller: "politico", view: "index")
+            } else if (pergunta.isRespondida) {
+                render(controller: "politico", view: "index")
+            } else {
+                render(view: "responder", model: ["pergunta": pergunta])
+            }
+
+        }else{
+            render(controller: "politico", view: "index")
         }
 
+
     }
-
-
-
 
 
     @Secured(['ROLE_ADMIN'])

@@ -9,9 +9,16 @@ class PoliticoController {
     transient springSecurityService
 
     def index() {
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def politico = Politico.findByUsuario(usuarioLogado)
+
         def perguntas = Pergunta.createCriteria().list {
-            order("isRespondida", 'asc')
+            createAlias("proposta","p", CriteriaSpecification.INNER_JOIN)
+            eq("p.politico.id", politico.id)
             eq('isAtivada',true)
+            order("isRespondida", 'asc')
+
+
         }
 
 
