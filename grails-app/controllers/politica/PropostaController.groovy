@@ -29,6 +29,7 @@ class PropostaController {
     def listarProposta()
     {
         def proposta = Proposta.findById(params.id)
+        render proposta as JSON
     }
 
 
