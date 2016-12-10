@@ -43,9 +43,9 @@
                     <td>${proposta.area.nome}</td>
                     <td>${proposta.titulo}</td>
                     <td style="max-width:20vw;   text-overflow:ellipsis;
-                    overflow:hidden;  white-space:nowrap">${proposta.resumo}</td>
+                    overflow:hidden;  white-space:nowrap">${proposta.resumo.encodeAsHTML()}</td>
                     <td style="max-width:20vw; white-space:nowrap;   text-overflow:ellipsis;
-                    overflow:hidden">${proposta.descricao}</td>
+                    overflow:hidden" >${proposta.descricao}</td>
                     <td><g:remoteLink controller="proposta" action="exibirPropostas" style="width: 100%"
                                       id="${proposta.id}"
                                       onSuccess="mostrarProposta(data)">
