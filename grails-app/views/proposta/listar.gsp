@@ -43,10 +43,10 @@
                     <td>${proposta.area.nome}</td>
                     <td>${proposta.titulo}</td>
                     <td style="max-width:20vw;   text-overflow:ellipsis;
-                    overflow:hidden;  white-space:nowrap">${proposta.resumo.encodeAsHTML()}</td>
+                    overflow:hidden;  white-space:nowrap">${proposta.resumo.decodeHTML()}</td>
                     <td style="max-width:20vw; white-space:nowrap;   text-overflow:ellipsis;
                     overflow:hidden" >${proposta.descricao}</td>
-                    <td><g:remoteLink controller="proposta" action="exibirPropostas" style="width: 100%"
+                    <td><g:remoteLink controller="proposta" action="listarProposta"  onclick="mostrarProposta(data)"  style="width: 100%"
                                       id="${proposta.id}"
                                       onSuccess="mostrarProposta(data)">
                         Editar
@@ -120,7 +120,7 @@
              var areas = data.areas*/
             $('#modalProposta').modal('show')
 
-            $('#conteudoProposta').html(data)
+            //$('#conteudoProposta').html(data)
 
         }
     </script>

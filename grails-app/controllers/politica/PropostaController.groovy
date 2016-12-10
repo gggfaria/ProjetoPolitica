@@ -22,7 +22,7 @@ class PropostaController {
         def politicos = Politico.list()
         def areas = Area.createCriteria().list { order("nome") }
         def propostas = Proposta.list()
-        render(view: "listar", model: [listaAreas: areas, listaPoliticos: politicos, listaProposta: propostas.encode])
+        render(view: "listar", model: [listaAreas: areas, listaPoliticos: politicos, listaProposta: propostas])
 
     }
     @Secured(['ROLE_POLITICO'])
