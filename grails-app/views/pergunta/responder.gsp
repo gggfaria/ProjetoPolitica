@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-md-1" style="margin-left: 25px">
-            <button class="button button-5 button-5b icon-cart" onclick="voltar()">
+            <button class="button button-5 button-5b icon-cart" id="voltar" onclick="voltar()">
                 <i class="fa fa-arrow-left"></i>
                 <span>voltar</span>
             </button>
@@ -41,7 +41,7 @@
 
     <hr/>
     <g:formRemote name="formResposta" url="[controller: 'resposta', action: 'salvar']" class="form-group"
-                  onSuccess="exibirMensagem(data)">
+                  onSuccess="exibirMensagemGenerica(data,'Resposta enviada com sucesso', false)">
 
         <input type="hidden" name="perguntaId" value="${pergunta?.id}"/>
 

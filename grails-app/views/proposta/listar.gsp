@@ -45,8 +45,9 @@
                     <td style="max-width:20vw;   text-overflow:ellipsis;
                     overflow:hidden;  white-space:nowrap">${proposta.resumo.decodeHTML()}</td>
                     <td style="max-width:20vw; white-space:nowrap;   text-overflow:ellipsis;
-                    overflow:hidden" >${proposta.descricao}</td>
-                    <td><g:remoteLink controller="proposta" action="listarProposta"  onclick="mostrarProposta(data)"  style="width: 100%"
+                    overflow:hidden">${proposta.descricao}</td>
+                    <td><g:remoteLink controller="proposta" action="listarProposta" onclick="mostrarProposta(data)"
+                                      style="width: 100%"
                                       id="${proposta.id}"
                                       onSuccess="mostrarProposta(data)">
                         Editar
@@ -81,6 +82,7 @@
         </div><!-- /.modal -->
 
     </div>
+
     <div class="modal fade" id="modalProposta" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -107,52 +109,54 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <script type="text/javascript" src="../js/select.js"></script>
-    <script type="text/javascript" src="../js/comum.js"></script>
-    <script type="text/javascript" src="../js/nicEdit.js"></script>
-    <script type="text/javascript">
-        //<![CDATA[
-        bkLib.onDomLoaded(function () {
-            nicEditors.allTextAreas()
-        });
-        function mostrarProposta(data) {
-            /*var propostas = data.propostas
-             var areas = data.areas*/
-            $('#modalProposta').modal('show')
+</div>
 
-            //$('#conteudoProposta').html(data)
+<script type="text/javascript" src="../js/select.js"></script>
+<script type="text/javascript" src="../js/comum.js"></script>
+<script type="text/javascript" src="../js/nicEdit.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    bkLib.onDomLoaded(function () {
+        nicEditors.allTextAreas()
+    });
+    function mostrarProposta(data) {
+        /*var propostas = data.propostas
+         var areas = data.areas*/
+        $('#modalProposta').modal('show')
 
-        }
-    </script>
+        //$('#conteudoProposta').html(data)
+
+    }
+</script>
 
 
 
-    <script>
-        /*   function exibirMensagem(data) {
-         if (data.erro) {
-         document.getElementById('mensagem').textContent = 'Não foi possível concluir a operação.'
-         document.getElementById('mensagem').setAttribute('class', 'alert alert-danger')
+<script>
+    /*   function exibirMensagem(data) {
+     if (data.erro) {
+     document.getElementById('mensagem').textContent = 'Não foi possível concluir a operação.'
+     document.getElementById('mensagem').setAttribute('class', 'alert alert-danger')
 
-         var divMensagemErro
-         var erros = data.erro
-         $('#mensagemErros').empty()
-         for (var i = 0; i < erros.length; i++) {
-         $('#mensagemErros').append("<div class='alert alert-danger'>" + erros[i] + "</div>" + "<br/>")
-         console.log(erros[i])
-         }
+     var divMensagemErro
+     var erros = data.erro
+     $('#mensagemErros').empty()
+     for (var i = 0; i < erros.length; i++) {
+     $('#mensagemErros').append("<div class='alert alert-danger'>" + erros[i] + "</div>" + "<br/>")
+     console.log(erros[i])
+     }
 
-         $('#mensagemModal').modal('show')
-         } else {
-         document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso.'
-         document.getElementById('mensagem').setAttribute('class', 'alert alert-success')
-         $('#mensagemErros').empty()
-         $('#mensagemModal').modal('show')
-         $('input').val('')
-         $('select').val('0')
-         }
-         }
-         */
-    </script>
+     $('#mensagemModal').modal('show')
+     } else {
+     document.getElementById('mensagem').textContent = 'Cadastro realizado com sucesso.'
+     document.getElementById('mensagem').setAttribute('class', 'alert alert-success')
+     $('#mensagemErros').empty()
+     $('#mensagemModal').modal('show')
+     $('input').val('')
+     $('select').val('0')
+     }
+     }
+     */
+</script>
 
 </body>
 
