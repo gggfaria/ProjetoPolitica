@@ -86,15 +86,15 @@ class PerguntaController {
         if (params.id) {
             def pergunta = Pergunta.findById(params.id)
             if (pergunta.proposta.politico.id != politico.id) {
-                render(controller: "politico", view: "index")
+                redirect(controller: "politico", action: "index")
             } else if (pergunta.isRespondida) {
-                render(controller: "politico", view: "index")
+                redirect(controller: "politico", action: "index")
             } else {
                 render(view: "responder", model: ["pergunta": pergunta])
             }
 
         }else{
-            render(controller: "politico", view: "index")
+            redirect(controller: "politico", action: "index")
         }
 
 

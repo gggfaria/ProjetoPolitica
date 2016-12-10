@@ -20,7 +20,7 @@ class RespostaController {
 
         if (params.perguntaId) {
             def idPergunta = params.perguntaId.toLong()
-            print('vai')
+
 
             pergunta = Pergunta.findById(idPergunta)
 
