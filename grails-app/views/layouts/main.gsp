@@ -97,7 +97,7 @@
     Gabriel Faria<br/>
     Guilherme Prado<br/>
     Felipe Guimarães<br/>
-    Willian Gonçalves<br/>
+
 
 </footer>
 
