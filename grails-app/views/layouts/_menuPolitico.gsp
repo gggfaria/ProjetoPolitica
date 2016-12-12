@@ -21,7 +21,7 @@
                            aria-expanded="false">Propostas</a>
                         <ul class="dropdown-menu">
                             <li><a href="/Politica/proposta/">Cadastrar</a></li>
-                            <li><a href="#">Editar</a></li>
+                            <li><a href="/Politica/proposta/listar">Editar</a></li>
                             <li role="separator" class="divider"></li>
                             <li><g:link controller="politico" action="index">
                                 Perguntas

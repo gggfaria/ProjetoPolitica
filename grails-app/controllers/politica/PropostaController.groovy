@@ -25,9 +25,9 @@ class PropostaController {
         render(view: "listar", model: [listaAreas: areas, listaPoliticos: politicos, listaProposta: propostas])
 
     }
+
     @Secured(['ROLE_POLITICO'])
-    def listarProposta()
-    {
+    def listarProposta() {
         def proposta = Proposta.findById(params.id)
         render proposta as JSON
     }
@@ -35,6 +35,7 @@ class PropostaController {
 
     @Secured(['ROLE_POLITICO'])
     def salvar() {
+
         Proposta proposta
         //Pegar usuario logado (politoc)
         Usuario usuarioLogado = springSecurityService.currentUser
@@ -42,15 +43,15 @@ class PropostaController {
 
         Integer areaId = params.area?.toInteger()
 
-        /*if(params.id) // se o formulario tem id, pega o objeto do BD
+        if (params.id == false) // se o formulario tem id, pega o objeto do BD
         {
-            proposta.id = proposta.get(params.id)
+            proposta.id = params.id?.toLong()
         } else {
             proposta = new Proposta()
-        }*/
+        }
 
         proposta = new Proposta()
-        withTag(null, params.descricao)
+
         proposta.titulo = params.titulo
         proposta.resumo = params.resumo
         proposta.descricao = params.descricao
@@ -82,8 +83,7 @@ class PropostaController {
         } else {
 
             Proposta proposta = Proposta.findById(params.id.toLong())
-            proposta.perguntas.sort{it.data} //TODO ORDERNAR DESC
-
+            proposta.perguntas.sort { it.data } //TODO ORDERNAR DESC
 
 
             if (proposta == null) {
@@ -100,19 +100,58 @@ class PropostaController {
     }
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def listarPerguntas(){
+    def listarPerguntas() {
 
         def perguntas = Pergunta.createCriteria().list {
-            eq("isAtivada",true)
-            proposta{
+            eq("isAtivada", true)
+            proposta {
                 idEq(params.id.toLong())
             }
-            order("data","desc")
+            order("data", "desc")
 
         }
 
 
-        render(view: "perguntas", model: ["perguntas":perguntas])
+        render(view: "perguntas", model: ["perguntas": perguntas])
     }
 
+
+    @Secured(['ROLE_POLITICO'])
+    def atualizar() {
+
+            Proposta proposta
+            //Pegar usuario logado (politoc)
+            Usuario usuarioLogado = springSecurityService.currentUser
+            Politico politico = Politico.findByUsuario(usuarioLogado)
+
+            Integer areaId = params.area?.toInteger()
+            Integer idProposta = params.id?.toInteger()
+
+            proposta = Proposta.get(idProposta)
+
+
+
+
+            proposta.titulo = params.titulo
+            proposta.resumo = params.resumo
+            proposta.descricao = params.descricao
+            proposta.politico = politico
+            proposta.politico.id = politico.id
+            proposta.area = Area.get(areaId)
+            proposta.validate()
+            if (proposta.hasErrors()) {
+                def listaErros = []
+                proposta.errors.each { erro ->
+                    listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+                }
+                def mensagem = ["erro": listaErros]
+                render mensagem as JSON
+
+            } else {
+                proposta = proposta.save(flush: true)
+                render proposta as JSON
+            }
+
+
+    }
 }
