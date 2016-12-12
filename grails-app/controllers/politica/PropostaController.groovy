@@ -81,8 +81,7 @@ class PropostaController {
         } else {
 
             Proposta proposta = Proposta.findById(params.id.toLong())
-            proposta.perguntas.sort{it.data} //TODO ORDERNAR DESC
-
+            proposta.perguntas.sort{it.data}
 
 
             if (proposta == null) {
@@ -106,7 +105,7 @@ class PropostaController {
             proposta{
                 idEq(params.id.toLong())
             }
-            order("data","desc")
+            order("data","asc")
 
         }
 

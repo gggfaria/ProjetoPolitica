@@ -25,7 +25,7 @@
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
                         <input type="email" name="j_username"
-                               placeholder="email" required="" class="form-control">
+                               placeholder="E-mail" required="" class="form-control">
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-key" aria-hidden="true"></i>
                         </span>
-                        <input type="password" min="5" name="j_password" id="senha" placeholder="senha" required=""
+                        <input type="password" min="5" name="j_password" id="senha" placeholder="Senha" required=""
                                class="form-control">
                         <span class="input-group-addon" style="cursor: pointer;" onmousedown="exibirSenha()"
                               onmouseup="esconderSenha()">
