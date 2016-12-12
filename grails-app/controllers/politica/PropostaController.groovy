@@ -83,6 +83,7 @@ class PropostaController {
         } else {
 
             Proposta proposta = Proposta.findById(params.id.toLong())
+
             proposta.perguntas.sort { it.data } //TODO ORDERNAR DESC
 
 
@@ -107,17 +108,18 @@ class PropostaController {
             proposta {
                 idEq(params.id.toLong())
             }
+
             order("data", "desc")
 
+
+
+            render(view: "perguntas", model: ["perguntas": perguntas])
         }
-
-
-        render(view: "perguntas", model: ["perguntas": perguntas])
     }
 
 
-    @Secured(['ROLE_POLITICO'])
-    def atualizar() {
+        @Secured(['ROLE_POLITICO'])
+        def atualizar() {
 
             Proposta proposta
             //Pegar usuario logado (politoc)
@@ -126,12 +128,7 @@ class PropostaController {
 
             Integer areaId = params.area?.toInteger()
             Integer idProposta = params.id?.toInteger()
-
             proposta = Proposta.get(idProposta)
-
-
-
-
             proposta.titulo = params.titulo
             proposta.resumo = params.resumo
             proposta.descricao = params.descricao
@@ -153,5 +150,6 @@ class PropostaController {
             }
 
 
+        }
     }
-}
+

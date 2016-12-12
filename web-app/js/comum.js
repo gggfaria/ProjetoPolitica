@@ -80,6 +80,7 @@ function exibirMensagemModal(data) {
         $('#mensagemErros').empty()
         $('#mensagemModal').modal('show')
         $('input').val('')
+        $("input[type=text]").val('')
         $('select').val('0')
     }
 }
@@ -101,7 +102,8 @@ function exibirMensagemAdicionarPergunta(data, id) {
 
     } else {
         $.notify("Pergunta enviada com sucesso", "success");
-        $('input').val('')
+        $('textarea').val('')
+        $("input[type=text]").val('')
         atualizarPerguntas(id)
 
     }
