@@ -1,3 +1,6 @@
+<%@ page import="politica.Pergunta" %>
+<meta name="layout" content="main">
+<link href="/Politica/css/site.css" rel="stylesheet">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -12,6 +15,7 @@
             </g:link>
         </div>
 
+
         <div id="bs-collapse" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
                 <sec:ifAllGranted roles="ROLE_POLITICO">
@@ -23,8 +27,13 @@
                             <li><a href="/Politica/proposta/">Cadastrar</a></li>
                             <li><a href="/Politica/proposta/listar">Editar</a></li>
                             <li role="separator" class="divider"></li>
+                            <g:include controller="politico" action="pegarNotificacao"/>
                             <li><g:link controller="politico" action="index">
-                                Perguntas
+                            Perguntas <span class="fa fa-question-circle" aria-hidden="true"/><span class="label label-danger label-as-badge" style="
+                            border-radius: 50%;
+                            position:relative;
+                            top: -10px;
+                            left: 2px;">${session.notificacao}</span>
                             </g:link></li>
                         </ul>
                     </li>
@@ -49,3 +58,9 @@
 
     </div>
 </nav>
+
+<script>
+    function exibirUpdate() {
+        alert('oi')
+    }
+</script>

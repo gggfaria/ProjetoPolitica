@@ -13,7 +13,32 @@
         </div>
 
         <div id="bs-collapse" class="collapse navbar-collapse navbar-right">
-
+            <ul class="nav navbar-nav">
+                <sec:ifAllGranted roles="ROLE_ELEITOR">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">Perguntas</a>
+                        <ul class="dropdown-menu">
+                            <g:include controller="eleitor" action="notificacao"/>
+                            <li><a href="/Politica/perguntas/">Respondidas
+                                <span
+                                        class="label label-danger label-as-badge" style="
+                                border-radius: 50%;
+                                position:relative;
+                                top: -10px;
+                                left: 2px;">${session.respondidas}</span></a></li>
+                            <li><a href="/Politica/perguntas/listar">Não respondidas
+                                <span
+                                        class="label label-danger label-as-badge" style="
+                                border-radius: 50%;
+                                position:relative;
+                                top: -10px;
+                                left: 2px;">${session.naoRespondidas}</span></a></li>
+                        </ul>
+                    </li>
+                </sec:ifAllGranted>
+            </ul>
             <ul class="nav navbar-nav">
                 <li>
                     <g:link controller="politico" action="listar">

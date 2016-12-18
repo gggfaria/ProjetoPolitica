@@ -5,6 +5,7 @@ class Proposta {
     String titulo
     String descricao
     String resumo
+    Date dataPublicacao
     Area area
     Politico politico
 
