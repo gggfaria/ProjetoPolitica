@@ -32,8 +32,9 @@
     <table style="width: 100%" class="table table-responsive table-bordered table-hover" id="tablePropostas">
         <thead style="background-color:#f8f8f8">
         <tr>
-            <th>ID</th>
+            <th style="display:none;">ID</th>
             <th>Area</th>
+            <th>Publicação</th>
             <th>Titulo</th>
             <th>Resumo</th>
             <th>Descrição</th>
@@ -44,11 +45,12 @@
         <tbody>
         <g:each in="${listaProposta}" var="proposta">
             <tr id="linhaProposta${proposta.id}">
-                <td>
+                <td style="display:none;">
                     ${proposta?.id}
                 </td>
 
                 <td>${proposta.area.nome}</td>
+                <td>${proposta.dataPublicacao.format("dd/MM/yyyy | HH:mm")}</td>
                 <td>${proposta.titulo}</td>
                 <td style="max-width:20vw;   text-overflow:ellipsis;
                 overflow:hidden;  white-space:nowrap">${raw(proposta.resumo)}</td>
@@ -108,7 +110,8 @@
                                       class="form-group">
                             <div class="col-md-6">
                                 <br>
-                                <input type="hidden" id="id" name="id">
+                                <input type="hidden" id="idProposta" name="idProposta">
+                                <input type="hidden" id="dataPublicacao" name="dataPublicacao">
                                 <span class="obrigatorio">*</span>
                                 <label>Area</label>
 
@@ -182,7 +185,8 @@
         $('#descricao').val(data.descricao)
         $('#resumo').val(data.resumo)
         $('#titulo').val(data.titulo)
-        $('#id').val(data.id)
+        $('#idProposta').val(data.id)
+        $('#dataPublicacao').val(data.dataPublicacao).data("dd/MM/yyyy - HH:mm")
         $('#area').val('a')
         $('#modalForm').modal('show')
     }
@@ -226,7 +230,7 @@
         table = document.getElementById("tablePropostas");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
+            td = tr[i].getElementsByTagName("td")[3];
             if (td) {
                 if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
                     tr[i].style.display = "";
@@ -241,8 +245,9 @@
         var dropdown = document.getElementById("area");
         var selected = dropdown.options[dropdown.selectedIndex].innerHTML;
 
-        var colunas = "<td>" + data.id + "</td>" +
+        var colunas = "<td style=\"display:none\">" + data.id + "</td>" +
                 "<td>" + selected + "</td>" +
+                "<td>" + data.dataPublicacao + "</td>" +
                 "<td>" + data.titulo + "</td>" +
                 "<td style=\"max-width:20vw; white-space:nowrap;   text-overflow:ellipsis;" +
                 "overflow:hidden\">" + data.resumo + "</td>" +

@@ -16,12 +16,17 @@ class PerguntaController {
     @Secured(['ROLE_ELEITOR'])
     def enviar() {
 
-        def idProposta = params.id
+        def RespostaRequisicao = [mensagem: '', erro: [errors: []], objeto: []];
 
-        if (idProposta) {
-            redirect(controller: "politico", action: "listar")
+        if (!params.propostaId.isNumber()) {
+            RespostaRequisicao.erro.errors.push('Proposta não informada');
         }
-
+        if (params.descricao == null || params.descricao == '') {
+            RespostaRequisicao.erro.errors.push('Descrição não informada');
+        }
+        if (RespostaRequisicao.erro.errors.size() > 0) {
+            return render(RespostaRequisicao as JSON);
+        }
 
         Pergunta pergunta = new Pergunta();
         Proposta proposta = Proposta.findById(params.propostaId);
@@ -48,22 +53,11 @@ class PerguntaController {
         pergunta.isAtivada = true;
 
 
-        pergunta.validate();
+        pergunta.save();
 
-        if(pergunta.hasErrors()) {
-            def listaErros = []
-
-            print(pergunta.errors.allErrors)
-            pergunta.errors.allErrors.each { erro ->
-
-                println(erro)
-                listaErros.add(g.message(message: erro.defaultMessage, error: erro))
-            }
-
-
-            def mensagem = ["erro": listaErros]
-            println(mensagem)
-            render mensagem as JSON
+        if (pergunta.hasErrors()) {
+            RespostaRequisicao.erro = pergunta.getErrors();
+            return render(RespostaRequisicao as JSON);
         }
 
         RespostaRequisicao.mensagem = 'Pergunta enviada com sucesso';

@@ -58,6 +58,7 @@ class PropostaController {
         proposta.politico = politico
         proposta.politico.id = politico.id
         proposta.area = Area.get(areaId)
+        proposta.dataPublicacao = new Date()
         proposta.validate()
         if (proposta.hasErrors()) {
             def listaErros = []
@@ -127,7 +128,7 @@ class PropostaController {
             Politico politico = Politico.findByUsuario(usuarioLogado)
 
             Integer areaId = params.area?.toInteger()
-            Integer idProposta = params.id?.toInteger()
+            Integer idProposta = params.idProposta?.toInteger()
             proposta = Proposta.get(idProposta)
             proposta.titulo = params.titulo
             proposta.resumo = params.resumo
