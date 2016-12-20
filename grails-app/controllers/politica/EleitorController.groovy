@@ -6,6 +6,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class EleitorController {
     transient springSecurityService
 
+    def _eleitorService
+
     @Secured(['ROLE_ELEITOR'])
     def index() {
 
@@ -72,13 +74,13 @@ class EleitorController {
 
     }
 
-    def eleitorService
+
     @Secured(['ROLE_ELEITOR'])
     def notificacao() {
         Usuario usuarioLogado = springSecurityService.currentUser
         def eleitor = Eleitor.findByUsuario(usuarioLogado)
-        session["naoRespondidas"] = eleitorService.naoRespondidas(eleitor)
-        session["respondidas"] = eleitorService.Respondidas(eleitor)
+        session["naoRespondidas"] = _eleitorService.naoRespondidas(eleitor)
+        session["respondidas"] = _eleitorService.Respondidas(eleitor)
         render ""
     }
 

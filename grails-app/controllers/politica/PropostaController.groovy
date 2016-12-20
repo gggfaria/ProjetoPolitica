@@ -85,7 +85,7 @@ class PropostaController {
 
             Proposta proposta = Proposta.findById(params.id.toLong())
 
-            proposta.perguntas.sort { it.data } //TODO ORDERNAR DESC
+            proposta.perguntas.sort { it.data }
 
 
             if (proposta == null) {
@@ -102,55 +102,53 @@ class PropostaController {
     }
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def listarPerguntas() {
+    def listarPerguntas(){
 
         def perguntas = Pergunta.createCriteria().list {
             eq("isAtivada", true)
             proposta {
                 idEq(params.id.toLong())
             }
-
             order("data", "asc")
-
-
         }
-        render(view: "perguntas", model: ["perguntas": perguntas])
-        
+
+        render(view: "perguntas", model: ["perguntas":perguntas])
+
     }
 
 
-        @Secured(['ROLE_POLITICO'])
-        def atualizar() {
+    @Secured(['ROLE_POLITICO'])
+    def atualizar() {
 
-            Proposta proposta
-            //Pegar usuario logado (politoc)
-            Usuario usuarioLogado = springSecurityService.currentUser
-            Politico politico = Politico.findByUsuario(usuarioLogado)
+        Proposta proposta
+        //Pegar usuario logado (politoc)
+        Usuario usuarioLogado = springSecurityService.currentUser
+        Politico politico = Politico.findByUsuario(usuarioLogado)
 
-            Integer areaId = params.area?.toInteger()
-            Integer idProposta = params.idProposta?.toInteger()
-            proposta = Proposta.get(idProposta)
-            proposta.titulo = params.titulo
-            proposta.resumo = params.resumo
-            proposta.descricao = params.descricao
-            proposta.politico = politico
-            proposta.politico.id = politico.id
-            proposta.area = Area.get(areaId)
-            proposta.validate()
-            if (proposta.hasErrors()) {
-                def listaErros = []
-                proposta.errors.each { erro ->
-                    listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
-                }
-                def mensagem = ["erro": listaErros]
-                render mensagem as JSON
-
-            } else {
-                proposta = proposta.save(flush: true)
-                render proposta as JSON
+        Integer areaId = params.area?.toInteger()
+        Integer idProposta = params.idProposta?.toInteger()
+        proposta = Proposta.get(idProposta)
+        proposta.titulo = params.titulo
+        proposta.resumo = params.resumo
+        proposta.descricao = params.descricao
+        proposta.politico = politico
+        proposta.politico.id = politico.id
+        proposta.area = Area.get(areaId)
+        proposta.validate()
+        if (proposta.hasErrors()) {
+            def listaErros = []
+            proposta.errors.each { erro ->
+                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
             }
+            def mensagem = ["erro": listaErros]
+            render mensagem as JSON
 
-
+        } else {
+            proposta = proposta.save(flush: true)
+            render proposta as JSON
         }
+
+
     }
+}
 

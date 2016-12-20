@@ -7,6 +7,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class PerguntaController {
     transient springSecurityService
 
+    PerguntaService _perguntaService = new PerguntaService()
+
     @Secured(['ROLE_ELEITOR'])
     def index() {
 
@@ -81,19 +83,13 @@ class PerguntaController {
 
         Usuario usuarioLogado = springSecurityService.currentUser
         def politico = Politico.findByUsuario(usuarioLogado)
+        def perguntaId = params.id.toLong()
 
+        if (!_perguntaService.isPerguntaRespondida(perguntaId) && _perguntaService.verificarUsuarioPerguntaProposta(perguntaId, politico.id)) {
+            def pergunta = _perguntaService.selectPerguntaId(perguntaId)
+            render(view: "responder", model: ["pergunta": pergunta])
 
-        if (params.id) {
-            def pergunta = Pergunta.findById(params.id)
-            if (pergunta.proposta.politico.id != politico.id) {
-                redirect(controller: "politico", action: "index")
-            } else if (pergunta.isRespondida) {
-                redirect(controller: "politico", action: "index")
-            } else {
-                render(view: "responder", model: ["pergunta": pergunta])
-            }
-
-        }else{
+        } else {
             redirect(controller: "politico", action: "index")
         }
 
@@ -183,53 +179,54 @@ class PerguntaController {
 
         return render([erro: Erros, objeto: Buscas] as JSON);
     }
-    
+
+
     @Secured(['ROLE_ELEITOR'])
     def listar() {
         Usuario usuarioLogado = springSecurityService.currentUser
         def eleitor = Eleitor.findByUsuario(usuarioLogado)
         def perguntas = Pergunta.createCriteria().list {
             order("isRespondida", 'asc')
-            eq('isAtivada',true)
+            eq('isAtivada', true)
             eq("pessoa.id", eleitor.id.toLong())
         }
-        
+
         render(view: "listar", model: ["perguntas": perguntas])
     }
-    
+
     @Secured(['ROLE_ELEITOR'])
     def exibirPergunta() {
         def perguntaId = params.id
         def perguntas = Pergunta.createCriteria().list {
             idEq(perguntaId.toLong())
         }
-        
+
         render(view: "editar", model: ["perguntas": perguntas])
     }
-    
+
     @Secured(['ROLE_ELEITOR'])
     def atualizar() {
-        
+
         Usuario usuarioLogado = springSecurityService.currentUser
         def eleitor = Eleitor.findByUsuario(usuarioLogado)
-        
+
         def perguntaId = params.perguntaId.toLong()
-        
+
         print(perguntaId)
-        
+
         def pergunta = new Pergunta()
-        
+
         if (perguntaId) {
             pergunta = Pergunta.findById(perguntaId)
-            
+
         }
-        
+
         pergunta.descricao = params.descricao
-        
+
         //print(pergunta.resposta.id)
-        
+
         pergunta.validate()
-        
+
 
         if (pergunta.hasErrors()) {
             def listaErros = []
@@ -238,15 +235,16 @@ class PerguntaController {
             pergunta.errors.allErrors.each { erro ->
                 listaErros.add(g.message(message: erro.defaultMessage, error: erro))
             }
-         
+
             def mensagem = ["erro": listaErros]
             println(mensagem)
-            
+
             render mensagem as JSON
         } else {
             pergunta = pergunta.save(flush: true)
             render pergunta as JSON
-            
+
         }
     }
+
 }
