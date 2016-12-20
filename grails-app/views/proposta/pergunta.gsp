@@ -37,8 +37,7 @@
         <h2>Enviar pergunta</h2>
         <hr/>
         <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'enviar']" class="form-group"
-                      onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})"
-                      onFailure="ModalServico.exibirRespostaErroPadrao(XMLHttpRequest)">
+                      onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})">
             <input type="hidden" name="propostaId" value="${proposta?.id}"/>
 
             <div class="row">

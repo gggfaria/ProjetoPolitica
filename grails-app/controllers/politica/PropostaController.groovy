@@ -37,7 +37,7 @@ class PropostaController {
     def salvar() {
 
         Proposta proposta
-        //Pegar usuario logado (politoc)
+        //Pegar usuario logado (politico)
         Usuario usuarioLogado = springSecurityService.currentUser
         Politico politico = Politico.findByUsuario(usuarioLogado)
 
