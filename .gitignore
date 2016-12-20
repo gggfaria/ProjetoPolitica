@@ -1,3 +1,7 @@
+
+# Created by https://www.gitignore.io/api/grails,intellij+iml
+
+### Grails ###
 # .gitignore for Grails 1.2 and 1.3
 # Although this should work for most versions of grails, it is
 # suggested that you use the "grails integrate-with --git" command
@@ -33,43 +37,7 @@
 /target
 
 
-# Created by https://www.gitignore.io/api/grails,intellij
-
-### Grails ###
-# .gitignore for Grails 1.2 and 1.3
-# Although this should work for most versions of grails, it is
-# suggested that you use the "grails integrate-with --git" command
-# to generate your .gitignore file.
-
-# web application files
-
-# default HSQL database files for production mode
-
-
-# general HSQL database files
-
-# logs
-
-# project release file
-
-
-# plugin release files
-/*.zip
-/plugin.xml
-
-# older plugin install locations
-/plugins
-/web-app/plugins
-
-# "temporary" build files
-/target
-
-.slcache/
-
-/bower-components
-
-
-### Intellij ###
+### Intellij+iml ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -85,6 +53,7 @@
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/
 
 # Gradle:
 .idea/gradle.xml
@@ -113,15 +82,20 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-### Intellij Patch ###
-# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+### Intellij+iml Patch ###
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
- *.iml
- modules.xml
- .idea/misc.xml 
- *.ipr
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
+.slcache/
+*.bat
 
 #arquivos de imagem e pdf
-*.jpg
-*.png
 *.pdf
+*.png
+*.jpg
+/images/*
+/arquivos/*
+
