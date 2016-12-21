@@ -20,7 +20,6 @@
                            aria-haspopup="true"
                            aria-expanded="false">Perguntas</a>
                         <ul class="dropdown-menu">
-                            <g:include controller="eleitor" action="notificacao"/>
                             <li><a href="/Politica/perguntas/">Respondidas
                                 <span
                                         class="label label-danger label-as-badge" style="
@@ -35,6 +34,37 @@
                                 position:relative;
                                 top: -10px;
                                 left: 2px;">${session.naoRespondidas}</span></a></li>
+
+                        </ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="true">Notificações</a>
+                        <ul class="dropdown-menu" style="width: 350px">
+                            <li class="col-lg-offset-6">
+                                <button id="deletar" type='link' class='btn btn-primary col-lg-offset-6'
+                                        title='Limpar notificações'>
+                                    Limpar
+
+                                </button>
+                            </li>
+
+                            <li id="dados">
+                                <g:formRemote id="myForm" name="myForm" update="updateMe" url="[controller: 'notificacao', action:'listar']" onSuccess="mostrarNotificacoes(data)">
+
+                                </g:formRemote>
+                                <g:render template="/notificacao/news" />
+                            </li>
+
+
+                            <li class="col-lg-offset-0">
+                                <button id="exibir" type='link' class='btn btn-primary col-lg-offset-6'
+                                        title='Ver notificações antigas'>
+                                    Veja mais
+
+                                </button>
+                            </li>
+
                         </ul>
                     </li>
                 </sec:ifAllGranted>
@@ -57,3 +87,17 @@
 
     </div>
 </nav>
+
+<script>
+    $(document).ready(function() {
+        $('#myForm').submit();
+        alert('cheguei aqui')
+    });
+
+    function mostrarNotificacoes(data) {
+        /*var propostas = data.propostas
+         var areas = data.areas*/
+
+
+    }
+</script>

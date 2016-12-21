@@ -9,7 +9,7 @@ public class Pessoa {
     boolean isAtivada
     politica.EnumSexo sexo
 
-    static hasMany = [perguntas: Pergunta]
+    static hasMany = [perguntas: Pergunta, notificacoes: Notificacao]
 
     static constraints = {
         nome size: 5..300, blank: false, nullable: false
