@@ -71,6 +71,11 @@
             </ul>
             <ul class="nav navbar-nav">
                 <li>
+                    <g:link controller="pergunta" action="listar">
+                        Minhas Perguntas
+                    </g:link>
+                </li>
+                <li>
                     <g:link controller="politico" action="listar">
                         Políticos
                     </g:link>

@@ -183,4 +183,70 @@ class PerguntaController {
 
         return render([erro: Erros, objeto: Buscas] as JSON);
     }
+    
+    @Secured(['ROLE_ELEITOR'])
+    def listar() {
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def eleitor = Eleitor.findByUsuario(usuarioLogado)
+        def perguntas = Pergunta.createCriteria().list {
+            order("isRespondida", 'asc')
+            eq('isAtivada',true)
+            eq("pessoa.id", eleitor.id.toLong())
+        }
+        
+        render(view: "listar", model: ["perguntas": perguntas])
+    }
+    
+    @Secured(['ROLE_ELEITOR'])
+    def exibirPergunta() {
+        def perguntaId = params.id
+        def perguntas = Pergunta.createCriteria().list {
+            idEq(perguntaId.toLong())
+        }
+        
+        render(view: "editar", model: ["perguntas": perguntas])
+    }
+    
+    @Secured(['ROLE_ELEITOR'])
+    def atualizar() {
+        
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def eleitor = Eleitor.findByUsuario(usuarioLogado)
+        
+        def perguntaId = params.perguntaId.toLong()
+        
+        print(perguntaId)
+        
+        def pergunta = new Pergunta()
+        
+        if (perguntaId) {
+            pergunta = Pergunta.findById(perguntaId)
+            
+        }
+        
+        pergunta.descricao = params.descricao
+        
+        //print(pergunta.resposta.id)
+        
+        pergunta.validate()
+        
+
+        if (pergunta.hasErrors()) {
+            def listaErros = []
+
+            print(pergunta.errors.allErrors)
+            pergunta.errors.allErrors.each { erro ->
+                listaErros.add(g.message(message: erro.defaultMessage, error: erro))
+            }
+         
+            def mensagem = ["erro": listaErros]
+            println(mensagem)
+            
+            render mensagem as JSON
+        } else {
+            pergunta = pergunta.save(flush: true)
+            render pergunta as JSON
+            
+        }
+    }
 }
