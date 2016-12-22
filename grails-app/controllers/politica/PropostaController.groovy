@@ -110,12 +110,12 @@ class PropostaController {
                 idEq(params.id.toLong())
             }
 
-            order("data", "desc")
+            order("data", "asc")
 
 
-
-            render(view: "perguntas", model: ["perguntas": perguntas])
         }
+        render(view: "perguntas", model: ["perguntas": perguntas])
+        
     }
 
 

@@ -159,7 +159,7 @@
 
     function atualizarPerguntas(id) {
         $.ajax({
-            url: "../listarPerguntas/" + id,
+            url: "/Politica/Proposta/listarPerguntas/" + id,
             data: {
                 id: id
             },
