@@ -8,6 +8,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class PropostaController {
     transient springSecurityService
 
+    PropostaService _propostaService = new PropostaService()
+
     @Secured(['ROLE_POLITICO'])
     def index() {
         def politicos = Politico.list()
@@ -82,15 +84,12 @@ class PropostaController {
         if (!params.id) {
             render(view: '/erro404', model: [mensagem: 'Proposta não especificada']);
         } else {
-
             Proposta proposta = Proposta.findById(params.id.toLong())
-
-            proposta.perguntas.sort { it.data }
-
 
             if (proposta == null) {
                 render(view: '/erro404', model: [mensagem: 'Proposta não encontrada']);
             } else {
+                proposta.perguntas.sort { it.data }
                 render(view: "pergunta", model: [proposta: proposta]);
             }
         }
@@ -101,8 +100,9 @@ class PropostaController {
         render(view: "/error", model: [status: 404, exception: "Id da Proposta não especificado"]);
     }
 
+
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def listarPerguntas(){
+    def listarPerguntas() {
 
         def perguntas = Pergunta.createCriteria().list {
             eq("isAtivada", true)
@@ -112,7 +112,8 @@ class PropostaController {
             order("data", "asc")
         }
 
-        render(view: "perguntas", model: ["perguntas":perguntas])
+        render(view: "perguntas", model: ["perguntas": perguntas])
+
 
     }
 

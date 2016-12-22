@@ -5,7 +5,19 @@ import grails.transaction.Transactional
 @Transactional
 class PerguntaService {
 
-    def verificarUsuarioPerguntaProposta(int perguntaId, int pessoaId) {
+
+
+    def salvarPergunta(Pergunta pergunta){
+        try{
+            pergunta = pergunta.save(flush: true)
+            return pergunta
+        }catch (Exception excecao){
+            return pergunta
+        }
+
+    }
+
+    def verificarUsuarioPerguntaProposta(long perguntaId, long pessoaId) {
         boolean retorno
 
         if (perguntaId) {
@@ -21,7 +33,7 @@ class PerguntaService {
 
     }
 
-    def isPerguntaRespondida(int perguntaId){
+    def isPerguntaRespondida(long perguntaId){
         boolean retorno
 
         if (perguntaId) {
@@ -36,7 +48,7 @@ class PerguntaService {
         return retorno
     }
 
-    def selectPerguntaId(int perguntaId){
+    def selectPerguntaId(long perguntaId){
         def pergunta = new Pergunta()
 
         if (perguntaId) {
