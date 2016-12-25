@@ -110,6 +110,12 @@ function exibirMensagemAdicionarPergunta(data, id) {
     }
 }
 
+function exibirMensagemReposta(data,mensagemSucesso) {
+    exibirMensagemGenerica(data, mensagemSucesso, false)
+    $("textarea").prop('disabled', true);
+    $("input").prop('disabled', true);
+}
+
 
 //funcao de exibir mensagem de sucesso adicionar pergunta, recebe o id da proposta
 function exibirMensagemGenerica(data, mensagemSucesso, isLimpar) {

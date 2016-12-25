@@ -21,7 +21,7 @@
     <h4>Proposta de ${proposta.politico.nome}</h4>
 
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">${proposta?.titulo}</div>
 
@@ -42,9 +42,9 @@
             <input type="hidden" name="propostaId" value="${proposta.id}"/>
 
             <div class="row">
-                <div class="col-md-12" style="margin-left: 25px">
+                <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <span class="obrigatorio">*</span>
                             <label>Faça sua pergunta</label>
                             <textarea name="descricao" class="form-control" style="max-width: 100%;"></textarea>
@@ -55,7 +55,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12" style="margin-left: 25px">
+                <div class="col-md-12">
                     <button class="button button-5 button-5b icon-cart" name="enviar">
                         <i class="fa fa-check"></i>
                         <span>enviar</span>
@@ -66,6 +66,22 @@
             <br/>
         </g:formRemote>
     </sec:ifAllGranted>
+
+    <sec:ifNotGranted roles="ROLE_ELEITOR">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    <strong>Eleitor</strong>, acesse com o seu usuário para fazer uma pergunta.
+                <g:link controller="login" action="logar" style="color: #0b30f5 !important;">
+                    Clique aqui!
+                </g:link>
+
+                </div>
+
+            </div>
+        </div>
+    </sec:ifNotGranted>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="mensagemModal">
         <div class="modal-dialog" role="document">
@@ -88,59 +104,58 @@
     </div><!-- /.modal -->
 
 
+    <h3>Perguntas sobre a proposta</h3>
     <hr/>
 
-    <h3>Perguntas sobre a proposta</h3>
-
     <div id="ListaPerguntas">
-
         <g:each in="${proposta.perguntas}" var="pergunta">
-
-            <div class="col-md-10" id="perguntasAntigas">
-                <div class="col-md-10">
-                    <div class="testimonial testimonial-default">
-                        <div class="testimonial-section">
-            ${pergunta.descricao}
-            </div>
-
-            <div class="testimonial-desc">
-
-                <div class="testimonial-writer">
-                    <div class="testimonial-writer-name">${pergunta.pessoa.nome}</div>
-
-                                <div class="testimonial-writer-designation">${pergunta.data.format("dd/MM/yyyy HH:mm")}</div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <g:if test="${pergunta.resposta != null}">
-                <div class="col-md-10" style="margin-left: 50px" id="perguntasAntigas">
-                    <div class="col-md-10">
-                        <div class="testimonial testimonial-primary">
+            <div class="row">
+                <div class="col-md-12" id="perguntasAntigas">
+                    <div class="col-md-12">
+                        <div class="testimonial testimonial-default">
                             <div class="testimonial-section">
-                ${pergunta.resposta?.descricao}
-                </div>
+                                ${pergunta.descricao}
+                            </div>
 
-                <div class="testimonial-desc">
-                    <div class="testimonial-writer">
-                        <div class="testimonial-writer-name"
-                             id="${pergunta?.id}">${pergunta.resposta?.politico?.nome}</div>
+                            <div class="testimonial-desc">
+                                <div class="testimonial-writer">
+                                    <div class="testimonial-writer-name">${pergunta.pessoa.nome}</div>
 
-                                    <div class="testimonial-writer-designation">${pergunta.resposta?.data?.format("dd/MM/yyyy hh:mm")}</div>
-
+                                    <div class="testimonial-writer-designation">${pergunta.data.format("dd/MM/yyyy HH:mm")}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
+
+            <g:if test="${pergunta.resposta != null}">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-11">
+                        <div class="col-md-12">
+                            <div class="testimonial testimonial-primary">
+                                <div class="testimonial-section">
+                                    ${pergunta.resposta?.descricao}
+                                </div>
+
+                                <div class="testimonial-desc">
+                                    <div class="testimonial-writer">
+                                        <div class="testimonial-writer-name"
+                                             id="${pergunta?.id}">${pergunta.resposta?.politico?.nome}</div>
+
+                                        <div class="testimonial-writer-designation">${pergunta.resposta?.data?.format("dd/MM/yyyy hh:mm")}</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </g:if>
 
         </g:each>
-
 
     </div>
 </div>
@@ -151,6 +166,18 @@
 
 <script>
 
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Politica/Proposta/atualizarPerguntas/" + id,
+            data: {
+                id: id
+            },
+            method: "post",
+            success: function (data) {
+                mostrarPerguntas(data)
+            }
+        })
+    });
 
 
     function mostrarPerguntas(data) {

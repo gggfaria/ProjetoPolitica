@@ -36,16 +36,16 @@ class PerguntaController {
         pergunta.validate()
 
 
-        if(pergunta.hasErrors()){
+        if (pergunta.hasErrors()) {
             def listaErros = []
-            pergunta.errors.allErrors.each{ erro ->
+            pergunta.errors.allErrors.each { erro ->
                 listaErros.add(g.message(message: erro.defaultMessage, error: erro))
             }
 
             def mensagem = ["erro": listaErros]
             render mensagem as JSON
 
-        }else{
+        } else {
             pergunta = perguntaService.salvarPergunta(pergunta)
             render pergunta as JSON
         }
@@ -58,21 +58,31 @@ class PerguntaController {
 
         Usuario usuarioLogado = springSecurityService.currentUser
         def politico = Politico.findByUsuario(usuarioLogado)
-        def perguntaId = params.id.toLong()
 
-        if (!_perguntaService.isPerguntaRespondida(perguntaId) && _perguntaService.verificarUsuarioPerguntaProposta(perguntaId, politico.id)) {
-            def pergunta = _perguntaService.selectPerguntaId(perguntaId)
-            render(view: "responder", model: ["pergunta": pergunta])
+        if (params.id) {
+            def perguntaId = params.id.toLong()
 
-        } else {
+            Pergunta pergunta = perguntaService.selectPerguntaId(perguntaId)
+            if (pergunta == null) {
+                render(view: '/erro404', model: [mensagem: 'Pergunta não encontrada']);
+            }
+
+            if ((!pergunta.isRespondida)) {
+                if( perguntaService.perguntaPertenceUsuario(pergunta, politico.id)){
+                    render(view: "responder", model: ["pergunta": pergunta])
+                }else {
+                    render(view: '/erro404', model: [mensagem: 'Pergunta não pertence ao usuário logado']);
+                }
+            } else {
+                render(view: '/erro404', model: [mensagem: 'Pergunta já foi respondida']);
+            }
+        }else
+        {
             redirect(controller: "politico", action: "index")
         }
 
 
     }
-
-
-
 
 
     @Secured(['ROLE_ELEITOR'])
@@ -140,5 +150,11 @@ class PerguntaController {
 
         }
     }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_ELEITOR','ROLE_POLITICO' ])
+    def erro404() {
+        render(view: "/error", model: [status: 404, exception: "Id da Proposta não especificado"]);
+    }
+
 
 }

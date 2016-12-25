@@ -96,7 +96,7 @@ class PropostaController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_ELEITOR','ROLE_POLITICO' ])
     def erro404() {
         render(view: "/error", model: [status: 404, exception: "Id da Proposta não especificado"]);
     }

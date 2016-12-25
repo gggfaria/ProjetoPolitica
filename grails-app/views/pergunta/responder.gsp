@@ -16,21 +16,26 @@
 <div class="container-fluid">
 
     <h2>Responder à pergunta</h2>
+
     <h3>${pergunta.descricao}</h3>
     <hr/>
     <h4>Eleitor: ${pergunta.pessoa.nome}</h4>
 
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">${pergunta.proposta.titulo}</div>
+
                 <div class="panel-body">
                     <p>${pergunta.proposta.descricao}</p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-1" style="margin-left: 25px">
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
             <button class="button button-5 button-5b icon-cart" id="voltar" onclick="voltar()">
                 <i class="fa fa-arrow-left"></i>
                 <span>voltar</span>
@@ -39,43 +44,40 @@
     </div>
 
 
+
     <hr/>
     <g:formRemote name="formResposta" url="[controller: 'resposta', action: 'salvar']" class="form-group"
-                  onSuccess="exibirMensagemGenerica(data,'Resposta enviada com sucesso', false)">
+                  onSuccess="exibirMensagemReposta(data,'Resposta enviada com sucesso', false)">
 
         <input type="hidden" name="perguntaId" value="${pergunta?.id}"/>
 
         <div class="row">
-            <div class="col-md-12" style="margin-left: 25px">
+            <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <span class="obrigatorio">*</span>
                         <label>Resposta</label>
-                        <textarea name="descricao" id="descricao" class="form-control" style="max-width: 100%;"></textarea>
+                        <textarea name="descricao" id="descricao" class="form-control"></textarea>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-2" style="margin-left: 25px">
+            <div class="col-md-2">
                 <button class="button button-5 button-5b icon-cart" name="enviar">
                     <i class="fa fa-check"></i>
                     <span>responder</span>
                 </button>
             </div>
-
-
         </div>
     </g:formRemote>
-
-
 
 </div>
 
 <script>
     function voltar() {
-        window.location='/Politica/politico';
+        window.location = '/Politica/politico';
     }
 </script>
 
