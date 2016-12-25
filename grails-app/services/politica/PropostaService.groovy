@@ -9,7 +9,7 @@ class PropostaService {
         def proposta = new Proposta()
 
         if (propostaId) {
-            proposta = Pergunta.findById(propostaId)
+            proposta = Proposta.findById(propostaId)
         }
 
         return proposta

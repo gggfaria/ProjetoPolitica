@@ -84,12 +84,13 @@ class PropostaController {
         if (!params.id) {
             render(view: '/erro404', model: [mensagem: 'Proposta não especificada']);
         } else {
-            Proposta proposta = Proposta.findById(params.id.toLong())
+
+            def proposta = Proposta.findById(params.id.toLong())
 
             if (proposta == null) {
                 render(view: '/erro404', model: [mensagem: 'Proposta não encontrada']);
             } else {
-                proposta.perguntas.sort { it.data }
+                proposta.perguntas.sort{it} //TODO ARRUMAR ORDENACAO
                 render(view: "pergunta", model: [proposta: proposta]);
             }
         }
@@ -102,20 +103,19 @@ class PropostaController {
 
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def listarPerguntas() {
+    def atualizarPerguntas() {
 
         def perguntas = Pergunta.createCriteria().list {
             eq("isAtivada", true)
             proposta {
                 idEq(params.id.toLong())
             }
-            order("data", "asc")
+            order("data", "desc")
         }
 
         render(view: "perguntas", model: ["perguntas": perguntas])
-
-
     }
+
 
 
     @Secured(['ROLE_POLITICO'])

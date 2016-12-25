@@ -104,6 +104,7 @@ function exibirMensagemAdicionarPergunta(data, id) {
         $.notify("Pergunta enviada com sucesso", "success");
         $('textarea').val('')
         $("input[type=text]").val('')
+        $('#ListaPerguntas').fadeToggle()
         atualizarPerguntas(id)
 
     }

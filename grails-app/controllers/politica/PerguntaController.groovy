@@ -7,8 +7,8 @@ import grails.plugin.springsecurity.annotation.Secured
 class PerguntaController {
     transient springSecurityService
 
-    PerguntaService _perguntaService = new PerguntaService()
-    PropostaService _propostaService = new PropostaService()
+    PerguntaService perguntaService
+    PropostaService propostaService
 
     @Secured(['ROLE_ELEITOR'])
     def index() {
@@ -19,18 +19,18 @@ class PerguntaController {
     @Secured(['ROLE_ELEITOR'])
     def salvar() {
 
-
-
         Usuario usuarioLogado = springSecurityService.currentUser
-        def eleitor = Eleitor.findByUsuario(usuarioLogado)
+        Pessoa eleitor = Eleitor.findByUsuario(usuarioLogado)
 
         Pergunta pergunta = new Pergunta()
+
+
 
         pergunta.descricao = params.descricao
         pergunta.data = new Date()
         pergunta.isAtivada = true
         pergunta.isRespondida = false
-        pergunta.proposta = _propostaService.selectPropostaId(params.propostaId)
+        pergunta.proposta = propostaService.selectPropostaId(params.propostaId.toLong())
         pergunta.pessoa = eleitor
 
         pergunta.validate()
@@ -38,7 +38,6 @@ class PerguntaController {
 
         if(pergunta.hasErrors()){
             def listaErros = []
-
             pergunta.errors.allErrors.each{ erro ->
                 listaErros.add(g.message(message: erro.defaultMessage, error: erro))
             }
@@ -47,7 +46,7 @@ class PerguntaController {
             render mensagem as JSON
 
         }else{
-            pergunta = _perguntaService.salvarPergunta(pergunta)
+            pergunta = perguntaService.salvarPergunta(pergunta)
             render pergunta as JSON
         }
 

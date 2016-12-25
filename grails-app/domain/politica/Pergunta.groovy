@@ -16,5 +16,13 @@ class Pergunta {
 
     static constraints = {
         resposta nullable: true
-    };
+        descricao (nullable:false, blank:false)
+
+    }
+
+
+    static mapping = {
+        table data :"data_hora"
+    }
+
 }

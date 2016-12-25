@@ -11,5 +11,6 @@ class Partido {
     static hasMany = [politicos: Politico]
     static belongsTo = [Politico]
     static constraints = {
+        nome (nullable:false, blank:false)
     }
 }

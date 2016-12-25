@@ -19,7 +19,7 @@
                             </h3>
                         </div>
 
-                        <div class='panel-body'>
+                        <!--  <div class='panel-body'>
                             ${raw(proposta.resumo)}
                             <button id="exibir${proposta.id}" type='link' class='btn btn-primary col-lg-offset-10'
                                     onclick="exibirDescricao(${proposta.id})"
@@ -31,31 +31,30 @@
                             <div id="descricao${proposta.id}" style="display: none">
                                 <div class='panel-heading'>
                                     <h4 style="color: #ffffff" class='label-primary text-center''>
-                                       Descrição da proposta ${proposta.titulo}
-                                    </h4>
+                                Descrição da proposta ${proposta.titulo}
+                                </h4>
                                 </div>
                                 ${raw(proposta.descricao)}
                             </div>
                         </div>
-
+                        -->
                         <div class='panel-footer'>
                             <sec:ifAllGranted roles="ROLE_ELEITOR">
                                 <button type='button' class='btn btn-primary'
                                         onclick='redirecionarPerguntaProposta(${proposta.id})'
                                         title='Faça uma pergunta sobre o assunto'>
-                                    Questione
                                     <i class='fa fa-comment' aria-hidden='true'></i>
+                                    Questione
                                 </button>
 
                             </sec:ifAllGranted>
-                            <sec:ifNotGranted roles="ROLE_ELEITOR">
-                                <button type='button' class='btn btn-primary'
-                                        onclick='redirecionarPerguntaProposta(${proposta.id})'
-                                        title='Visualizar mais informações sobre a proposta'>
-                                    <i class='fa fa-plus' aria-hidden='true'></i>
-                                    Sobre
-                                </button>
-                            </sec:ifNotGranted>
+
+                            <button type='button' class='btn btn-primary'
+                                    onclick='redirecionarPerguntaProposta(${proposta.id})'
+                                    title='Visualizar mais informações sobre a proposta'>
+                                <i class='fa fa-plus' aria-hidden='true'></i>
+                                Ver detalhes
+                            </button>
 
                         </div>
                     </div>
@@ -69,12 +68,12 @@
 </g:each>
 <script>
     function exibirDescricao(id) {
-        if ($('#descricao' + id).is(":visible") == false ){
+        if ($('#descricao' + id).is(":visible") == false) {
             $('#descricao' + id).show(500)
-            $('#exibir'+id).text("Ocultar descrição")
+            $('#exibir' + id).text("Ocultar descrição")
         } else {
             $('#descricao' + id).hide(500)
-            $('#exibir'+id).text("Saiba mais !")
+            $('#exibir' + id).text("Saiba mais !")
         }
         // document.getElementById('descricao'+id)
         //alert('descricao'+id)

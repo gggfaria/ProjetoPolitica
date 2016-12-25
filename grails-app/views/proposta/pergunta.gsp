@@ -36,10 +36,10 @@
     <sec:ifAllGranted roles="ROLE_ELEITOR">
         <h2>Enviar pergunta</h2>
         <hr/>
-        <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'enviar']" class="form-group"
+        <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'salvar']" class="form-group"
                       onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})">
 
-            <input type="hidden" name="propostaId" value="${proposta?.id}"/>
+            <input type="hidden" name="propostaId" value="${proposta.id}"/>
 
             <div class="row">
                 <div class="col-md-12" style="margin-left: 25px">
@@ -91,6 +91,7 @@
     <hr/>
 
     <h3>Perguntas sobre a proposta</h3>
+
     <div id="ListaPerguntas">
 
         <g:each in="${proposta.perguntas}" var="pergunta">
@@ -99,13 +100,13 @@
                 <div class="col-md-10">
                     <div class="testimonial testimonial-default">
                         <div class="testimonial-section">
-                            ${pergunta.descricao}
-                        </div>
+            ${pergunta.descricao}
+            </div>
 
-                        <div class="testimonial-desc">
+            <div class="testimonial-desc">
 
-                            <div class="testimonial-writer">
-                                <div class="testimonial-writer-name">${pergunta.pessoa.nome}</div>
+                <div class="testimonial-writer">
+                    <div class="testimonial-writer-name">${pergunta.pessoa.nome}</div>
 
                                 <div class="testimonial-writer-designation">${pergunta.data.format("dd/MM/yyyy HH:mm")}</div>
 
@@ -120,12 +121,14 @@
                     <div class="col-md-10">
                         <div class="testimonial testimonial-primary">
                             <div class="testimonial-section">
-                                ${pergunta.resposta?.descricao}
-                            </div>
+                ${pergunta.resposta?.descricao}
+                </div>
 
-                            <div class="testimonial-desc">
-                                <div class="testimonial-writer">
-                                    <div class="testimonial-writer-name" id="${pergunta?.id}">${pergunta.resposta?.politico?.nome}</div>
+                <div class="testimonial-desc">
+                    <div class="testimonial-writer">
+                        <div class="testimonial-writer-name"
+                             id="${pergunta?.id}">${pergunta.resposta?.politico?.nome}</div>
+
                                     <div class="testimonial-writer-designation">${pergunta.resposta?.data?.format("dd/MM/yyyy hh:mm")}</div>
 
                                 </div>
@@ -150,30 +153,25 @@
 
 
 
-    function mostrarProposta(data) {
-
-        $('#ListaPerguntas').fadeToggle()
+    function mostrarPerguntas(data) {
         $('#ListaPerguntas').html(data).fadeToggle();
     }
 
-
     function atualizarPerguntas(id) {
         $.ajax({
-            url: "/Politica/Proposta/listarPerguntas/" + id,
+            url: "/Politica/Proposta/atualizarPerguntas/" + id,
             data: {
                 id: id
             },
             method: "post",
             success: function (data) {
-                mostrarProposta(data)
+                mostrarPerguntas(data)
             }
         })
     }
 
 
 </script>
-
-<script src="/Politica/js/modal-servico.js"></script>
 
 </body>
 </html>
