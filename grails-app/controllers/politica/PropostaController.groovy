@@ -90,7 +90,6 @@ class PropostaController {
             if (proposta == null) {
                 render(view: '/erro404', model: [mensagem: 'Proposta não encontrada']);
             } else {
-                proposta.perguntas.sort{it} //TODO ARRUMAR ORDENACAO
                 render(view: "pergunta", model: [proposta: proposta]);
             }
         }

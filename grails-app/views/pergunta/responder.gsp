@@ -15,7 +15,7 @@
 <body>
 <div class="container-fluid">
 
-    <h2>Responder à pergunta</h2>
+    <h2>Responder</h2>
 
     <h3>${pergunta.descricao}</h3>
     <hr/>
