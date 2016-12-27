@@ -62,18 +62,27 @@ class PropostaController {
         proposta.area = Area.get(areaId)
         proposta.dataPublicacao = new Date()
         proposta.validate()
-        if (proposta.hasErrors()) {
+
+
+        if(proposta.hasErrors()){
             def listaErros = []
-            proposta.errors.each { erro ->
-                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+
+            print(proposta.errors.allErrors)
+            proposta.errors.allErrors.each{ erro ->
+
+                println(erro)
+                listaErros.add(g.message(message: erro.defaultMessage, error: erro))
             }
+
+
             def mensagem = ["erro": listaErros]
             render mensagem as JSON
 
-        } else {
-            proposta = proposta.save(flush: true)
+        }else{
+            proposta =  proposta.save(flush: true)
             render proposta as JSON
         }
+
 
 
     }

@@ -56,7 +56,7 @@ class EleitorController {
 
 
             def mensagem = ["erro": listaErros]
-            println(mensagem)
+
             render mensagem as JSON
 
         }else{
