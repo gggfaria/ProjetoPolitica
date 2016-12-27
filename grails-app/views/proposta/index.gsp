@@ -24,7 +24,7 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <i class="fa fa-university" aria-hidden="true"></i>
+                        <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
                     </span>
                     <g:select name="area" from="${listaAreas}" class="form-control" optionValue="nome"
                               optionKey="id"></g:select>
@@ -35,7 +35,7 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <i class="fa fa-hashtag" aria-hidden="true"></i>
+                        <i class="fa fa-bold" aria-hidden="true"></i>
                     </span>
 
                     <input type="text" name="titulo" placeholder="Título da proposta" required=""

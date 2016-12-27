@@ -78,7 +78,7 @@ class PerguntaController {
             }
         }else
         {
-            redirect(controller: "politico", action: "index")
+            redirect(controller: "politico", action: "perguntas")
         }
 
 

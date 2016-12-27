@@ -9,6 +9,10 @@ class PoliticoController {
     transient springSecurityService
 
     def index() {
+        render(view: "index")
+    }
+
+    def perguntas(){
         Usuario usuarioLogado = springSecurityService.currentUser
         def politico = Politico.findByUsuario(usuarioLogado)
 
@@ -22,7 +26,7 @@ class PoliticoController {
         }
 
 
-        render(view: "index", model: ["perguntas": perguntas])
+        render(view: "perguntas", model: ["perguntas": perguntas])
     }
 
     @Secured(['ROLE_POLITICO'])

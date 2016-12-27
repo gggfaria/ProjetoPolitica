@@ -28,7 +28,7 @@
                             <li><a href="/Politica/proposta/listar">Editar</a></li>
                             <li role="separator" class="divider"></li>
                             <g:include controller="politico" action="pegarNotificacao"/>
-                            <li><g:link controller="politico" action="index">
+                            <li><g:link controller="politico" action="perguntas">
                             Perguntas <span class="fa fa-question-circle" aria-hidden="true"/><span class="label label-danger label-as-badge" style="
                             border-radius: 50%;
                             position:relative;
