@@ -1,17 +1,83 @@
-<label>Quantidade de notificações</label>
-${listaNotificacoes?.size()}
-<g:each in="${listaNotificacoes}" var="notificacao">
+<div class="col-md-12" style="overflow-y: scroll; height:300px;">
 
-    <div class="panel-group" id="accordion${notificacao.id}">
-        <div class="panel panel-primary" aria-expanded="false">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <i class="fa ${notificacao.data}" aria-hidden="true"></i>
-    <a data-toggle="collapse" data-parent="#accordion" href="#collapse${notificacao.titulo.replaceAll(" ", "")}"
-       aria-expanded="false">
-        ${notificacao.descricao}
-    </a>
-    </h4>
-</div>
+ <li class="col-lg-offset-7">
+<button id="deletar" type='button' onclick="limparNotificacoes()" class='btn btn-primary col-lg-offset-6'  title='Limpar notificações'>Limpar</button> </li>
+                        <hr>
+<g:each in="${listaNotificacoes}" var="notificacao">
+    <g:if test="${notificacao.isVisualizada}">
+        <div class="panel-body" style="background-color: #ffffff">
+       <i class="fa fa-envelope-o" aria-hidden="true"></i>
+    </g:if>
+    <g:else>
+        <div class="panel-body" style="background-color:#ecf0f1">
+
+
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>
+    </g:else>
+
+    <button type="button" onclick="excluirNotificacao(${notificacao.id})" class="close">
+        <span style="background-color: transparent" aria-hidden="true">&times;</span></button>
+    <li>
+        <a href="/notificacao/listar/${notificacao.id}">
+            <div class="pull-left">
+            </div>
+            <h4>
+                ${notificacao.titulo}
+            </h4>
+
+            <p>${notificacao.descricao}</p>
+        </a>
+        <small><i class="fa fa-clock-o"></i> ${notificacao.dataHora.format("dd/MM/yyyy hh:mm")}</small>
+
+    </li>
     </div>
-       </g:each>
+    <hr>
+
+</g:each>
+
+</div>
+
+<script>
+    function limparNotificacoes() {
+
+        $.ajax({
+            url: "/Politica/notificacao/limpar/",
+
+            method: "post",
+            success: function (data) {
+            }
+        })
+
+    }
+
+    function excluirNotificacao(id) {
+        $.ajax({
+            url: "/Politica/notificacao/excluir/" + id,
+            data: {
+                id: id
+            },
+            method: "post",
+            success: function (data) {
+                excluirMensagem(data)
+                carregarNotificacoes()
+            }
+        })
+
+    }
+
+    function carregarNotificacoes() {
+
+        $.ajax({
+            url: "/Politica/notificacao/listar/",
+            method: "post",
+            success: function (data) {
+            }
+        })
+
+    }
+
+
+</script>
+
+
+

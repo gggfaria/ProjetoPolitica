@@ -75,15 +75,4 @@ class EleitorController {
     }
 
 
-    @Secured(['ROLE_ELEITOR'])
-    def notificacao() {
-        Usuario usuarioLogado = springSecurityService.currentUser
-        def eleitor = Eleitor.findByUsuario(usuarioLogado)
-        session["naoRespondidas"] = _eleitorService.naoRespondidas(eleitor)
-        session["respondidas"] = _eleitorService.Respondidas(eleitor)
-        render ""
-    }
-
-
-
 }

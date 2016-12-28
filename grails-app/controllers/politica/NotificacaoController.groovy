@@ -3,12 +3,13 @@ package politica
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
+
 @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 class NotificacaoController {
     transient springSecurityService
-    def index()
-    {
-        render (view:"_news")
+    def notificacaoService
+    def index() {
+        render(view: "_news")
     }
 
 
@@ -18,7 +19,7 @@ class NotificacaoController {
         //Pegar usuario logado (politoc)
         Usuario usuarioLogado = springSecurityService.currentUser
         Pessoa pessoa = Politico.findByUsuario(usuarioLogado)
-        notificacao.data = new Date()
+        notificacao.dataHora = new Date()
         notificacao.descricao = params.descricao
         notificacao.isVisualizada = false
         notificacao.pessoa = pessoa
@@ -40,12 +41,34 @@ class NotificacaoController {
 
     }
 
-    def listar(){
+    def listar() {
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def pessoa = Pessoa.findByUsuario(usuarioLogado)
+        def notificacao = notificacaoService.listar(pessoa)
+        render(template: 'news', model: [listaNotificacoes: notificacao])
+    }
+
+
+
+
+    def quantidade() {
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def pessoa = Pessoa.findByUsuario(usuarioLogado)
+        session["notificacoes"] = notificacaoService.notificacoes(pessoa)
+        render ""
+    }
+
+    def limpar(){
 
         Usuario usuarioLogado = springSecurityService.currentUser
-        def notificacao = Notificacao.list()
-        println notificacao.size()
-        render (template: 'news', model: [listaNotificacoes: notificacao])
-
+        def pessoa = Pessoa.findByUsuario(usuarioLogado)
+        def notificacao = notificacaoService.limpar(pessoa)
+        render(template: 'news', model: [listaNotificacoes: notificacao])
     }
+    def excluir(int id){
+       def notificacao = notificacaoService.excluir(id)
+        render(template: 'news', model: [listaNotificacoes: notificacao])
+    }
+
 }
+
