@@ -64,7 +64,7 @@
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </g:remoteLink></td>
                 <td>
-                    <g:link controller="pergunta" action="index" id="${proposta.id}">Perguntas</g:link>
+                    <g:link controller="proposta" action="pergunta" id="${proposta.id}">Perguntas</g:link>
                 </td>
 
             </tr>

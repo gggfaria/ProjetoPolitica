@@ -73,15 +73,17 @@ class RespostaController {
             render mensagem as JSON
 
         } else {
+            //Gravando Notificação
             Notificacao notificacao = new Notificacao()
             notificacao.dataHora = new Date()
             notificacao.isVisualizada = false
+            notificacao.caminho = pergunta.proposta.id
             notificacao.titulo = "O Sr(a) " + politico.nome + " respondeu sua pergunta."
-            notificacao.descricao = resposta.descricao + " clique aqui para mais informações"
+            notificacao.descricao = resposta.descricao
             def alvoNotificacao = Pessoa.findById(pergunta.pessoa.id)
             notificacao.pessoa = alvoNotificacao
             notificacao.save(flush: true)
-
+            //-----------------------------------
             pergunta.resposta = resposta
             pergunta = pergunta.save(flush: true)
             render resposta as JSON

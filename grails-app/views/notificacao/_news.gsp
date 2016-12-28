@@ -18,15 +18,15 @@
     <button type="button" onclick="excluirNotificacao(${notificacao.id})" class="close">
         <span style="background-color: transparent" aria-hidden="true">&times;</span></button>
     <li>
-        <a href="/notificacao/listar/${notificacao.id}">
+
             <div class="pull-left">
             </div>
             <h4>
                 ${notificacao.titulo}
             </h4>
 
-            <p>${notificacao.descricao}</p>
-        </a>
+            <p>${notificacao.descricao}<g:link controller="proposta" action="pergunta" id="${notificacao.caminho}">Clique aqui para interagir"</g:link></p>
+
         <small><i class="fa fa-clock-o"></i> ${notificacao.dataHora.format("dd/MM/yyyy hh:mm")}</small>
 
     </li>
