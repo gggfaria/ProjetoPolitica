@@ -8,15 +8,24 @@ import grails.plugin.springsecurity.annotation.Secured
 class PropostaController {
     transient springSecurityService
 
-    PropostaService _propostaService = new PropostaService()
+    PropostaService propostaService
 
     @Secured(['ROLE_POLITICO'])
     def index() {
-        def politicos = Politico.list()
+
+        render(view: "index")
+    }
+
+
+    @Secured(['ROLE_POLITICO'])
+    def cadastrar() {
+
         def areas = Area.createCriteria().list { order("nome") }
 
-        render(view: "index", model: [listaAreas: areas, listaPoliticos: politicos])
+        render(view: "cadastrar", model: [listaAreas: areas])
     }
+
+
 
 
     @Secured(['ROLE_POLITICO'])

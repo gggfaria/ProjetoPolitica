@@ -21,7 +21,7 @@
     </div>
 
     <div class="input-group">
-        <input type="text" id="myInput" class="form-control" onkeyup="BuscaProposta()" placeholder="Procurar por Titulo"
+        <input type="text" id="myInput" class="form-control" onkeyup="BuscaProposta()" placeholder="Procurar por Título"
                title="Type in a name">
 
         <span class="input-group-addon">
@@ -35,7 +35,7 @@
             <th style="display:none;">ID</th>
             <th>Area</th>
             <th>Publicação</th>
-            <th>Titulo</th>
+            <th>Título</th>
             <th>Resumo</th>
             <th>Descrição</th>
             <th>Editar</th>
@@ -124,13 +124,13 @@
                                               optionKey="id"></g:select>
                                 </div>
                                 <span class="obrigatorio">*</span>
-                                <label>Titulo</label>
+                                <label>Título</label>
 
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-hashtag" aria-hidden="true"></i>
                                     </span>
-                                    <input type="text" name="titulo" id="titulo" placeholder="Titulo" required=""
+                                    <input type="text" name="titulo" id="titulo" placeholder="Título" required=""
                                            class="form-control">
                                 </div>
                             </div>
