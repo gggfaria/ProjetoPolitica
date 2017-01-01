@@ -30,7 +30,7 @@
                                   optionKey="id"></g:select>
                     </div>
 
-                    <span class="obrigatorio">*</span>
+                    <span class="obrigatorio" title="Tamanho deverá estar entre 20 e 150 caracteres" style="cursor: pointer">*</span>
                     <label>Título</label>
 
                     <div class="input-group">
@@ -45,13 +45,13 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12">
-                    <span class="obrigatorio">*</span>
+                    <span class="obrigatorio" title="Tamanho deverá estar entre 50 e 255 caracteres" style="cursor: pointer">*</span>
                     <label>Resumo</label>
 
 
                     <textarea min="5" rows="3" name="resumo" id="resumo" placeholder="Resumo"
-                              required="" class="form-control"></textarea>
-
+                              required="" class="form-control" oninput="contarCaracteres('#resumo', '#quantidadeDigitadaResumo')"></textarea>
+                    <p><spam id="quantidadeDigitadaResumo"></spam> caracter(es) digitado(s)</p>
                 </div>
             </div>
         </div>
@@ -60,12 +60,16 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <br>
-                    <span class="obrigatorio">*</span>
+                    <span class="obrigatorio" title="Tamanho deverá estar entre 80 e 5.000 caracteres" style="cursor: pointer">*</span>
                     <label>Descrição</label>
 
 
-                    <textarea type="text" min="5" rows="15" name="descricao" placeholder="Descrição" required=""
+                    <textarea type="text" oninput="contarCaracteres('#descricao', '#quantidadeDigitadaDescricao')" id="descricao" min="5" rows="15" name="descricao" placeholder="Descrição" required=""
                               class="form-control"></textarea>
+
+                   <p><spam id="quantidadeDigitadaDescricao"></spam> caracter(es) digitado(s)</p>
+
+
                 </div>
             </div>
         </div>
@@ -79,28 +83,8 @@
 
         </div>
 
-
-        <div class="modal fade" tabindex="-1" role="dialog" id="mensagemModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Informação</h4>
-                    </div>
-
-                    <div class="modal-body">
-                        <div id="mensagem" role="alert"></div>
-
-                        <div id="mensagemErros" role="alert"></div>
-                    </div>
-
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
     </g:formRemote>
 </div>
-
+<script src="../js/validacao.js"></script>
 </body>
 </html>

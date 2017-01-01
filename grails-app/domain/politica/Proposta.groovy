@@ -12,7 +12,8 @@ class Proposta {
     static hasMany = [perguntas: Pergunta, notas: Nota]
     static belongsTo = [Politico]
     static constraints = {
-        descricao (nullable:false, blank:false, size: 20..5000)
-        resumo (nullable:false, blank:false, size: 10..255)
+        descricao (nullable:false, blank:false, size: 80..5000)
+        resumo (nullable:false, blank:false, size: 50..255)
+        titulo (nullable:false, blank:false, size: 20..150)
     }
 }
