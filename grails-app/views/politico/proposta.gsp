@@ -19,25 +19,10 @@
                             </h3>
                         </div>
 
-                        <!--  <div class='panel-body'>
-                            ${raw(proposta.resumo)}
-                            <button id="exibir${proposta.id}" type='link' class='btn btn-primary col-lg-offset-10'
-                                    onclick="exibirDescricao(${proposta.id})"
-                                    title='Exibir Descrição'>
-                                Saiba mais !
-
-                            </button>
-
-                            <div id="descricao${proposta.id}" style="display: none">
-                                <div class='panel-heading'>
-                                    <h4 style="color: #ffffff" class='label-primary text-center''>
-                                Descrição da proposta ${proposta.titulo}
-                                </h4>
-                                </div>
-                                ${raw(proposta.descricao)}
-                            </div>
+                        <div class='panel-body'>
+                            ${proposta.resumo}
                         </div>
-                        -->
+
                         <div class='panel-footer'>
                             <sec:ifAllGranted roles="ROLE_ELEITOR">
                                 <button type='button' class='btn btn-primary'
@@ -66,18 +51,6 @@
     </div>
 
 </g:each>
-<script>
-    function exibirDescricao(id) {
-        if ($('#descricao' + id).is(":visible") == false) {
-            $('#descricao' + id).show(500)
-            $('#exibir' + id).text("Ocultar descrição")
-        } else {
-            $('#descricao' + id).hide(500)
-            $('#exibir' + id).text("Saiba mais !")
-        }
-        // document.getElementById('descricao'+id)
-        //alert('descricao'+id)
-    }
-</script>
+
 
 
