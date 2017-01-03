@@ -15,5 +15,24 @@ class PropostaService {
         return proposta
     }
 
+    def propostaPertenceUsuario(Proposta proposta, long pessoaId) {
+        boolean retorno
+
+        if (proposta.id) {
+            if (proposta.politico.id != pessoaId) {
+                retorno = false
+            } else
+                retorno = true
+        } else
+            retorno = false
+
+        return retorno
+
+    }
+
+
+
+
+
 
 }

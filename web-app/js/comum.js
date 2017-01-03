@@ -157,6 +157,7 @@ function exibirMensagemGenerica(data, mensagemSucesso, isLimpar) {
 
     } else {
         $.notify(mensagemSucesso, "success");
+        $('.modal').modal('hide')
         if (isLimpar) {
             limparCampos()
         }

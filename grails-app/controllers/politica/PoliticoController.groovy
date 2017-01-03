@@ -64,7 +64,7 @@ class PoliticoController {
             //render(template: "proposta", model: [propostas: propostas])
             render(view: "proposta", model: ["resposta": resposta])
         } else {
-            //TODO ERRO
+            redirect(controller: "politico", action: "listar")
         }
 
     }

@@ -98,7 +98,6 @@
     Guilherme Prado<br/>
     Felipe Guimarães<br/>
 
-
 </footer>
 
 <r:layoutResources/>
@@ -133,8 +132,10 @@
 
 
     function exibirCadastro() {
+
         $('#modalForm').modal('show')
         $("#nome").focus()
+
     }
 </script>
 

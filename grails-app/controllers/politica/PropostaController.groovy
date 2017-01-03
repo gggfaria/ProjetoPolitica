@@ -12,8 +12,27 @@ class PropostaController {
 
     @Secured(['ROLE_POLITICO'])
     def index() {
+        def propostas = Proposta.list()
 
-        render(view: "index")
+        render(view: "index", model: [propostas: propostas])
+    }
+
+    @Secured(['ROLE_POLITICO'])
+    def formEditarProposta(){
+        Usuario usuarioLogado = springSecurityService.currentUser
+        Politico politico = Politico.findByUsuario(usuarioLogado)
+
+        def propostaId = params.id.toLong()
+        def proposta = propostaService.selectPropostaId(propostaId)
+
+        def areas = Area.list()
+
+
+        if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
+            render(view: "editar", model: ["proposta": proposta, "areas":areas])
+        } else {
+            redirect(controller: "proposta", action: "index")
+        }
     }
 
 
@@ -145,7 +164,7 @@ class PropostaController {
 
         Integer areaId = params.area?.toInteger()
         Integer idProposta = params.idProposta?.toInteger()
-        proposta = Proposta.get(idProposta)
+        proposta = Proposta.get(params.id)
         proposta.titulo = params.titulo
         proposta.resumo = params.resumo
         proposta.descricao = params.descricao

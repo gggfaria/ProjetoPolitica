@@ -20,7 +20,7 @@
                 <div class="col-md-6 col-xs-12">
 
                     <span class="obrigatorio">*</span>
-                    <label>Area</label>
+                    <label>Área</label>
 
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -63,13 +63,9 @@
                     <span class="obrigatorio" title="Tamanho deverá estar entre 80 e 5.000 caracteres" style="cursor: pointer">*</span>
                     <label>Descrição</label>
 
-
                     <textarea type="text" oninput="contarCaracteres('#descricao', '#quantidadeDigitadaDescricao')" id="descricao" min="5" rows="15" name="descricao" placeholder="Descrição" required=""
                               class="form-control"></textarea>
-
                    <p><spam id="quantidadeDigitadaDescricao"></spam> caracter(es) digitado(s)</p>
-
-
                 </div>
             </div>
         </div>
@@ -80,7 +76,6 @@
                 <i class="fa fa-check"></i>
                 <span>Cadastrar</span>
             </button>
-
         </div>
 
     </g:formRemote>

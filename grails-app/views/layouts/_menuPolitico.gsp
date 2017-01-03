@@ -25,7 +25,7 @@
                            aria-expanded="false">Propostas</a>
                         <ul class="dropdown-menu">
                             <li><g:link controller="proposta" action="cadastrar">Cadastrar</g:link>
-                            <li><a href="/Politica/proposta/listar">Editar</a></li>
+                            <li><g:link controller="proposta" action="index">Editar</g:link></li>
                             <li role="separator" class="divider"></li>
 
                             <g:include controller="notificacao" action="quantidade"/>

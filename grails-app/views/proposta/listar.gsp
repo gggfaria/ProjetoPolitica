@@ -106,7 +106,7 @@
                 <div class="modal-body">
                     <div class="col-md-12">
                         <g:formRemote name="formProposta" url="[controller: 'proposta', action: 'atualizar']"
-                                      onSuccess="exibirUpdate(data); carregarLista(data)"
+                                      onSuccess="exibirMensagemGenerica(data, 'Proposta editada com sucesso', true); carregarLista(data)"
                                       class="form-group">
                             <div class="col-md-6">
                                 <br>
