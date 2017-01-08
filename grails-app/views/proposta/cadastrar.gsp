@@ -50,7 +50,7 @@
 
 
                     <textarea min="5" rows="3" name="resumo" id="resumo" placeholder="Resumo"
-                              required="" class="form-control" oninput="contarCaracteres('#resumo', '#quantidadeDigitadaResumo')"></textarea>
+                              required="" class="form-control" oninput="contadorCaracteres('#resumo', '#quantidadeDigitadaResumo')"></textarea>
                     <p><spam id="quantidadeDigitadaResumo"></spam> caracter(es) digitado(s)</p>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     <span class="obrigatorio" title="Tamanho deverá estar entre 80 e 5.000 caracteres" style="cursor: pointer">*</span>
                     <label>Descrição</label>
 
-                    <textarea type="text" oninput="contarCaracteres('#descricao', '#quantidadeDigitadaDescricao')" id="descricao" min="5" rows="15" name="descricao" placeholder="Descrição" required=""
+                    <textarea type="text" oninput="contadorCaracteres('#descricao', '#quantidadeDigitadaDescricao')" id="descricao" min="5" rows="15" name="descricao" placeholder="Descrição" required=""
                               class="form-control"></textarea>
                    <p><spam id="quantidadeDigitadaDescricao"></spam> caracter(es) digitado(s)</p>
                 </div>

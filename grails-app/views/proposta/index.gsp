@@ -26,21 +26,24 @@
         </thead>
         <tbody>
         <g:each in="${propostas}" var="proposta">
-            <tr>
-                <td>
+            <tr id="proposta${proposta.id}">
+                <td id="area${proposta.id}">
                     <i class="fa ${proposta.area.icone}"></i>
                     ${proposta.area.nome}
                 </td>
-                <td>${proposta.titulo}</td>
+                <td id="titulo${proposta.id}">${proposta.titulo}</td>
                 <td>${proposta.dataPublicacao.format("dd/MM/yyyy")}
                 <td class="text-center">
                     <g:remoteLink controller="proposta" action="formEditarProposta" id="${proposta.id}"
-                                  onSuccess="mostrarProposta(data)" title="Abrir edição da proposta">
+                                  onSuccess="mostrarProposta(data); contadorCaracteres('#resumo', '#quantidadeDigitadaResumo');
+                                             contadorCaracteres('#descricao', '#quantidadeDigitadaDescricao')"
+                                  title="Abrir edição da proposta">
                         <i class="fa fa-pencil-square-o fa-2x"></i>
                     </g:remoteLink>
                 </td>
                 <td class="text-center">
-                    <g:link controller="proposta" action="pergunta" id="${proposta.id}" title="Visualizar proposta completa">
+                    <g:link controller="proposta" action="pergunta" id="${proposta.id}"
+                            title="Visualizar proposta completa">
                         <i class="fa fa-plus fa-2x"></i>
                     </g:link>
                 </td>
@@ -80,13 +83,29 @@
 <script src="../js/validacao.js"></script>
 <script>
 
-    function mostrarProposta(data){
+    function mostrarProposta(data) {
 
         $('#modalProposta').modal('show')
 
         $('#conteudoProposta').html(data)
 
     }
+
+    function atualizarLinha(data) {
+        $("#titulo" + data.proposta.id).text(data.proposta.titulo)
+
+        var areaTr = $("#area" + data.proposta.id)
+        var areaIcone = $("#area" + data.proposta.id+' i')
+
+        //alterando icone
+        areaIcone.attr('class','fa '+ data.area.icone)
+
+        areaTr.text(' '+data.area.nome)
+        areaTr.prepend(areaIcone)
+
+    }
+
+
 </script>
 </body>
 </html>

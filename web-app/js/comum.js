@@ -145,7 +145,7 @@ function exibirMensagemReposta(data,mensagemSucesso) {
 function exibirMensagemGenerica(data, mensagemSucesso, isLimpar) {
     if (data.erro) {
         var erros = data.erro
-        console.log(erros)
+
         $('#mensagemErros').empty()
         for (var i = 0; i < erros.length; i++) {
             $.notify(erros[i], "error", {autoHideDelay: 15000});

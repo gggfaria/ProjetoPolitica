@@ -1,6 +1,8 @@
 <g:each in="${perguntas}" var="pergunta">
 
-    <g:formRemote name="formPergunta" url="[controller:'pergunta', action:'atualizar']" onSuccess="exibirMensagem(data)" class="form-group">
+    <g:formRemote name="formPergunta" url="[controller:'pergunta', action:'atualizar']"
+                  onSuccess="exibirMensagemGenerica(data, 'Pergunta editada com sucesso', true)"
+                  class="form-group">
 
     <input type="hidden" name="perguntaId" value="${pergunta?.id}"/>
 
@@ -10,10 +12,8 @@
                 <div class="col-md-10">
                     <span class="obrigatorio">*</span>
                     <label>Corrigir pergunta</label>
-                    
-                    <textarea name="descricao" id="descricao" class="form-control" style="max-width: 100%;">${pergunta.descricao}</textarea>
-                    
-                    
+                    <textarea name="descricao" id="descricao" class="form-control"
+                              style="max-width: 100%;">${pergunta.descricao}</textarea>
                 </div>
             </div>
         </div>

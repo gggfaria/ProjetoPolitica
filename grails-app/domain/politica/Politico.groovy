@@ -6,13 +6,14 @@ class Politico extends Pessoa {
     int numero
     static hasMany = [propostas: Proposta, respostas: Resposta]
     boolean isCandidato
+    boolean isEleito
     static hasOne = [partido: Partido]
 
     static constraints = {
     }
 
-
     static mapping ={
         discriminator value: "POLITICO"
     }
+
 }

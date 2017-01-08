@@ -18,7 +18,7 @@ class PropostaController {
     }
 
     @Secured(['ROLE_POLITICO'])
-    def formEditarProposta(){
+    def formEditarProposta() {
         Usuario usuarioLogado = springSecurityService.currentUser
         Politico politico = Politico.findByUsuario(usuarioLogado)
 
@@ -29,7 +29,7 @@ class PropostaController {
 
 
         if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
-            render(view: "editar", model: ["proposta": proposta, "areas":areas])
+            render(view: "editar", model: ["proposta": proposta, "areas": areas])
         } else {
             redirect(controller: "proposta", action: "index")
         }
@@ -43,8 +43,6 @@ class PropostaController {
 
         render(view: "cadastrar", model: [listaAreas: areas])
     }
-
-
 
 
     @Secured(['ROLE_POLITICO'])
@@ -92,11 +90,11 @@ class PropostaController {
         proposta.validate()
 
 
-        if(proposta.hasErrors()){
+        if (proposta.hasErrors()) {
             def listaErros = []
 
             print(proposta.errors.allErrors)
-            proposta.errors.allErrors.each{ erro ->
+            proposta.errors.allErrors.each { erro ->
 
                 println(erro)
                 listaErros.add(g.message(message: erro.defaultMessage, error: erro))
@@ -106,11 +104,10 @@ class PropostaController {
             def mensagem = ["erro": listaErros]
             render mensagem as JSON
 
-        }else{
-            proposta =  proposta.save(flush: true)
+        } else {
+            proposta = proposta.save(flush: true)
             render proposta as JSON
         }
-
 
 
     }
@@ -132,7 +129,7 @@ class PropostaController {
         }
     }
 
-    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_ELEITOR','ROLE_POLITICO' ])
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY', 'ROLE_ELEITOR', 'ROLE_POLITICO'])
     def erro404() {
         render(view: "/error", model: [status: 404, exception: "Id da Proposta não especificado"]);
     }
@@ -153,7 +150,6 @@ class PropostaController {
     }
 
 
-
     @Secured(['ROLE_POLITICO'])
     def atualizar() {
 
@@ -172,20 +168,29 @@ class PropostaController {
         proposta.politico.id = politico.id
         proposta.area = Area.get(areaId)
         proposta.validate()
-        if (proposta.hasErrors()) {
-            def listaErros = []
-            proposta.errors.each { erro ->
-                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+
+        if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
+            if (proposta.hasErrors()) {
+                def listaErros = []
+                proposta.errors.each { erro ->
+                    listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+                }
+                def mensagem = ["erro": listaErros]
+                render mensagem as JSON
+
+            } else {
+                proposta = proposta.save(flush: true)
+                print(proposta.area)
+                def mapa = [proposta: proposta, area:proposta.area]
+
+                render mapa as JSON
             }
-            def mensagem = ["erro": listaErros]
-            render mensagem as JSON
 
         } else {
-            proposta = proposta.save(flush: true)
-            render proposta as JSON
+            redirect(controller: "proposta", action: "index")
         }
-
-
     }
+
+
 }
 

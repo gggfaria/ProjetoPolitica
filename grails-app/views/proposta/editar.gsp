@@ -1,5 +1,5 @@
 <g:formRemote name="formProposta" url="[controller: 'proposta', action: 'atualizar']"
-              onSuccess="exibirMensagemGenerica(data, 'Proposta editada com sucesso', true); carregarLista(data)"
+              onSuccess="exibirMensagemGenerica(data, 'Proposta editada com sucesso', true); atualizarLinha(data)"
               class="form-group">
     <g:hiddenField name="id" value="${proposta.id}"></g:hiddenField>
 
@@ -12,7 +12,7 @@
 
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <i class="fa fa-university" aria-hidden="true"></i>
+                        <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
                     </span>
                     <g:select name="area" from="${areas}" id="area" class="form-control"
                               optionValue="nome" value="${proposta.area.id}"
@@ -43,7 +43,7 @@
 
                 <textarea min="5" rows="3" name="resumo" id="resumo" placeholder="Resumo"
                           required="" class="form-control"
-                          oninput="contarCaracteres('#resumo', '#quantidadeDigitadaResumo')">${proposta.resumo}</textarea>
+                          oninput="contadorCaracteres('#resumo', '#quantidadeDigitadaResumo')">${proposta.resumo}</textarea>
 
                 <p><spam id="quantidadeDigitadaResumo"></spam> caracter(es) digitado(s)</p>
             </div>
@@ -58,7 +58,7 @@
                       style="cursor: pointer">*</span>
                 <label>Descrição</label>
 
-                <textarea type="text" oninput="contarCaracteres('#descricao', '#quantidadeDigitadaDescricao')"
+                <textarea type="text" oninput="contadorCaracteres('#descricao', '#quantidadeDigitadaDescricao')"
                           id="descricao" min="5" rows="15" name="descricao" placeholder="Descrição" required=""
                           class="form-control">${proposta.descricao}</textarea>
 
