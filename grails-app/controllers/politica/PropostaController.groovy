@@ -190,7 +190,43 @@ class PropostaController {
             redirect(controller: "proposta", action: "index")
         }
     }
+    
+    @Secured(['ROLE_ELEITOR'])
+    def avaliar() {
+        if (params.valor && params.id) {
+            def valor = params.valor.toInteger()
+            def id = params.id.toLong()
+            Usuario usuarioLogado = springSecurityService.currentUser
+            Eleitor eleitor = Eleitor.findByUsuario(usuarioLogado)
+            
+            def nota = new Nota()
+            nota.valor = valor
+            nota.eleitor = eleitor
+            
+            def proposta = Proposta.get(id)
+            
+            nota.proposta = proposta
+            
+            nota.validate()
+            
+            if (nota.hasErrors()) {
+                def listaErros = []
+
+                print(nota.errors.allErrors)
+                nota.errors.allErrors.each { erro ->
+
+                listaErros.add(g.message(message: erro.defaultMessage, error: erro))
+            }
 
 
+            def mensagem = ["erro": listaErros]
+            render mensagem as JSON
+
+            } else {
+                nota = nota.save(flush: true)
+                render nota as JSON
+            }
+        }
+    }
 }
 

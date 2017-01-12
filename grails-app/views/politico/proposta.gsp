@@ -11,6 +11,7 @@
                 </h4>
             </div>
             <g:each in="${resposta.propostas.findAll { p -> p.area.nome.equals(area.nome) }}" var="proposta">
+            
                 <div id="collapse${area.nome.replaceAll(" ", "")}" class="panel-collapse collapse" style="margin: 5px">
                     <div class='panel panel-default'>
                         <div class='panel-heading'>
@@ -49,8 +50,5 @@
         </div>
 
     </div>
-
+    
 </g:each>
-
-
-

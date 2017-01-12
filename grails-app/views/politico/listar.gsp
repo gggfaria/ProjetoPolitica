@@ -6,6 +6,9 @@
     <link href="/Politica/css/quadro.css" rel="stylesheet">
 
     <meta name="layout" content="main">
+
+    
+</head>
 </head>
 
 <body>
