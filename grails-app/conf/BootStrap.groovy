@@ -1,3 +1,4 @@
+import politica.Area
 import politica.Permissao
 
 class BootStrap {
@@ -18,9 +19,28 @@ class BootStrap {
             eleitor = new Permissao(authority: "ROLE_ELEITOR").save(flush: true)
         }
 
-
+        cadastrarAreas("Cultura", "fa fa-book")
+        cadastrarAreas("Saúde","fa-medkit")
+        cadastrarAreas("Educação","fa-book")
+        cadastrarAreas("Turismo","fa-suitcase")
+        cadastrarAreas("Segurança","fa-shield")
+        cadastrarAreas("Meio Ambiente","fa-tree")
+        cadastrarAreas("Transporte","fa-subway")
 
     }
+
     def destroy = {
     }
+
+
+    def cadastrarAreas(String nome, String icone) {
+        Area area = Area.findByNome(nome)
+        if (area == null) {
+            area = new Area(nome: nome, icone: icone).save(flush: true)
+        }
+    }
+
+
 }
+
+
