@@ -1,7 +1,7 @@
 <g:each in="${perguntas}" var="pergunta">
 
     <g:formRemote name="formPergunta" url="[controller:'pergunta', action:'atualizar']"
-                  onSuccess="exibirMensagemGenerica(data, 'Pergunta editada com sucesso', true)"
+                  onSuccess="exibirMensagemGenerica(data, 'Pergunta editada com sucesso', true); atualizarLinha(data)"
                   class="form-group">
 
     <input type="hidden" name="perguntaId" value="${pergunta?.id}"/>

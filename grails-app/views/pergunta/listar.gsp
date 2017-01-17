@@ -31,7 +31,7 @@
             <tbody>
             <g:each in="${perguntas}" var="pergunta">
                 <tr>
-                    <td>
+                    <td id="pergunta${pergunta.id}">
                         ${pergunta.descricao}
                     </td>
 
@@ -51,16 +51,18 @@
                         </td>
                     </g:else>
 
-                    <td>
+                    <td class="text-center">
                         <g:if test="${pergunta.isRespondida}">
-                            Pergunta respondida
+                             <a onclick='redirecionarPerguntaProposta(${pergunta.proposta.id})'>                                
+                                Ver detalhes
+                            </a>
                         </g:if>
 
                         <g:else>
 
                             <g:remoteLink controller="pergunta" action="exibirPergunta" id="${pergunta.id}"
                                           onSuccess="mostrarPergunta(data)">
-                                Editar
+                                <i class="fa fa-pencil-square-o fa-2x"></i>
                             </g:remoteLink>
 
                             <!--
@@ -107,6 +109,15 @@
     function mostrarPergunta(data) {
         $('#modalPergunta').modal('show')
         $('#conteudoPergunta').html(data)
+    }
+    
+    function atualizarLinha(data) {
+        $("#pergunta" + data.id).text(data.descricao)
+        console.log("teste")
+    }
+    
+    function redirecionarPerguntaProposta(id) {
+        window.location="../proposta/pergunta/"+id;
     }
 </script>
 </body>
