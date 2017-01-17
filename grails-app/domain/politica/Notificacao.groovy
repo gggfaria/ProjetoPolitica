@@ -11,6 +11,11 @@ class Notificacao {
     static hasOne = [pessoa: Pessoa]
 
     static constraints = {
+
+    }
+
+    static mapping = {
+        table dataHora :"data_hora"
     }
 
 }
