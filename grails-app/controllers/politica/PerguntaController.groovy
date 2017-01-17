@@ -29,7 +29,6 @@ class PerguntaController {
         pergunta.pessoa = eleitor
         pergunta.validate()
 
-
         if(pergunta.hasErrors()){
             def listaErros = []
             pergunta.errors.allErrors.each{ erro ->

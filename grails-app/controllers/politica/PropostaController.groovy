@@ -198,17 +198,23 @@ class PropostaController {
             def id = params.id.toLong()
             Usuario usuarioLogado = springSecurityService.currentUser
             Eleitor eleitor = Eleitor.findByUsuario(usuarioLogado)
-            
-            def nota = new Nota()
+            def proposta = Proposta.get(id)
+
+            def nota = Nota.createCriteria().get{
+                eq("proposta.id", id)
+                eq("eleitor.id", eleitor.id)
+            }
+
+            if(!nota.id){
+                nota = new Nota()
+            }
+
             nota.valor = valor
             nota.eleitor = eleitor
-            
-            def proposta = Proposta.get(id)
-            
             nota.proposta = proposta
-            
+
             nota.validate()
-            
+
             if (nota.hasErrors()) {
                 def listaErros = []
 

@@ -24,36 +24,44 @@
 
     <div class="col-md-12">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7 col-xs-7">
                 <div class="panel panel-primary">
                     <div class="panel-heading">${proposta?.titulo}
-                        
+
                         <sec:ifAllGranted roles="ROLE_ELEITOR">
                             <span class="starRating" style="float:right">
-                                <input id="rating5" class="estrela" type="radio" name="rating" onclick="classificarProposta(${proposta.id}, 1)">
+                                <input id="rating5" class="estrela" type="radio" name="rating"
+                                       onclick="classificarProposta(${proposta.id}, 1)">
                                 <label for="rating5">5</label>
-                                <input id="rating4" class="estrela" type="radio" name="rating" onclick="classificarProposta(${proposta.id}, 2)">
+                                <input id="rating4" class="estrela" type="radio" name="rating"
+                                       onclick="classificarProposta(${proposta.id}, 2)">
                                 <label for="rating4">4</label>
-                                <input id="rating3" class="estrela" type="radio" name="rating" onclick="classificarProposta(${proposta.id}, 3)">
+                                <input id="rating3" class="estrela" type="radio" name="rating"
+                                       onclick="classificarProposta(${proposta.id}, 3)">
                                 <label for="rating3">3</label>
-                                <input id="rating2" class="estrela" type="radio" name="rating" onclick="classificarProposta(${proposta.id}, 4)">
+                                <input id="rating2" class="estrela" type="radio" name="rating"
+                                       onclick="classificarProposta(${proposta.id}, 4)">
                                 <label for="rating2">2</label>
-                                <input id="rating1" class="estrela" type="radio" name="rating" onclick="classificarProposta(${proposta.id}, 5)">
+                                <input id="rating1" class="estrela" type="radio" name="rating"
+                                       onclick="classificarProposta(${proposta.id}, 5)">
                                 <label for="rating1">1</label>
-                                
+
                             </span>
                         </sec:ifAllGranted>
-                    
+
                     </div>
-                    
+
                     <div class="panel-body">
                         <p>${proposta?.descricao}</p>
                     </div>
                 </div>
             </div>
+            <div class="col-xs-5 col-md-5">
+                <g:render template="avaliacao"></g:render>
+            </div>
         </div>
 
-        
+
 
         <sec:ifAllGranted roles="ROLE_ELEITOR">
             <h2>Enviar pergunta</h2>
@@ -69,7 +77,8 @@
                             <div class="col-md-12">
                                 <span class="obrigatorio">*</span>
                                 <label>Faça sua pergunta</label>
-                                <textarea name="descricao" class="form-control" style="max-width: 100%;"></textarea>
+                                <textarea name="descricao" class="form-control" rows="5"
+                                          style="max-width: 100%;"></textarea>
                             </div>
                         </div>
                     </div>
@@ -142,7 +151,7 @@
 
 
 <script>
-    
+
     $(document).ready(function () {
         $('#ListaPerguntas').fadeToggle()
         atualizarPerguntas(${proposta.id})
@@ -168,7 +177,7 @@
     }
 
     function classificarProposta(id, valor) {
-        
+
         $.ajax({
             url: "${g.createLink(controller:'proposta',action:'avaliar')}",
             data: {
@@ -181,9 +190,9 @@
             }
         })
     }
-    
+
     function carregarNota(id) {
-        
+
         $.ajax({
             url: "${g.createLink(controller:'nota',action:'carregarNotaUsuario')}",
             data: {
@@ -191,7 +200,7 @@
             },
             method: "post",
             success: function (data) {
-            console.log(data.valor)
+                console.log(data.valor)
                 $("#rating" + data.valor).attr("checked", true)
             }
         })
