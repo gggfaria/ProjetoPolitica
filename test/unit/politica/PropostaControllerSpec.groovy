@@ -9,6 +9,27 @@ import spock.lang.*
 @Mock(Proposta)
 class PropostaControllerSpec extends Specification {
 
+
+    void "Editar proposta" (){
+        when:
+
+        params.area = '3'
+        params.idProposta = '5'
+        params.titulo = 'Educação para todos'
+        params.resumo = 'No meu governo todos terão edução, todos irão falar obrigado e de nada...'
+        params.descricao = '... me desculpe, foi sem querer.'
+        params.politico
+
+
+
+
+        controller.atualizar()
+        then:
+        response.json.id != null
+
+
+    }
+
  /*   def populateValidParams(params) {
         assert params != null
         // TODO: Populate valid properties like...
