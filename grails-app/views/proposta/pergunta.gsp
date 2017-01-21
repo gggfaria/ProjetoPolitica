@@ -186,7 +186,7 @@
             },
             method: "post",
             success: function (data) {
-                exibirMensagemGenerica(data, 'Avaliado com sucesso', true)
+                exibirMensagemGenerica(data, 'Avaliado com sucesso', false)
             }
         })
     }

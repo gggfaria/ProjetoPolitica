@@ -205,7 +205,7 @@ class PropostaController {
                 eq("eleitor.id", eleitor.id)
             }
 
-            if(!nota.id){
+            if(!nota){
                 nota = new Nota()
             }
 
