@@ -4,12 +4,12 @@ class Area {
 
     String nome
     String icone
-    static hasMany = [proposta: Proposta]
+    static hasMany = [propostas: Proposta]
     static belongsTo = [Proposta]
 
     static constraints = {
     }
     static mapping = {
-        proposta cascade: "all-delete-orphan"
+        propostas cascade: "all-delete-orphan"
     }
 }
