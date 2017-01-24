@@ -43,26 +43,32 @@ class PoliticoController {
 
 
     def exibirPropostas() {
-        def propostas = Proposta.createCriteria().list {
-            createAlias("area", "a", CriteriaSpecification.INNER_JOIN)
-            politico {
-                idEq(params.id.toLong())
+
+        def politicoId = params.id.toLong()
+
+        def areas = null;
+
+        if (politicoId) {
+            areas = Area.createCriteria().list {
+                setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
+                createAlias("propostas", "prop", CriteriaSpecification.INNER_JOIN)
+                createAlias("prop.politico", "pol", CriteriaSpecification.INNER_JOIN)
+                eq("prop.politico.id", politicoId)
             }
+            /*
+            def propostas = Proposta.createCriteria().list {
+                createAlias("area", "a", CriteriaSpecification.INNER_JOIN)
+                politico {
+                    idEq(params.id.toLong())
+                }
 
+            }
+            */
         }
 
-        def areas = Area.createCriteria().list {
-            setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY)
-            createAlias("proposta", "prop", CriteriaSpecification.INNER_JOIN)
-            createAlias("prop.politico", "pol", CriteriaSpecification.INNER_JOIN)
-            eq("prop.politico.id", params.id.toLong())
-        }
-
-        def resposta = ["propostas": propostas, "areas": areas]
-
-        if (propostas != null) {
+        if (areas != null) {
             //render(template: "proposta", model: [propostas: propostas])
-            render(view: "proposta", model: ["resposta": resposta])
+            render(view: "proposta", model: ["areas": areas])
         } else {
             redirect(controller: "politico", action: "listar")
         }
@@ -70,6 +76,7 @@ class PoliticoController {
     }
 
     def politicoService
+
     @Secured(['ROLE_POLITICO'])
     def pegarNotificacao() {
         Usuario usuarioLogado = springSecurityService.currentUser
