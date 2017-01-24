@@ -1,12 +1,13 @@
 package politica
 
 import grails.converters.JSON
-import org.hibernate.criterion.CriteriaSpecification
 import grails.plugin.springsecurity.annotation.Secured
 
 class NotaController {
 
     transient springSecurityService
+
+    def notaService
 
     @Secured(['ROLE_ELEITOR'])
     def carregarNotaUsuario() {
@@ -21,14 +22,41 @@ class NotaController {
             }
             if (nota) {
                 render nota as JSON
-            }else{
-                def mensagem = [valor:5]
+            } else {
+                def mensagem = [valor: 5]
                 render mensagem as JSON
             }
 
 
         }
-
-
     }
+
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def carregarMediaNotas() {
+        if (params.id) {
+            def propostaId = params.id.toLong()
+
+            def notas = notaService.selectQuantidadePorNotas(propostaId)
+
+            def valoresNotas = []
+            def quantidadeNotas = []
+            notas.each { nota ->
+                valoresNotas << nota[0]
+                quantidadeNotas << nota[1]
+            }
+
+            def mediaNotas = notaService.mediaNotas(valoresNotas, quantidadeNotas)
+
+
+            def mapa = [nota: valoresNotas, quantidade: quantidadeNotas, media: mediaNotas]
+
+            if (notas) {
+                render(view: "avaliacao", model: ["resposta": mapa])
+            } else {
+                render(view: "avaliacao", model: ["resposta": mapa])
+            }
+        } else
+            redirect(controller: "politico", action: "listar")
+    }
+
 }

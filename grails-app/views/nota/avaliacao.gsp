@@ -2,18 +2,22 @@
     <div class="row">
         <div class="col-xs-12 col-md-12 text-center">
             <h1 class="rating-num">
-                4.0</h1>
+                ${resposta.media}
+            </h1>
 
             <div class="rating">
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star-o"></span>
+                <g:each in="${[0, 1, 2, 3, 4]}" var="i">
+                    <g:if test="${i < resposta.media}">
+                        <span class="fa fa-star"></span>
+                    </g:if>
+                    <g:else>
+                        <span class="fa fa-star-o"></span>
+                    </g:else>
+                </g:each>
             </div>
 
             <div>
-                <span class="fa fa-user"></span>1,050,008 total
+                <span class="fa fa-user"></span>${resposta.quantidade.sum()}
             </div>
         </div>
 

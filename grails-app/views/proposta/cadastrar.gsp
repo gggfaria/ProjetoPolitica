@@ -80,6 +80,6 @@
 
     </g:formRemote>
 </div>
-<script src="../js/validacao.js"></script>
+<script src="../js/comum/validacao.js"></script>
 </body>
 </html>

@@ -173,8 +173,8 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<script type="text/javascript" src="../js/select.js"></script>
-<script type="text/javascript" src="../js/comum.js"></script>
+<script type="text/javascript" src="../js/comum/select.js"></script>
+<script type="text/javascript" src="../js/comum/comum.js"></script>
 
 <script type="text/javascript">
     function mostrarProposta(data) {

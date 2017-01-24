@@ -102,8 +102,8 @@
 
 <r:layoutResources/>
 
-<script type="text/javascript" src="/Politica/js/select.js"></script>
-<script type="text/javascript" src="/Politica/js/comum.js"></script>
+<script type="text/javascript" src="/Politica/js/comum/select.js"></script>
+<script type="text/javascript" src="/Politica/js/comum/comum.js"></script>
 <script type="text/javascript" src="/Politica/js/bootstrap-datepicker.js"></script>
 <script>
 
