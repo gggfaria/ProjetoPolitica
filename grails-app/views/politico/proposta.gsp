@@ -1,4 +1,4 @@
-<g:each in="${resposta.areas}" var="area">
+<g:each in="${areas}" var="area">
     <div class="panel-group" id="accordion${area.id}">
         <div class="panel panel-primary" aria-expanded="false">
             <div class="panel-heading">
@@ -10,9 +10,9 @@
                     </a>
                 </h4>
             </div>
-            <g:each in="${resposta.propostas.findAll { p -> p.area.nome.equals(area.nome) }}" var="proposta">
-            
-                <div id="collapse${area.nome.replaceAll(" ", "")}" class="panel-collapse collapse" style="margin: 5px">
+
+            <div id="collapse${area.nome.replaceAll(" ", "")}" class="panel-collapse collapse" style="margin: 5px">
+                <g:each in="${area.propostas}" var="proposta">
                     <div class='panel panel-default'>
                         <div class='panel-heading'>
                             <h3 class='panel-title'>
@@ -44,11 +44,10 @@
 
                         </div>
                     </div>
-                </div>
-            </g:each>
-
+                </g:each>
+            </div>
         </div>
 
     </div>
-    
+
 </g:each>
