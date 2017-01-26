@@ -164,7 +164,7 @@
 <script>
     $(document).ready(function () {
         $('#ListaPerguntas').fadeToggle()
-        $('#avaliacao').fadeToggle()
+        
         atualizarPerguntas(${proposta.id})
 
         carregarMediaNota(${proposta.id})
@@ -202,12 +202,13 @@
             method: "post",
             success: function (data) {
                 exibirMensagemGenerica(data, 'Avaliado com sucesso', false)
+                carregarMediaNota(id)
             }
         })
     }
 
     function mostrarMediaNota(data) {
-        $('#avaliacao').html(data).fadeToggle();
+        $('#avaliacao').html(data);
     }
 
 

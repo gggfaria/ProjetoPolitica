@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col-xs-12 col-md-12 text-center">
             <h1 class="rating-num">
-                ${resposta.media}
+                <g:formatNumber number="${resposta.media}" type="number" maxFractionDigits="2" />
             </h1>
 
             <div class="rating">
                 <g:each in="${[0, 1, 2, 3, 4]}" var="i">
-                    <g:if test="${i < resposta.media}">
+                    <g:if test="${i < (int)resposta.media}">
                         <span class="fa fa-star"></span>
                     </g:if>
                     <g:else>
@@ -17,79 +17,30 @@
             </div>
 
             <div>
-                <span class="fa fa-user"></span>${resposta.quantidade.sum()}
+                <span class="fa fa-user"></span> ${resposta.quantidade.sum()}
             </div>
         </div>
 
         <div class="col-xs-12 col-md-11">
             <div class="row rating-desc">
-                <div class="col-xs-3 col-md-3 text-right">
-                    <span class="fa fa-star"></span>5
-                </div>
+                
+                <g:each status="i" in="${resposta.porcentagem}" var="porcentagem">
+                    <div class="col-xs-3 col-md-3 text-right">
+                        <span class="fa fa-star">${resposta.nota.getAt(i)}</span>
+                    </div>
 
-                <div class="col-xs-8 col-md-9">
-                    <div class="progress progress-striped">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                            <span class="sr-only">80%</span>
+                    <div class="col-xs-8 col-md-9">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="80"
+                                 aria-valuemin="0" aria-valuemax="100" style="width: ${porcentagem}%">
+                                <span class="sr-only">
+                                    <g:formatNumber number="${porcentagem}" type="number" maxFractionDigits="2" />%
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- end 5 -->
-                <div class="col-xs-3 col-md-3 text-right">
-                    <span class="fa fa-star"></span>4
-                </div>
-
-                <div class="col-xs-8 col-md-9">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                            <span class="sr-only">60%</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end 4 -->
-                <div class="col-xs-3 col-md-3 text-right">
-                    <span class="fa fa-star"></span>3
-                </div>
-
-                <div class="col-xs-8 col-md-9">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                            <span class="sr-only">40%</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end 3 -->
-                <div class="col-xs-3 col-md-3 text-right">
-                    <span class="fa fa-star"></span>2
-                </div>
-
-                <div class="col-xs-8 col-md-9">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                            <span class="sr-only">20%</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end 2 -->
-                <div class="col-xs-3 col-md-3 text-right">
-                    <span class="fa fa-star"></span>1
-                </div>
-
-                <div class="col-xs-8 col-md-9">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 15%">
-                            <span class="sr-only">15%</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- end 1 -->
+                </g:each>
             </div>
-            <!-- end row -->
         </div>
     </div>
 </div>

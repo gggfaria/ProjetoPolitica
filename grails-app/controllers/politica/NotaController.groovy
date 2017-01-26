@@ -46,9 +46,10 @@ class NotaController {
             }
 
             def mediaNotas = notaService.mediaNotas(valoresNotas, quantidadeNotas)
+            
+            def porcentagemNota = notaService.porcentagemNota(valoresNotas, quantidadeNotas)
 
-
-            def mapa = [nota: valoresNotas, quantidade: quantidadeNotas, media: mediaNotas]
+            def mapa = [nota: valoresNotas, quantidade: quantidadeNotas, media: mediaNotas, porcentagem: porcentagemNota]
 
             if (notas) {
                 render(view: "avaliacao", model: ["resposta": mapa])
