@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <g:link controller="eleitor" action="index" class="navbar-brand">
+            <g:link url="/Politica" class="navbar-brand">
                 Política Municipal
             </g:link>
         </div>

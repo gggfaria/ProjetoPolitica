@@ -67,7 +67,7 @@
             </div>
 
             <div class="col-lg-5 col-md-5 col-xs-12 text-center">
-                <div class="well well-sm" style="min-height: 100%" id="avaliacao">
+                <div class="well well-sm" style="min-height: 100%; opacity: 0" id="avaliacao">
                     <h4>Avaliação</h4>
                     <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
                     <p>Proposta ainda não avaliada.</p>
@@ -169,6 +169,10 @@
 <script>
     $(document).ready(function () {
         $('#ListaPerguntas').fadeToggle()
+
+        $('#avaliacao').animate({opacity: 1},1500);
+
+
 
         atualizarPerguntas(${proposta.id})
 
