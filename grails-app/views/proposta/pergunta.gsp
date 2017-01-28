@@ -170,8 +170,9 @@
     $(document).ready(function () {
         $('#ListaPerguntas').fadeToggle()
 
-        $('#avaliacao').animate({opacity: 1},1500);
-
+        setTimeout(function () {
+            $('#avaliacao').animate({opacity: 1},"slow");
+        }, 500)
 
 
         atualizarPerguntas(${proposta.id})
