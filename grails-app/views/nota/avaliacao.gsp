@@ -24,11 +24,11 @@
     <div class="col-xs-12 col-md-11">
         <div class="row rating-desc">
             <g:each status="i" in="${resposta.porcentagem}" var="porcentagem">
-                <div class="col-xs-2 col-md-2 text-right">
+                <div class="col-xs-3 col-md-2 text-right">
                     ${resposta.nota.getAt(i)} <span class="fa fa-star"></span>
                 </div>
 
-                <div class="col-xs-10 col-md-10">
+                <div class="col-xs-8 col-md-10">
                     <div class="progress">
                         <div class="progress-bar progress-bar" role="progressbar" aria-valuenow="80"
                              aria-valuemin="0" aria-valuemax="100" style="width: ${porcentagem}%">
