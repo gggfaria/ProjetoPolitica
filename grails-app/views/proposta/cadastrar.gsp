@@ -12,7 +12,9 @@
     <h2>Cadastrar Proposta</h2>
     <hr/>
     <g:formRemote name="formProposta" url="[controller: 'proposta', action: 'salvar']"
-                  onSuccess="exibirMensagemGenerica(data, 'Sua proposta foi cadastrada com sucesso', true)"
+                  onSuccess="exibirMensagemGenerica(data, 'Sua proposta foi cadastrada com sucesso', true);
+                            contadorCaracteres('#resumo', '#quantidadeDigitadaResumo');
+                            contadorCaracteres('#descricao', '#quantidadeDigitadaDescricao')"
                   class="form-group">
 
         <div class="row">
