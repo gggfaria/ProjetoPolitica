@@ -66,7 +66,12 @@
                 </div>
             </div>
 
-            <div class="col-lg-5 col-md-5 col-xs-12" id="avaliacao">
+            <div class="col-lg-5 col-md-5 col-xs-12 text-center">
+                <div class="well well-sm" style="min-height: 100%" id="avaliacao">
+                    <h4>Avaliação</h4>
+                    <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
+                    <p>Proposta ainda não avaliada.</p>
+                </div>
             </div>
 
         </div>
@@ -113,7 +118,7 @@
             <div class="col-md-12">
                 <div class="alert alert-warning" role="alert">
                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    <strong>Eleitor</strong>, acesse com o seu usuário para fazer uma pergunta.
+                    <strong>Eleitor</strong>, acesse com o seu usuário para fazer uma pergunta e avaliar a proposta.
                 <g:link controller="login" action="logar" style="color: #0b30f5 !important;">
                     Clique aqui!
                 </g:link>
@@ -164,13 +169,13 @@
 <script>
     $(document).ready(function () {
         $('#ListaPerguntas').fadeToggle()
-        
+
         atualizarPerguntas(${proposta.id})
 
         carregarMediaNota(${proposta.id})
 
         <sec:ifAllGranted roles="ROLE_ELEITOR">
-            carregarNota(${proposta.id})
+        carregarNota(${proposta.id})
         </sec:ifAllGranted>
 
     });
