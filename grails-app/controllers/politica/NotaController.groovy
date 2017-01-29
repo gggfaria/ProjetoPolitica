@@ -38,24 +38,26 @@ class NotaController {
 
             def notas = notaService.selectQuantidadePorNotas(propostaId)
 
-            def valoresNotas = []
-            def quantidadeNotas = []
-            notas.each { nota ->
-                valoresNotas << nota[0]
-                quantidadeNotas << nota[1]
-            }
-
-            def mediaNotas = notaService.mediaNotas(valoresNotas, quantidadeNotas)
-            
-            def porcentagemNota = notaService.porcentagemNota(valoresNotas, quantidadeNotas)
-
-            def mapa = [nota: valoresNotas, quantidade: quantidadeNotas, media: mediaNotas, porcentagem: porcentagemNota]
-
             if (notas) {
-                render(view: "avaliacao", model: ["resposta": mapa])
+                def valoresNotas = []
+                def quantidadeNotas = []
+
+                notas.each { nota ->
+                    valoresNotas << nota[0]
+                    quantidadeNotas << nota[1]
+                }
+
+                def mediaNotas = notaService.mediaNotas(valoresNotas, quantidadeNotas)
+
+                def porcentagemNota = notaService.porcentagemNota(valoresNotas, quantidadeNotas)
+
+                def resposta = [nota: valoresNotas, quantidade: quantidadeNotas, media: mediaNotas, porcentagem: porcentagemNota]
+
+                render(view: "avaliacao", model: ["resposta": resposta])
             } else {
-                render(view: "avaliacao", model: ["resposta": mapa])
+                render(view: "avaliacao", model: ["resposta": null])
             }
+
         } else
             redirect(controller: "politico", action: "listar")
     }

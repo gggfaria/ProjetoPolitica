@@ -42,7 +42,7 @@
                     </g:remoteLink>
                 </td>
                 <td class="text-center">
-                    <g:link controller="proposta" action="pergunta" id="${proposta.id}"
+                    <g:link controller="proposta" action="detalhes" id="${proposta.id}"
                             title="Visualizar proposta completa">
                         <i class="fa fa-plus fa-2x"></i>
                     </g:link>

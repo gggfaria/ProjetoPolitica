@@ -10,6 +10,7 @@
 <head>
     <title>Proposta - Perguntas</title>
     <link href="/Politica/css/Testimonials.css" rel="stylesheet">
+    <link href="/Politica/css/loading.css" rel="stylesheet">
     <link href="/Politica/css/rating.css" rel="stylesheet">
     <meta name="layout" content="main">
     <style>
@@ -67,98 +68,104 @@
             </div>
 
             <div class="col-lg-5 col-md-5 col-xs-12 text-center">
-                <div class="well well-sm" style="min-height: 100%; opacity: 0" id="avaliacao">
-                    <h4>Avaliação</h4>
-                    <i class="fa fa-info-circle fa-2x" aria-hidden="true"></i>
-                    <p>Proposta ainda não avaliada.</p>
+                <div class="well well-sm center" style="min-height: 100%;" id="avaliacao">
+                    <div class='uil-squares-css' style='transform:scale(0.6); margin-left: auto; margin-right: auto'>
+                        <div><div></div></div>
+                        <div><div></div></div>
+                        <div><div></div></div>
+                        <div><div></div></div>
+                        <div><div></div></div>
+                        <div><div></div></div>
+                        <div><div></div></div>
+                        <div><div></div></div>
+                    </div>
                 </div>
+
             </div>
 
-        </div>
+            <sec:ifAllGranted roles="ROLE_ELEITOR">
+                <h2>Enviar pergunta</h2>
+                <hr/>
+                <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'salvar']" class="form-group"
+                              onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})">
 
-        <sec:ifAllGranted roles="ROLE_ELEITOR">
-            <h2>Enviar pergunta</h2>
-            <hr/>
-            <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'salvar']" class="form-group"
-                          onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})">
+                    <input type="hidden" name="propostaId" value="${proposta.id}"/>
 
-                <input type="hidden" name="propostaId" value="${proposta.id}"/>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span class="obrigatorio">*</span>
-                                <label>Pergunta para ${proposta.politico.nome}:</label>
-                                <textarea name="descricao" class="form-control" rows="5"
-                                          placeholder="Digite sua pergunta aqui..."
-                                          style="max-width: 100%;"></textarea>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="obrigatorio">*</span>
+                                    <label>Pergunta para ${proposta.politico.nome}:</label>
+                                    <textarea name="descricao" class="form-control" rows="5"
+                                              placeholder="Digite sua pergunta aqui..."
+                                              style="max-width: 100%;"></textarea>
+                                </div>
                             </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="button button-5 button-5b icon-cart" name="enviar">
+                                <i class="fa fa-check"></i>
+                                <span>enviar</span>
+                            </button>
                         </div>
                     </div>
 
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="button button-5 button-5b icon-cart" name="enviar">
-                            <i class="fa fa-check"></i>
-                            <span>enviar</span>
-                        </button>
-                    </div>
-                </div>
-
-                <br/>
-            </g:formRemote>
-        </sec:ifAllGranted>
-    </div>
-
-    <sec:ifNotGranted roles="ROLE_ELEITOR">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-warning" role="alert">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    <strong>Eleitor</strong>, acesse com o seu usuário para fazer uma pergunta e avaliar a proposta.
-                <g:link controller="login" action="logar" style="color: #0b30f5 !important;">
-                    Clique aqui!
-                </g:link>
-                </div>
-
-            </div>
+                    <br/>
+                </g:formRemote>
+            </sec:ifAllGranted>
         </div>
-    </sec:ifNotGranted>
 
+        <sec:ifNotGranted roles="ROLE_ELEITOR">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        <strong>Eleitor</strong>, acesse com o seu usuário para fazer uma pergunta e avaliar a proposta.
+                    <g:link controller="login" action="logar" style="color: #0b30f5 !important;">
+                        Clique aqui!
+                    </g:link>
+                    </div>
 
-
-    <div class="modal fade" tabindex="-1" role="dialog" id="mensagemModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            onclick="carregarPerguntas(${proposta.id})" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Informação</h4>
                 </div>
-
-                <div class="modal-body">
-                    <div id="mensagem" role="alert"></div>
-
-                    <div id="mensagemErros" role="alert"></div>
-                </div>
-
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+            </div>
+        </sec:ifNotGranted>
 
 
-    <h3><i class="fa fa-comments"></i> Perguntas feitas pelos eleitores</h3>
 
-    <hr/>
+        <div class="modal fade" tabindex="-1" role="dialog" id="mensagemModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                onclick="carregarPerguntas(${proposta.id})" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Informação</h4>
+                    </div>
 
-    <div id="ListaPerguntas">
+                    <div class="modal-body">
+                        <div id="mensagem" role="alert"></div>
+
+                        <div id="mensagemErros" role="alert"></div>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+        <h3><i class="fa fa-comments"></i> Perguntas feitas pelos eleitores</h3>
+
+        <hr/>
+
+        <div id="ListaPerguntas">
+        </div>
+
     </div>
-
-</div>
 
 </div>
 
@@ -170,9 +177,10 @@
     $(document).ready(function () {
         $('#ListaPerguntas').fadeToggle()
 
-        setTimeout(function () {
-            $('#avaliacao').animate({opacity: 1},"slow");
-        }, 500)
+      /*  setTimeout(function () {
+            $('#infoAvaliacao').animate({opacity: 1}, "slow");
+        }, 1000)
+      */
 
 
         atualizarPerguntas(${proposta.id})

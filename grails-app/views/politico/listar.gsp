@@ -80,7 +80,7 @@
 
 <script>
     function redirecionarPerguntaProposta(id) {
-        window.location="../proposta/pergunta/"+id;
+        window.location="../proposta/detalhes/"+id;
     }
 
     function mostrarProposta(data){

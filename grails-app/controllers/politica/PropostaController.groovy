@@ -1,7 +1,6 @@
 package politica
 
 import grails.converters.JSON
-import org.hibernate.criterion.CriteriaSpecification
 import grails.plugin.springsecurity.annotation.Secured
 
 
@@ -113,7 +112,7 @@ class PropostaController {
     }
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
-    def pergunta() {
+    def detalhes() {
 
         if (!params.id) {
             render(view: '/erro404', model: [mensagem: 'Proposta não especificada']);
@@ -124,7 +123,7 @@ class PropostaController {
             if (proposta == null) {
                 render(view: '/erro404', model: [mensagem: 'Proposta não encontrada']);
             } else {
-                render(view: "pergunta", model: [proposta: proposta]);
+                render(view: "detalhes", model: [proposta: proposta]);
             }
         }
     }
@@ -181,7 +180,7 @@ class PropostaController {
             } else {
                 proposta = proposta.save(flush: true)
                 print(proposta.area)
-                def mapa = [proposta: proposta, area:proposta.area]
+                def mapa = [proposta: proposta, area: proposta.area]
 
                 render mapa as JSON
             }
@@ -190,7 +189,7 @@ class PropostaController {
             redirect(controller: "proposta", action: "index")
         }
     }
-    
+
     @Secured(['ROLE_ELEITOR'])
     def avaliar() {
         if (params.valor && params.id) {
@@ -200,12 +199,12 @@ class PropostaController {
             Eleitor eleitor = Eleitor.findByUsuario(usuarioLogado)
             def proposta = Proposta.get(id)
 
-            def nota = Nota.createCriteria().get{
+            def nota = Nota.createCriteria().get {
                 eq("proposta.id", id)
                 eq("eleitor.id", eleitor.id)
             }
 
-            if(!nota){
+            if (!nota) {
                 nota = new Nota()
             }
 
@@ -221,12 +220,12 @@ class PropostaController {
                 print(nota.errors.allErrors)
                 nota.errors.allErrors.each { erro ->
 
-                listaErros.add(g.message(message: erro.defaultMessage, error: erro))
-            }
+                    listaErros.add(g.message(message: erro.defaultMessage, error: erro))
+                }
 
 
-            def mensagem = ["erro": listaErros]
-            render mensagem as JSON
+                def mensagem = ["erro": listaErros]
+                render mensagem as JSON
 
             } else {
                 nota = nota.save(flush: true)
