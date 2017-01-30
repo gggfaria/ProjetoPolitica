@@ -91,8 +91,10 @@
 <g:layoutBody/>
 
 
-<hr/>
-<footer class="footer text-center">
+
+
+<footer class="footer text-center" style="clear: both">
+    <hr/>
     Projeto Politica Municipal - 2º Modulo Pós Web.<br/>
     Gabriel Faria<br/>
     Guilherme Prado<br/>

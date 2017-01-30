@@ -85,5 +85,13 @@ class PoliticoController {
         render ""
     }
 
+    @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+    def carregarEleitos(){
+        def eleitos = Politico.findAllByIsEleito(true)
+
+        render(view: "eleitos", model: ["eleitos": eleitos])
+    }
+
+
 
 }
