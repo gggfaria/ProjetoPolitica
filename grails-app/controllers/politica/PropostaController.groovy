@@ -11,8 +11,10 @@ class PropostaController {
 
     @Secured(['ROLE_POLITICO'])
     def index() {
-        def propostas = Proposta.list()
+        Usuario usuarioLogado = springSecurityService.currentUser
+        Politico politico = Politico.findByUsuario(usuarioLogado)
 
+        def propostas = Proposta.findAllByPolitico(politico)
         render(view: "index", model: [propostas: propostas])
     }
 
@@ -160,34 +162,35 @@ class PropostaController {
         Integer areaId = params.area?.toInteger()
         Integer idProposta = params.idProposta?.toInteger()
         proposta = Proposta.get(params.id)
-        proposta.titulo = params.titulo
-        proposta.resumo = params.resumo
-        proposta.descricao = params.descricao
-        proposta.politico = politico
-        proposta.politico.id = politico.id
-        proposta.area = Area.get(areaId)
-        proposta.validate()
 
         if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
-            if (proposta.hasErrors()) {
-                def listaErros = []
-                proposta.errors.each { erro ->
-                    listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
-                }
-                def mensagem = ["erro": listaErros]
-                render mensagem as JSON
+            proposta.titulo = params.titulo
+            proposta.resumo = params.resumo
+            proposta.descricao = params.descricao
+            proposta.politico = politico
+            proposta.politico.id = politico.id
+            proposta.area = Area.get(areaId)
 
-            } else {
-                proposta = proposta.save(flush: true)
-                print(proposta.area)
-                def mapa = [proposta: proposta, area: proposta.area]
+        }
+        proposta.validate()
 
-                render mapa as JSON
+        if (proposta.hasErrors()) {
+            def listaErros = []
+            proposta.errors.each { erro ->
+                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
             }
+            def mensagem = ["erro": listaErros]
+            render mensagem as JSON
 
         } else {
-            redirect(controller: "proposta", action: "index")
+            proposta = proposta.save(flush: true)
+            print(proposta.area)
+            def mapa = [proposta: proposta, area: proposta.area]
+
+            render mapa as JSON
         }
+
+
     }
 
     @Secured(['ROLE_ELEITOR'])
