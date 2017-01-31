@@ -11,8 +11,8 @@
                 </h4>
             </div>
 
-            <div id="collapse${area.nome.replaceAll(" ", "")}" class="panel-collapse collapse" style="margin: 5px">
-                <g:each in="${area.propostas}" var="proposta">
+            <div id="collapse${area?.nome.replaceAll(" ", "")}" class="panel-collapse collapse" style="margin: 5px">
+                <g:each in="${propostas?.findAll { p -> p.area.nome.equals(area.nome) }}" var="proposta">
                     <div class='panel panel-default'>
                         <div class='panel-heading'>
                             <h3 class='panel-title'>

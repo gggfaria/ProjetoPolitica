@@ -47,6 +47,7 @@ class PoliticoController {
         def politicoId = params.id.toLong()
 
         def areas = null;
+        def propostas = null;
 
         if (politicoId) {
             areas = Area.createCriteria().list {
@@ -55,20 +56,20 @@ class PoliticoController {
                 createAlias("prop.politico", "pol", CriteriaSpecification.INNER_JOIN)
                 eq("prop.politico.id", politicoId)
             }
-            /*
-            def propostas = Proposta.createCriteria().list {
+
+            propostas = Proposta.createCriteria().list {
                 createAlias("area", "a", CriteriaSpecification.INNER_JOIN)
                 politico {
                     idEq(params.id.toLong())
                 }
 
             }
-            */
+
         }
 
-        if (areas != null) {
+        if (areas) {
             //render(template: "proposta", model: [propostas: propostas])
-            render(view: "proposta", model: ["areas": areas])
+            render(view: "proposta", model: ["areas": areas, "propostas" : propostas])
         } else {
             redirect(controller: "politico", action: "listar")
         }
