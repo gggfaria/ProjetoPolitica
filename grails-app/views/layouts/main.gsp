@@ -50,7 +50,12 @@
                         <li><a href="#" onclick="exibirCadastro()">Cadastrar</a></li>
                     </sec:ifNotLoggedIn>
                     <sec:ifNotLoggedIn>
-                        <li><g:link controller='login' action='logar'>Login</g:link></li>
+                        <li>
+                           <g:link controller='login' action='logar'>
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                Login
+                            </g:link>
+                        </li>
                     </sec:ifNotLoggedIn>
                 </ul>
             </div>

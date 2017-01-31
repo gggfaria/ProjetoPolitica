@@ -16,44 +16,51 @@
             <ul class="nav navbar-nav">
                 <sec:ifAllGranted roles="ROLE_ELEITOR">
 
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <g:link controller="pergunta" action="listar">
+                                Minhas Perguntas
+                            </g:link>
+                        </li>
+                        <li>
+                            <g:link controller="politico" action="listar">
+                                Políticos
+                            </g:link>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="true">
+                                <!-- icone -->
+                                <i class="fa fa-bell-o" aria-hidden="true"></i>
 
+                                <g:include controller="notificacao" action="quantidade"/>
+                                <span class="label label-danger label-as-badge" style="
+                                border-radius: 50%;
+                                position:relative;
+                                top: -10px;
+                                left: 2px;">${session.notificacoes}</span>
 
-            <ul class="nav navbar-nav">
-                <li>
-                    <g:link controller="pergunta" action="listar">
-                        Minhas Perguntas
-                    </g:link>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true"
-                       aria-expanded="true">Notificações
-                    <g:include controller="notificacao" action="quantidade"/>
-                        <span class="label label-danger label-as-badge" style="
-                        border-radius: 50%;
-                        position:relative;
-                        top: -10px;
-                        left: 2px;">${session.notificacoes}</span>
-                    </a>
-                    <ul class="dropdown-menu" style="width: 390px">
-                        <li class="header">Você tem ${session.notificacoes} mensagem(s) não visualizada(s)</li>
-                        <br>
-                        <g:include controller="notificacao" action="listar"/>
-                        <li class="footer text-center"><a href="#">Veja mais</a></li>
+                            </a>
+                            <ul class="dropdown-menu" style="width: 390px">
+                                <li class="header">Você tem ${session.notificacoes} mensagem(s) não visualizada(s)</li>
+                                <br>
+                                <g:include controller="notificacao" action="listar"/>
+                                <li class="footer text-center"><a href="#">Veja mais</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <g:link controller="eleitor" action="index"><sec:loggedInUserInfo
+                                    field="username"/></g:link>
+                        </li>
+                        <sec:ifLoggedIn>
+                            <li><a href="/Politica/j_spring_security_logout">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Sair
+                            </a>
+                            </li>
+                        </sec:ifLoggedIn>
                     </ul>
-                </li>
-                <li>
-                    <g:link controller="politico" action="listar">
-                        Políticos
-                    </g:link>
-                </li>
-                <li>
-                    <g:link controller="eleitor" action="index"><sec:loggedInUserInfo field="username"/></g:link>
-                </li>
-                <sec:ifLoggedIn>
-                    <li><a href="/Politica/j_spring_security_logout">Sair</a></li>
-                </sec:ifLoggedIn>
-            </ul>
                 </sec:ifAllGranted>
             </ul>
 
