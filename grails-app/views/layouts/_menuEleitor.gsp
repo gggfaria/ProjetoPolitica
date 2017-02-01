@@ -46,7 +46,7 @@
                                 <li class="header">Você tem ${session.notificacoes} mensagem(s) não visualizada(s)</li>
                                 <br>
                                 <g:include controller="notificacao" action="listar"/>
-                                <li class="footer text-center"><a href="#">Veja mais</a></li>
+                                <li class="footer text-center"><a href="#" onclick="mostrarNotificacoes()">Veja mais</a></li>
                             </ul>
                         </li>
                         <li>
@@ -69,3 +69,31 @@
     </div>
 </nav>
 
+<div class="modal fade" id="modalNotificacoes" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" title="Fechar" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+                <h4 class="modal-title">Todas notificações</h4>
+
+                <div class="modal-body">
+
+                        <g:include controller="notificacao" action="listarTudo"/>
+                   
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+    function mostrarNotificacoes(data) {
+        $('#modalNotificacoes').modal('show')
+    }
+</script>

@@ -47,7 +47,12 @@ class NotificacaoController {
         def notificacao = notificacaoService.listar(pessoa)
         render(template: 'news', model: [listaNotificacoes: notificacao])
     }
-
+    def listarTudo() {
+        Usuario usuarioLogado = springSecurityService.currentUser
+        def pessoa = Pessoa?.findByUsuario(usuarioLogado)
+        def notificacao = notificacaoService.listar(pessoa)
+        render(template: 'notificacoes', model: [listaNotificacoes: notificacao])
+    }
 
 
 

@@ -27,7 +27,7 @@ class NotificacaoService {
         def notificacoes =  Notificacao.createCriteria()
         def result = notificacoes.list {
             eq ('pessoa', pessoa)
-           // order('isVisualizada')
+            order('isVisualizada')
             order('dataHora', 'desc')
 
         }

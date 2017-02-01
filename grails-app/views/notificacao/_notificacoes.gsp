@@ -1,11 +1,5 @@
-<div class="col-md-12" style="overflow-y: scroll; height:300px;">
-
-    <li class="col-lg-offset-7">
-<g:submitButton name="deletar" value="Limpar" type='button' onclick="limparNotificacoes()"
-                class='btn btn-primary col-lg-offset-6'
-                title='Limpar notificações'></g:submitButton></li>
+<g:each in="${listaNotificacoes}" var="notificacao">
 <hr>
-<g:each in="${listaNotificacoes.take(10)}" var="notificacao">
     <g:if test="${notificacao.isVisualizada}">
         <div class="panel-body" >
       <i class="fa fa-folder-open-o fa-2x" aria-hidden="true"></i>
@@ -15,7 +9,7 @@
 
      <i class="fa fa-folder-o fa-2x" aria-hidden="true"></i>
     </g:else>
-    <g:submitButton  name="deletar${notificacao.id}" value="x" class="close"
+    <g:submitButton name="deletar${notificacao.id}" value="x" class="close"
                     onclick="excluirNotificacao(${notificacao.id})"/>
     <li>
         <h4>
@@ -39,22 +33,13 @@
     </li>
     <small><i class="fa fa-clock-o"></i> ${notificacao.dataHora.format("dd/MM/yyyy hh:mm")}</small>
     </div>
-    <hr>
+
 
 </g:each>
-</div>
+
 
 <script>
-    function limparNotificacoes() {
-        $.ajax({
-            url: "/Politica/notificacao/limpar/",
 
-            method: "post",
-            success: function (data) {
-            }
-        })
-
-    }
 
     function visualizarNotificacao(id) {
         $.ajax({
@@ -78,12 +63,12 @@
             },
             method: "post",
             success: function (data) {
+                exibirMensagemGenerica(data, "Excluído com sucesso", false)
                 carregarNotificacoes()
             }
         })
 
     }
-
 
     function carregarNotificacoes() {
 
