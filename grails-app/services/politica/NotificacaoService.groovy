@@ -18,6 +18,7 @@ class NotificacaoService {
             eq ('pessoa', pessoa)
             eq('isVisualizada', false)
 
+
         }
         return result.toString().replace("[","").replace("]", "")
     }
@@ -26,7 +27,9 @@ class NotificacaoService {
         def notificacoes =  Notificacao.createCriteria()
         def result = notificacoes.list {
             eq ('pessoa', pessoa)
-            order('isVisualizada')
+           // order('isVisualizada')
+            order('dataHora', 'desc')
+
         }
         return result
     }
@@ -48,6 +51,13 @@ class NotificacaoService {
     def excluir(int id){
         def notificacao =  Notificacao.findById(id)
         notificacao?.delete()
+
+    }
+
+    def visualizar(int id){
+        def notificacao =  Notificacao.findById(id)
+        notificacao?.isVisualizada = true
+        notificacao.save()
 
     }
 

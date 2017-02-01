@@ -11,9 +11,9 @@ class PoliticoService {
     }
 
     def Notificacoes(Politico politico) {
-        def perguntas = Pergunta.createCriteria().list {
+        def perguntas = Pergunta?.createCriteria().list {
             createAlias("proposta", "p", CriteriaSpecification.INNER_JOIN)
-            eq("p.politico.id", politico.id)
+            eq("p.politico.id", politico?.id)
             eq("isRespondida", false)
         }
 

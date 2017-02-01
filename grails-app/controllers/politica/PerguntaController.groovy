@@ -45,15 +45,16 @@ class PerguntaController {
             pessoaPergunta = Pessoa.findByUsuario(usuarioLogado)
             Notificacao notificacao = new Notificacao()
             notificacao.dataHora = new Date()
-            notificacao.caminho = proposta.id
+
             notificacao.isVisualizada = false
-            notificacao.titulo = "O Sr(a) " + pessoaPergunta.nome + " te fez uma pergunta"
+            notificacao.titulo = " " + pessoaPergunta.nome + " te fez uma pergunta"
             notificacao.descricao = pergunta.descricao
             def alvoNotificacao = Pessoa.findById(proposta.politico.id)
             notificacao.pessoa = alvoNotificacao
+            pergunta = perguntaService.salvarPergunta(pergunta)
+            notificacao.caminho = pergunta.id
             notificacao.save(flush: true)
             //-----------------------------
-            pergunta = perguntaService.salvarPergunta(pergunta)
             render pergunta as JSON
         }
 

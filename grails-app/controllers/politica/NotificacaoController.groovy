@@ -43,7 +43,7 @@ class NotificacaoController {
 
     def listar() {
         Usuario usuarioLogado = springSecurityService.currentUser
-        def pessoa = Pessoa.findByUsuario(usuarioLogado)
+        def pessoa = Pessoa?.findByUsuario(usuarioLogado)
         def notificacao = notificacaoService.listar(pessoa)
         render(template: 'news', model: [listaNotificacoes: notificacao])
     }
@@ -53,7 +53,7 @@ class NotificacaoController {
 
     def quantidade() {
         Usuario usuarioLogado = springSecurityService.currentUser
-        def pessoa = Pessoa.findByUsuario(usuarioLogado)
+        def pessoa = Pessoa?.findByUsuario(usuarioLogado)
         session["notificacoes"] = notificacaoService.notificacoes(pessoa)
         render ""
     }
@@ -61,10 +61,16 @@ class NotificacaoController {
     def limpar(){
 
         Usuario usuarioLogado = springSecurityService.currentUser
-        def pessoa = Pessoa.findByUsuario(usuarioLogado)
+        def pessoa = Pessoa?.findByUsuario(usuarioLogado)
         def notificacao = notificacaoService.limpar(pessoa)
         render(template: 'news', model: [listaNotificacoes: notificacao])
     }
+
+    def visualizar(int id){
+        def notificacao = notificacaoService.visualizar(id)
+        render(template: 'news', model: [listaNotificacoes: notificacao])
+    }
+    
     def excluir(int id){
        def notificacao = notificacaoService.excluir(id)
         render(template: 'news', model: [listaNotificacoes: notificacao])
