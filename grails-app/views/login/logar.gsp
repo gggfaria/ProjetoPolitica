@@ -20,11 +20,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <span class="obrigatorio">*</span>
+
                     <label>E-mail</label>
 
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="email" name="j_username"
+                        <input type="email" name="j_username" id="login_usuario"
                                placeholder="E-mail" required="" class="form-control">
                     </div>
                 </div>
@@ -39,7 +40,7 @@
                         <span class="input-group-addon">
                             <i class="fa fa-key" aria-hidden="true"></i>
                         </span>
-                        <input type="password" min="5" name="j_password" id="senha" placeholder="Senha" required=""
+                        <input type="password" min="5" name="j_password" id="login_senha" placeholder="Senha" required=""
                                class="form-control">
                         <span class="input-group-addon" style="cursor: pointer;" onmousedown="exibirSenha()"
                               onmouseup="esconderSenha()">
@@ -63,13 +64,16 @@
                 </div>
             </div>
 
+
             <button class="button button-5 button-5b icon-cart" name="cadastrar">
                 <i class="fa fa-arrow-right"></i>
                 <span>Acessar</span>
             </button>
+
         </form>
 
     </div>
+
 </div>
 <script>
 
