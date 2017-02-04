@@ -1,5 +1,11 @@
 import politica.Area
+import politica.EnumSexo
+import politica.Partido
 import politica.Permissao
+import politica.Pessoa
+import politica.Politico
+import politica.Usuario
+import politica.UsuarioPermissao
 
 class BootStrap {
 
@@ -27,6 +33,7 @@ class BootStrap {
         cadastrarAreas("Meio Ambiente","fa-tree")
         cadastrarAreas("Transporte","fa-subway")
 
+        cadastrarUsuario("João José", "joao.jose@mail.com", "senha")
     }
 
     def destroy = {
@@ -39,6 +46,29 @@ class BootStrap {
             area = new Area(nome: nome, icone: icone).save(flush: true)
         }
     }
+
+
+
+    def cadastrarUsuario(String nome, String email, String senha) {
+        Politico politico = Politico.findByEmail(email)
+        if (politico == null) {
+            def partido =  new Partido(bandeira: "/Politica/static/partido/bandeira.png",
+                    sigla:"PQWERT", numero: 555, nome: "PARTIDO DOS TESTES" ).save(flush: true)
+
+            Permissao permissao = Permissao.findByAuthority("ROLE_POLITICO")
+
+            politico = new Politico(nome:nome, email: email, dataNascimento: new Date(),isAtivada: true, sexo: EnumSexo.MASCULINO,
+                    isCandidato: false, isEleito: true, foto: "/Politica/static/images/politico/perfil.jpg",
+                    numero: 42)
+            politico.usuario = new Usuario(username: email, password: senha,
+                    enabled: true, accountExpired: false, accountLocked: false,
+                    passwordExpired: false).save(flush: true)
+
+            def usuarioPermissao = new UsuarioPermissao(usuario: politico.usuario, permissao: permissao).save(flush: true)
+
+        }
+    }
+
 
 
 }

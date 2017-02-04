@@ -155,20 +155,20 @@ class PropostaController {
     def atualizar() {
 
         Proposta proposta
-        //Pegar usuario logado (politoc)
+        //Pegar usuario logado (politoco)
         Usuario usuarioLogado = springSecurityService.currentUser
         Politico politico = Politico.findByUsuario(usuarioLogado)
 
         Integer areaId = params.area?.toInteger()
-        Integer idProposta = params.idProposta?.toInteger()
-        proposta = Proposta.get(params.id)
+        def propostaId = params.id.toLong()
+        proposta = Proposta.get(propostaId)
 
         if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
             proposta.titulo = params.titulo
             proposta.resumo = params.resumo
             proposta.descricao = params.descricao
-            proposta.politico = politico
-            proposta.politico.id = politico.id
+            //proposta.politico = politico
+            //proposta.politico.id = politico.id
             proposta.area = Area.get(areaId)
 
         }
