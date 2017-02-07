@@ -53,7 +53,7 @@
 
                     <td class="text-center">
                         <g:if test="${pergunta.isRespondida}">
-                             <a onclick='redirecionarPerguntaProposta(${pergunta.proposta.id})'>                                
+                             <a style="cursor: pointer" onclick='redirecionarPerguntaProposta(${pergunta.proposta.id})'>
                                 Ver detalhes
                             </a>
                         </g:if>
@@ -117,7 +117,7 @@
     }
     
     function redirecionarPerguntaProposta(id) {
-        window.location="../proposta/pergunta/"+id;
+        window.location="../proposta/detalhes/"+id;
     }
 </script>
 </body>
