@@ -75,13 +75,13 @@ class PropostaIntegrationSpec extends Specification {
 
         SpringSecurityUtils.doWithAuth("gabrielguima@mail.com") {
 
-            controller.params.valor = '4'
+            controller.params.valor = "4"
             controller.params.id = proposta.id
             controller.avaliar()
         }
 
         then:
-        controller.response.json.valor == "4"
+        controller.response.json.valor == 4
 
     }
 }

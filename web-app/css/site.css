@@ -6,9 +6,10 @@ footer {
     margin: 50px 0;
 }
 
-textarea{
+textarea {
     max-width: 100%;
 }
+
 .obrigatorio {
     color: red;
 }
@@ -28,17 +29,17 @@ div {
 a:link {
     color: white !important;
 }
+
 /*MENU*/
-.navbar{
+.navbar {
     background-color: #0072c6 !important;
     border-color: #0072c6 !important;
-   /* box-shadow: 0 4px 2px -2px gray;*/
+    /* box-shadow: 0 4px 2px -2px gray;*/
 }
 
 .navbar a {
     color: white !important;
 }
-
 
 .navbar a:hover {
     background-color: #0093ff !important;
@@ -50,40 +51,55 @@ a:link {
     border-color: #0093ff !important;
 }
 
-nav button{
+nav button {
     background-color: #0072c6 !important;
 
 }
-nav button:hover{
+
+nav button:hover {
     background-color: white !important;
 }
 
-.dropdown-menu a{
+.dropdown-menu a {
     background-color: white !important;
 
 }
 
 /*FIM MENU*/
 
-.dropdown li a{
+.dropdown li a {
     color: #0093ff !important;
 
 }
-.dropdown li a:hover{
+
+.dropdown li a:hover {
     color: white !important;
 }
 
-
-
 .navbar .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-    background-color:  #0093ff !important;
+    background-color: #0093ff !important;
 }
 
-table tr a{
+table tr a {
     color: #0093ff !important;
 }
-table tr a:link{
+
+table tr a:link {
     color: #0093ff !important;
+}
+
+.link {
+    color: #0093ff !important;
+    padding: 4px 4px 4px 2px ;
+    text-decoration: underline;
+    background-color: white !important;
+}
+
+.link:hover {
+    text-decoration: none;
+    background-color: white !important;
+    color: white !important;
+
 }
 
 

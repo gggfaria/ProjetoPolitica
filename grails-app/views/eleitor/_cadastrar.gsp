@@ -31,9 +31,9 @@
                 <div class="col-md-10">
                     <span class="obrigatorio">*</span>
                     <label>E-mail</label>
-                    <div class="input-group">
+                    <div class="input-group" id="email">
                         <span class="input-group-addon">@</span>
-                        <input type="email" name="j_username"  placeholder="E-mail"  required="" class="form-control">
+                        <input type="email" id="nome_cadastro" name="j_username"  placeholder="E-mail"  required="" class="form-control">
                     </div>
                 </div>
             </div>
@@ -103,7 +103,19 @@
     </div>
 
     <br/>
-
 </g:formRemote>
+
+<script type="text/javascript" src="/Politica/js/comum/validacao.js"></script>
+<script>
+    $(document).ready(function() {
+
+        $('#nome_cadastro').on('blur',function () {
+            var email_login = $('#nome_cadastro').val()
+            validarEmail(email_login)
+        })
+    })
+
+
+</script>
 
 

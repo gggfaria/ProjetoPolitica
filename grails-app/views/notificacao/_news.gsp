@@ -19,17 +19,19 @@
           onclick="excluirNotificacao(${notificacao.id})">
         <i class="fa fa-times" aria-hidden="true"></i>
     </span>
+
     <li>
         <h4>
             ${notificacao.titulo}
         </h4>
 
         <sec:ifAllGranted roles="ROLE_POLITICO">
-            <p>${notificacao.descricao}<g:link onclick="visualizarNotificacao(${notificacao.id})"
-                                               controller="pergunta"
-                                               action="responder"
-                                               id="${notificacao.caminho}"><br>Clique aqui para interagir</g:link>
-            </p>
+            <g:link class="link" onclick="visualizarNotificacao(${notificacao.id})"
+                    controller="pergunta"
+                    action="responder"
+                    id="${notificacao.caminho}">
+               ${notificacao.descricao}
+            </g:link>
         </sec:ifAllGranted>
         <sec:ifAllGranted roles="ROLE_ELEITOR">
             <p>${notificacao.descricao}<g:link onclick="visualizarNotificacao(${notificacao.id})"

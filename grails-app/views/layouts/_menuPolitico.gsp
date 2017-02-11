@@ -60,8 +60,8 @@
                         top: -10px;
                         left: 2px;">${session.notificacoes}</span>
                     </a>
-                    <ul class="dropdown-menu" style="width: 390px">
-                        <li class="header">Você tem ${session.notificacoes} mensagem(s) não visualizada(s)</li>
+                    <ul class="dropdown-menu" style="width: 350px">
+                        <li class="header text-center" style="margin: 5px;">Você tem ${session.notificacoes} mensagem(s) não visualizada(s)</li>
                         <br>
                         <g:include controller="notificacao" action="listar"/>
                         <li class="footer text-center"><a href="#" onclick="mostrarNotificacoes()">Veja mais</a></li>
