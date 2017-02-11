@@ -85,7 +85,7 @@ class RespostaController {
             //-----------------------------------
             pergunta.resposta = resposta
             pergunta = pergunta.save(flush: true)
-            notificacao.caminho = pergunta.proposta.id
+            notificacao.caminho = pergunta.proposta.id + "#answer"+resposta.id
             notificacao.save(flush: true)
             render resposta as JSON
         }

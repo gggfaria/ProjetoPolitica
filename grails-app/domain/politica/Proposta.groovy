@@ -13,7 +13,7 @@ class Proposta {
     static belongsTo = [Politico]
     static constraints = {
         descricao (nullable:false, blank:false, size: 80..5000)
-        resumo (nullable:false, blank:false, size: 50..255)
-        titulo (nullable:false, blank:false, size: 20..150)
+        resumo (nullable:false, blank:false, size: 50..1000)
+        titulo (nullable:false, blank:false, size: 5..150)
     }
 }

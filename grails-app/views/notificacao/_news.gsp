@@ -5,7 +5,7 @@
                 class='btn btn-primary col-lg-offset-6'
                 title='Limpar notificações'></g:submitButton></li>
 <hr>
-<g:each in="${listaNotificacoes.take(10)}" var="notificacao">
+<g:each in="${listaNotificacoes}" var="notificacao">
     <g:if test="${notificacao.isVisualizada}">
         <div class="panel-body" >
       <i class="fa fa-folder-open-o fa-2x" aria-hidden="true"></i>
@@ -15,8 +15,10 @@
 
      <i class="fa fa-folder-o fa-2x" aria-hidden="true"></i>
     </g:else>
-    <g:submitButton  name="deletar${notificacao.id}" value="x" class="close"
-                    onclick="excluirNotificacao(${notificacao.id})"/>
+    <span name="deletar${notificacao.id}" class="close"
+          onclick="excluirNotificacao(${notificacao.id})">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </span>
     <li>
         <h4>
             ${notificacao.titulo}
@@ -51,6 +53,8 @@
 
             method: "post",
             success: function (data) {
+                exibirMensagemGenerica(data, "Todas notificações marcadas como visualizadas", false)
+                carregarNotificacoes()
             }
         })
 

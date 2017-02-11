@@ -32,7 +32,7 @@
                                   optionKey="id"></g:select>
                     </div>
 
-                    <span class="obrigatorio" title="Tamanho deverá estar entre 20 e 150 caracteres" style="cursor: pointer">*</span>
+                    <span class="obrigatorio" title="Tamanho deverá estar entre 5 e 150 caracteres" style="cursor: pointer">*</span>
                     <label>Título</label>
 
                     <div class="input-group">
@@ -47,13 +47,13 @@
                 </div>
 
                 <div class="col-md-6 col-xs-12">
-                    <span class="obrigatorio" title="Tamanho deverá estar entre 50 e 255 caracteres" style="cursor: pointer">*</span>
+                    <span class="obrigatorio" title="Tamanho deverá estar entre 50 e 1000 caracteres" style="cursor: pointer">*</span>
                     <label>Resumo</label>
 
 
                     <textarea min="5" rows="3" name="resumo" id="resumo" placeholder="Resumo"
                               required="" class="form-control" oninput="contadorCaracteres('#resumo', '#quantidadeDigitadaResumo')"></textarea>
-                    <p><spam id="quantidadeDigitadaResumo"></spam> caracter(es) digitado(s)</p>
+                    <p><spam id="quantidadeDigitadaResumo"></spam> caracter(es) digitado(s) <small> <i>*Insira uma descrição entre 50 e 1000 caracteres</i></small></p>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
 
                     <textarea type="text" oninput="contadorCaracteres('#descricao', '#quantidadeDigitadaDescricao')" id="descricao" min="5" rows="15" name="descricao" placeholder="Descrição" required=""
                               class="form-control"></textarea>
-                   <p><spam id="quantidadeDigitadaDescricao"></spam> caracter(es) digitado(s)</p>
+                    <p><spam id="quantidadeDigitadaDescricao"></spam> caracter(es) digitado(s) <small> <i>*Insira uma descrição entre 80 e 5000 caracteres</i></small></p>
                 </div>
             </div>
         </div>

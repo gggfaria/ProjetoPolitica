@@ -29,16 +29,16 @@ class PerguntaController {
         pergunta.pessoa = eleitor
         pergunta.validate()
 
-        if(pergunta.hasErrors()){
+        if (pergunta.hasErrors()) {
             def listaErros = []
-            pergunta.errors.allErrors.each{ erro ->
+            pergunta.errors.allErrors.each { erro ->
                 listaErros.add(g.message(message: erro.defaultMessage, error: erro))
             }
 
             def mensagem = ["erro": listaErros]
             render mensagem as JSON
 
-        }else{
+        } else {
             //Gravando Notificação
             Proposta proposta = Proposta.findById(params.propostaId)
             Pessoa pessoaPergunta
@@ -71,22 +71,19 @@ class PerguntaController {
         if (params.id) {
             def pergunta = Pergunta.findById(params.id)
             if (pergunta.proposta.politico.id != politico.id) {
-                redirect(controller: "politico", action: "perguntas")
+                redirect(controller: "proposta", action: "detalhes", id: pergunta.proposta.id + "#ask" + pergunta.id)
             } else if (pergunta.isRespondida) {
-                redirect(controller: "politico", action: "perguntas")
+                redirect(controller: "proposta", action: "detalhes", id: pergunta.proposta.id + "#ask" + pergunta.id)
             } else {
                 render(view: "responder", model: ["pergunta": pergunta])
             }
 
-        }else{
+        } else {
             redirect(controller: "politico", action: "perguntas")
         }
 
 
     }
-
-
-
 
 
     @Secured(['ROLE_ELEITOR'])

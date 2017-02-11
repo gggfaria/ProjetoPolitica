@@ -1,5 +1,5 @@
 <g:each in="${listaNotificacoes}" var="notificacao">
-<hr>
+    <hr>
     <g:if test="${notificacao.isVisualizada}">
         <div class="panel-body" >
       <i class="fa fa-folder-open-o fa-2x" aria-hidden="true"></i>
@@ -9,8 +9,11 @@
 
      <i class="fa fa-folder-o fa-2x" aria-hidden="true"></i>
     </g:else>
-    <g:submitButton name="deletar${notificacao.id}" value="x" class="close"
-                    onclick="excluirNotificacao(${notificacao.id})"/>
+    <span name="deletar${notificacao.id}" class="close"
+          onclick="excluirNotificacao(${notificacao.id})">
+        <i class="fa fa-times" aria-hidden="true"></i>
+
+    </span>
     <li>
         <h4>
             ${notificacao.titulo}
@@ -33,7 +36,6 @@
     </li>
     <small><i class="fa fa-clock-o"></i> ${notificacao.dataHora.format("dd/MM/yyyy hh:mm")}</small>
     </div>
-
 
 </g:each>
 

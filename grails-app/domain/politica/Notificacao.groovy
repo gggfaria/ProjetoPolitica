@@ -3,7 +3,7 @@ package politica
 class Notificacao {
     String titulo
     String descricao
-    int caminho
+    String caminho
     Pessoa pessoa
     Date dataHora
     boolean isVisualizada
