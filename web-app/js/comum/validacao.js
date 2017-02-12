@@ -18,8 +18,25 @@ function validarEmail(login_email) {
     })
 }
 
+function validarPreenchimento(inputId,  divId) {
+    var input = document.getElementById(inputId);
+    if(input.checkValidity()){
+        $(divId).removeClass('has-error');
+        $(divId).addClass('has-success');
+    }else {
+        $(divId).removeClass('has-success');
+        $(divId).addClass('has-error');
+    }
 
-function validarPreenchimentoForm() {
+}
+
+function validarSelect(selectId, divId) {
+    var select = document.getElementById(selectId);
+    if(select.checkValidity()){
+        select.style.borderColor = '#3C763D';
+    }else {
+        select.style.borderColor = '#A94442';
+    }
 
 }
 

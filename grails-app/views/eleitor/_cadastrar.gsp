@@ -1,15 +1,17 @@
-<g:formRemote name="formEleitor" url="[controller:'eleitor', action:'cadastrar']" onSuccess="exibirMensagem(data)" class="form-group">
+<g:formRemote name="formEleitor" url="[controller:'eleitor', action:'cadastrar']"
+              onSuccess="exibirMensagemGenerica(data, 'Cadastro realizado com sucesso', true)" class="form-group">
     <div class="row">
         <div class="col-md-12" style="margin-left: 25px">
             <div class="row">
                 <div class="col-md-10">
                     <span class="obrigatorio">*</span>
                     <label>Nome completo</label>
-                    <div class="input-group">
+                    <div class="input-group" id="divNome">
                         <span class="input-group-addon">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
-                        <input type="text" name="nome" placeholder="Nome" id="nome" required="" class="form-control">
+                        <input type="text" name="nome" placeholder="Nome" onblur="validarPreenchimento(this.id, '#divNome')"
+                               id="nome" required="" class="form-control">
                     </div>
                 </div>
             </div>
@@ -18,11 +20,12 @@
                 <div class="col-md-10">
                     <span class="obrigatorio"> * </span>
                     <label>Data de nascimento</label>
-                    <div class="input-group">
+                    <div class="input-group" id="divDataNascimento">
                         <span class="input-group-addon">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                         </span>
-                        <input type="text" name="dataNascimento" placeholder="dd/mm/aaaa"  id="dataNascimento"  class="form-control">
+                        <input type="text" name="dataNascimento" placeholder="dd/mm/aaaa"  id="dataNascimento" required=""
+                               onchange="validarPreenchimento(this.id, '#divDataNascimento')" class="form-control">
                     </div>
                 </div>
             </div>
@@ -42,11 +45,11 @@
                 <div class="col-md-10">
                     <span class="obrigatorio">*</span>
                     <label>Senha</label>
-                    <div class="input-group">
+                    <div class="input-group" id="divSenha">
                         <span class="input-group-addon">
                             <i class="fa fa-key" aria-hidden="true"></i>
                         </span>
-                        <input type="password" min="5" name="j_password" id="senha"  placeholder="Senha"  required="" class="form-control">
+                        <input type="password" onblur="validarPreenchimento(this.id, '#divSenha')" min="5" name="j_password" id="senha"  placeholder="Senha"  required="" class="form-control">
                         <span class="input-group-addon" style="cursor: pointer;" onmousedown="exibirSenha()" onmouseup="esconderSenha()">
                             <i class="fa fa-eye" aria-hidden="true"></i>
                         </span>
@@ -59,12 +62,13 @@
                 <div class="col-md-10">
                     <span class="obrigatorio">*</span>
                     <label>Sexo</label>
-                    <div class="input-group">
+                    <div class="input-group" id="divSexo">
                         <span class="input-group-addon">
                             <i class="fa fa-venus-mars" aria-hidden="true"></i>
                         </span>
-                        <select name="sexo" class="form-control" required="">
-                            <option value="0">Selecione</option>
+                        <select name="sexo" class="form-control" required="" id="selectSexo"
+                                onchange="validarPreenchimento(this.id, '#divSexo')">
+                            <option value="">Selecione</option>
                             <option value="MASCULINO">Masculino</option>
                             <option value="FEMININO">Feminino</option>
                             <option value="OUTROS">Outros</option>
@@ -113,7 +117,9 @@
             var email_login = $('#nome_cadastro').val()
             validarEmail(email_login)
         })
+        $('#divDataNascimento').removeClass('has-error');
     })
+
 
 
 </script>

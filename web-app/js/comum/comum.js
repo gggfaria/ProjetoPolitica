@@ -168,6 +168,9 @@ function exibirMensagemGenerica(data, mensagemSucesso, isLimpar) {
 function limparCampos() {
     $('input').val('')
     $('textarea').val('')
+    $('select').val('')
+    $('div').removeClass('has-error');
+    $('div').removeClass('has-success');
 }
 
 
