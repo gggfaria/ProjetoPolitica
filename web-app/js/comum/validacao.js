@@ -30,7 +30,7 @@ function validarPreenchimento(inputId,  divId) {
 
 }
 
-function validarSelect(selectId, divId) {
+function validarSelect(selectId) {
     var select = document.getElementById(selectId);
     if(select.checkValidity()){
         select.style.borderColor = '#3C763D';

@@ -34,6 +34,7 @@ class BootStrap {
         cadastrarAreas("Transporte","fa-subway")
 
         cadastrarUsuario("João José", "joao.jose@mail.com", "senha")
+        cadastrarUsuario("João Silva", "joao.silva@mail.com", "senha")
     }
 
     def destroy = {
