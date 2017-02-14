@@ -8,6 +8,7 @@ class PropostaController {
     transient springSecurityService
 
     PropostaService propostaService
+    NotificacaoService notificacaoService
 
     @Secured(['ROLE_POLITICO'])
     def index() {
@@ -84,6 +85,7 @@ class PropostaController {
         proposta.titulo = params.titulo
         proposta.resumo = params.resumo
         proposta.descricao = params.descricao
+        proposta.status = 'AGUARDANDO'
         proposta.politico = politico
         proposta.politico.id = politico.id
         proposta.area = Area.get(areaId)
@@ -125,7 +127,16 @@ class PropostaController {
             if (proposta == null) {
                 render(view: '/erro404', model: [mensagem: 'Proposta não encontrada']);
             } else {
-                render(view: "detalhes", model: [proposta: proposta]);
+                Usuario usuarioLogado = springSecurityService.currentUser
+                Pessoa pessoa = Pessoa.findByUsuario(usuarioLogado)
+                def exibirPergunta = true
+
+                    if (pessoa?.id == proposta?.politico?.id || pessoa?.id == null) {
+                        exibirPergunta = false
+                    }
+
+
+                render(view: "detalhes", model: [proposta: proposta, exibirPergunta: exibirPergunta]);
             }
         }
     }
@@ -138,7 +149,6 @@ class PropostaController {
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def atualizarPerguntas() {
-
         def perguntas = Pergunta.createCriteria().list {
             eq("isAtivada", true)
             proposta {
@@ -146,95 +156,133 @@ class PropostaController {
             }
             order("data", "desc")
         }
-
-        render(view: "perguntas", model: ["perguntas": perguntas])
-    }
-
-
-    @Secured(['ROLE_POLITICO'])
-    def atualizar() {
-
-        Proposta proposta
-        //Pegar usuario logado (politoco)
         Usuario usuarioLogado = springSecurityService.currentUser
-        Politico politico = Politico.findByUsuario(usuarioLogado)
+        Pessoa pessoa = Pessoa.findByUsuario(usuarioLogado)
+        def exibirResposta = false
+        def proposta = Proposta.findById(params.id)
 
-        Integer areaId = params.area?.toInteger()
-        def propostaId = params.id.toLong()
-        proposta = Proposta.get(propostaId)
-
-        if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
-            proposta.titulo = params.titulo
-            proposta.resumo = params.resumo
-            proposta.descricao = params.descricao
-            //proposta.politico = politico
-            //proposta.politico.id = politico.id
-            proposta.area = Area.get(areaId)
+        if (pessoa?.id == proposta?.politico?.id && pessoa.id != null) {
+            exibirResposta = true
 
         }
-        proposta.validate()
 
-        if (proposta.hasErrors()) {
-            def listaErros = []
-            proposta.errors.each { erro ->
-                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
-            }
-            def mensagem = ["erro": listaErros]
-            render mensagem as JSON
-
-        } else {
-            proposta = proposta.save(flush: true)
-            print(proposta.area)
-            def mapa = [proposta: proposta, area: proposta.area]
-
-            render mapa as JSON
-        }
-
+            render(view: "perguntas", model: ["perguntas": perguntas, exibirResposta: exibirResposta])
 
     }
 
-    @Secured(['ROLE_ELEITOR'])
-    def avaliar() {
-        if (params.valor && params.id) {
-            def valor = params.valor.toInteger()
-            def id = params.id.toLong()
+
+        @Secured(['ROLE_POLITICO'])
+        def atualizar() {
+
+            Proposta proposta
+            //Pegar usuario logado (politoco)
             Usuario usuarioLogado = springSecurityService.currentUser
-            Eleitor eleitor = Eleitor.findByUsuario(usuarioLogado)
-            def proposta = Proposta.get(id)
+            Politico politico = Politico.findByUsuario(usuarioLogado)
+            Integer areaId = params.area?.toInteger()
+            def propostaId = params.id.toLong()
+            proposta = Proposta.get(propostaId)
 
-            def nota = Nota.createCriteria().get {
-                eq("proposta.id", id)
-                eq("eleitor.id", eleitor.id)
+            if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
+                proposta.titulo = params.titulo
+                proposta.resumo = params.resumo
+                proposta.descricao = params.descricao
+                //proposta.politico = politico
+                //proposta.politico.id = politico.id
+                proposta.area = Area.get(areaId)
+
             }
+            proposta.validate()
 
-            if (!nota) {
-                nota = new Nota()
-            }
-
-            nota.valor = valor
-            nota.eleitor = eleitor
-            nota.proposta = proposta
-
-            nota.validate()
-
-            if (nota.hasErrors()) {
+            if (proposta.hasErrors()) {
                 def listaErros = []
-
-                print(nota.errors.allErrors)
-                nota.errors.allErrors.each { erro ->
-
-                    listaErros.add(g.message(message: erro.defaultMessage, error: erro))
+                proposta.errors.each { erro ->
+                    listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
                 }
-
-
                 def mensagem = ["erro": listaErros]
                 render mensagem as JSON
 
             } else {
-                nota = nota.save(flush: true)
-                render nota as JSON
+                proposta = proposta.save(flush: true)
+                def mapa = [proposta: proposta, area: proposta.area]
+
+                render mapa as JSON
+            }
+        }
+
+        @Secured(['ROLE_POLITICO'])
+        def alterarStatus() {
+
+            Proposta proposta
+            //Pegar usuario logado (politoco)
+            Usuario usuarioLogado = springSecurityService.currentUser
+            Politico politico = Politico.findByUsuario(usuarioLogado)
+
+            def propostaId = params.idProposta.toLong()
+            proposta = Proposta.get(propostaId)
+
+            if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
+                proposta.status = params.status
+            }
+            proposta.validate()
+            if (proposta.hasErrors()) {
+                def listaErros = []
+                proposta.errors.each { erro ->
+                    listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+                }
+                def mensagem = ["erro": listaErros]
+                render mensagem as JSON
+
+            } else {
+                def status = params.status
+                proposta = proposta.save(flush: true)
+                notificacaoService.atualizarStatus(politico, proposta)
+                def mapa = [proposta: proposta, status: status]
+                render mapa as JSON
+            }
+        }
+
+        @Secured(['ROLE_ELEITOR'])
+        def avaliar() {
+            if (params.valor && params.id) {
+                def valor = params.valor.toInteger()
+                def id = params.id.toLong()
+                Usuario usuarioLogado = springSecurityService.currentUser
+                Eleitor eleitor = Eleitor.findByUsuario(usuarioLogado)
+                def proposta = Proposta.get(id)
+
+                def nota = Nota.createCriteria().get {
+                    eq("proposta.id", id)
+                    eq("eleitor.id", eleitor.id)
+                }
+
+                if (!nota) {
+                    nota = new Nota()
+                }
+
+                nota.valor = valor
+                nota.eleitor = eleitor
+                nota.proposta = proposta
+
+                nota.validate()
+
+                if (nota.hasErrors()) {
+                    def listaErros = []
+
+                    print(nota.errors.allErrors)
+                    nota.errors.allErrors.each { erro ->
+
+                        listaErros.add(g.message(message: erro.defaultMessage, error: erro))
+                    }
+
+
+                    def mensagem = ["erro": listaErros]
+                    render mensagem as JSON
+
+                } else {
+                    nota = nota.save(flush: true)
+                    render nota as JSON
+                }
             }
         }
     }
-}
 

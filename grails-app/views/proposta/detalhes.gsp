@@ -25,7 +25,8 @@
 <div class="container-fluid">
     <h2>Proposta</h2>
     <hr/>
-    <h4>${proposta.politico.nome}</h4>
+    <h4>Autor: ${proposta.politico.nome}<br>
+    Número:${proposta.politico.numero}<br> Partido:${proposta.politico.partido.nome}</h4>
     <br/>
 
     <div class="col-md-12">
@@ -65,6 +66,7 @@
                         </div>
                     </sec:ifAllGranted>
                 </div>
+
             </div>
 
             <div class="col-lg-5 col-md-5 col-xs-12 text-center">
@@ -80,12 +82,12 @@
                         <div><div></div></div>
                     </div>
                 </div>
-
+                <h4>Andamento: ${proposta.status.id}</h4>
             </div>
+            <br>
 
-            <sec:ifAllGranted roles="ROLE_ELEITOR">
-                <h2>Enviar pergunta</h2>
-                <hr/>
+               <g:if test="${exibirPergunta == true}">
+
                 <g:formRemote name="formPergunta" url="[controller: 'pergunta', action: 'salvar']" class="form-group"
                               onSuccess="exibirMensagemAdicionarPergunta(data,${proposta.id})">
 
@@ -93,6 +95,8 @@
 
                     <div class="row">
                         <div class="col-md-12">
+                            <h2>Enviar pergunta</h2>
+                            <hr/>
                             <div class="row">
                                 <div class="col-md-12">
                                     <span class="obrigatorio">*</span>
@@ -117,10 +121,10 @@
 
                     <br/>
                 </g:formRemote>
-            </sec:ifAllGranted>
+               </g:if>
         </div>
 
-        <sec:ifNotGranted roles="ROLE_ELEITOR">
+        <sec:ifNotLoggedIn>
             <div class="row">
                 <div class="col-md-12">
                     <div class="alert alert-warning" role="alert">
@@ -133,7 +137,7 @@
 
                 </div>
             </div>
-        </sec:ifNotGranted>
+        </sec:ifNotLoggedIn>
 
 
 

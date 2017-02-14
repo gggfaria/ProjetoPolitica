@@ -1,8 +1,8 @@
 <div class="col-md-12" style="overflow-y: scroll; height:300px;">
 
-    <li class="col-lg-offset-7">
+    <li>
 <g:submitButton name="deletar" value="Limpar" type='button' onclick="limparNotificacoes()"
-                class='btn btn-primary col-lg-offset-6'
+                class='btn btn-primary col-lg-offset-10'
                 title='Limpar notificações'></g:submitButton></li>
 <hr>
 <g:each in="${listaNotificacoes}" var="notificacao">
@@ -26,12 +26,13 @@
         </h4>
 
         <sec:ifAllGranted roles="ROLE_POLITICO">
-            <g:link class="link" onclick="visualizarNotificacao(${notificacao.id})"
-                    controller="pergunta"
-                    action="responder"
-                    id="${notificacao.caminho}">
-               ${notificacao.descricao}
-            </g:link>
+
+            <p>${notificacao.descricao}<g:link onclick="visualizarNotificacao(${notificacao.id})"
+                                               controller="proposta"
+                                               action="detalhes"
+                                               id="${notificacao.caminho}"><br>Clique aqui para interagir</g:link>
+            </p>
+
         </sec:ifAllGranted>
         <sec:ifAllGranted roles="ROLE_ELEITOR">
             <p>${notificacao.descricao}<g:link onclick="visualizarNotificacao(${notificacao.id})"

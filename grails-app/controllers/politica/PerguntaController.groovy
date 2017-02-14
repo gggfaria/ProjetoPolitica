@@ -52,7 +52,7 @@ class PerguntaController {
             def alvoNotificacao = Pessoa.findById(proposta.politico.id)
             notificacao.pessoa = alvoNotificacao
             pergunta = perguntaService.salvarPergunta(pergunta)
-            notificacao.caminho = pergunta.id
+            notificacao.caminho = proposta.id + "#ask"+pergunta.id
             notificacao.save(flush: true)
             //-----------------------------
             render pergunta as JSON
