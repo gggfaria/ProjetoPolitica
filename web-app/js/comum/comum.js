@@ -125,7 +125,7 @@ function exibirMensagemAdicionarPergunta(data, id) {
 
 
     } else {
-        $.notify("Mensagem enviada com sucesso", "success");
+        $.notify("Pergunta enviada com sucesso", "success");
         $('textarea').val('')
         $("input[type=text]").val('')
         $('#ListaPerguntas').fadeToggle()

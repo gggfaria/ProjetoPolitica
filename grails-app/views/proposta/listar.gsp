@@ -40,7 +40,6 @@
             <th>Descrição</th>
             <th>Editar</th>
             <th>Perguntas</th>
-
         </tr>
         </thead>
         <tbody>
@@ -67,7 +66,6 @@
                 <td>
                     <g:link controller="proposta" action="pergunta" id="${proposta.id}">Perguntas</g:link>
                 </td>
-
 
             </tr>
         </g:each>
