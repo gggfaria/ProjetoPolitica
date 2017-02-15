@@ -21,26 +21,24 @@ class EleitorControllerSpec extends Specification {
     void "Cadastrar novo eleitor" (){
         when:
 
-        //def tokenHolder = SynchronizerTokensHolder.store(session)
-        //params[SynchronizerTokensHolder.TOKEN_URI] = '/humorista/salvar'
-        // params[SynchronizerTokensHolder.TOKEN_KEY] = tokenHolder.generateToken(params[SynchronizerTokensHolder.TOKEN_URI])
-        params.nome = 'Gabriel F'
-        params.dataNascimento = '10/10/1990'
-        params.email = 'gabriel@mail.com'
+            //def tokenHolder = SynchronizerTokensHolder.store(session)
+            //params[SynchronizerTokensHolder.TOKEN_URI] = '/humorista/salvar'
+           // params[SynchronizerTokensHolder.TOKEN_KEY] = tokenHolder.generateToken(params[SynchronizerTokensHolder.TOKEN_URI])
+            params.nome = 'Gabriel F'
+            params.dataNascimento = '10/10/1990'
+            params.email = 'gabriel@mail.com'
 
-        params.sexo = 'MASCULINO'
+            params.sexo = 'MASCULINO'
 
-        params.j_password = 'Senha'
-        params.j_username = 'gabriel@mail.com'
+            params.j_password = 'Senha'
+            params.j_username = 'gabriel@mail.com'
 
 
         controller.cadastrar()
         then:
-        response.json.id != null
+            response.json.id != null
 
 
     }
-
-
 
 }
