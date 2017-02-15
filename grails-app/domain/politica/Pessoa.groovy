@@ -22,5 +22,6 @@ public class Pessoa {
     static mapping = {
         discriminator column: "tipo", value: "GERAL"
         perguntas cascade: "all-delete-orphan"
+        notificacoes cascade: "all-delete-orphan"
     };
 }

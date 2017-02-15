@@ -11,9 +11,6 @@
 <div class="container-fluid">
     <h2>Propostas</h2>
     <hr/>
-
-
-
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
@@ -22,6 +19,7 @@
             <th>Publicação</th>
             <th>Editar</th>
             <th>Detalhes</th>
+            <th style="column-span: 2">Status</th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +40,15 @@
                     </g:remoteLink>
                 </td>
                 <td class="text-center">
+                    <g:link controller="proposta" action="detalhes" id="${proposta.id}"
+                            title="Visualizar proposta completa">
+                        <i class="fa fa-plus fa-2x"></i>
+                    </g:link>
+                </td>
+                <td>
+                    ${proposta.status.id}
+                </td>
+                <td>
                     <g:link controller="proposta" action="detalhes" id="${proposta.id}"
                             title="Visualizar proposta completa">
                         <i class="fa fa-plus fa-2x"></i>
@@ -95,12 +102,12 @@
         $("#titulo" + data.proposta.id).text(data.proposta.titulo)
 
         var areaTr = $("#area" + data.proposta.id)
-        var areaIcone = $("#area" + data.proposta.id+' i')
+        var areaIcone = $("#area" + data.proposta.id + ' i')
 
         //alterando icone
-        areaIcone.attr('class','fa '+ data.area.icone)
+        areaIcone.attr('class', 'fa ' + data.area.icone)
 
-        areaTr.text(' '+data.area.nome)
+        areaTr.text(' ' + data.area.nome)
         areaTr.prepend(areaIcone)
 
     }
