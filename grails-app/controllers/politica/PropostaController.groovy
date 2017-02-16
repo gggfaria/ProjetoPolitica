@@ -8,6 +8,7 @@ class PropostaController {
     transient springSecurityService
 
     PropostaService propostaService
+    NotificacaoService notificacaoService
 
     @Secured(['ROLE_POLITICO'])
     def index() {
@@ -80,7 +81,7 @@ class PropostaController {
         }
 
         proposta = new Proposta()
-
+        proposta.status = 'AGUARDANDO'
         proposta.titulo = params.titulo
         proposta.resumo = params.resumo
         proposta.descricao = params.descricao
@@ -191,6 +192,38 @@ class PropostaController {
         }
 
 
+    }
+    @Secured(['ROLE_POLITICO'])
+    def alterarStatus() {
+
+        Proposta proposta
+        //Pegar usuario logado (politoco)
+        Usuario usuarioLogado = springSecurityService.currentUser
+        Politico politico = Politico.findByUsuario(usuarioLogado)
+
+        def propostaId = params.idProposta.toLong()
+        proposta = Proposta.get(propostaId)
+
+        if (propostaService.propostaPertenceUsuario(proposta, politico.id)) {
+            proposta.status = params.status
+        }
+        proposta.validate()
+        if (proposta.hasErrors()) {
+            def listaErros = []
+            proposta.errors.each { erro ->
+                listaErros += g.message(message: erro.fieldError.defaultMessage, error: erro.fieldError)
+            }
+            def mensagem = ["erro": listaErros]
+            render mensagem as JSON
+
+        } else {
+
+            proposta = proposta.save(flush: true)
+            def status = proposta.status.id
+            notificacaoService.atualizarStatus(politico, proposta)
+            def mapa = [proposta: proposta, status: status]
+            render mapa as JSON
+        }
     }
 
     @Secured(['ROLE_ELEITOR'])

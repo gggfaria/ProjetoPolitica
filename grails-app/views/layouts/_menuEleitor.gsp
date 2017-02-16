@@ -43,7 +43,7 @@
 
                             </a>
                             <ul class="dropdown-menu" style="width: 390px">
-                                <li class="header text-center" style="margin: 5px;">Você tem ${session.notificacoes} mensagem(s) não visualizada(s)</li>
+                                <li class="header" style="margin: 5px;">Você tem ${session.notificacoes} mensagem(s) não visualizada(s)</li>
                                 <br>
                                 <g:include controller="notificacao" action="listar"/>
                                 <li class="footer text-center"><a href="#" class="link" onclick="mostrarNotificacoes()">Veja mais</a></li>

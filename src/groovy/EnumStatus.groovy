@@ -1,9 +1,11 @@
 package politica
 
 public enum EnumStatus {
-    AGUARDANDO('Aguardando'),
-    DESENVOLVIMENTO('Em Desenvolvimento'),
-    CUMPRIDA('Cumprida')
+    AGUARDANDO('Aguardando aprovação'),
+    DESENVOLVIMENTO('Em desenvolvimento'),
+    CUMPRIDA('Proposta cumprida'),
+    CANCELADA('Cancelada pelo autor'),
+    RECUSADA('Proposta recusada')
 
     String id;
 
