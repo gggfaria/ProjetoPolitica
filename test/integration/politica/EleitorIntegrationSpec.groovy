@@ -19,7 +19,7 @@ class EleitorIntegrationSpec extends Specification {
         when:
         EleitorController controller = new EleitorController()
 
-        controller.params.email = 'joao.jose@mail.com'
+        controller.params.email = "gabrielguima93@gmail.com"
         controller.validarEmail()
 
         then:

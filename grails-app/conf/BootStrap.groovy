@@ -1,4 +1,5 @@
 import politica.Area
+import politica.Eleitor
 import politica.EnumSexo
 import politica.Partido
 import politica.Permissao
@@ -26,15 +27,16 @@ class BootStrap {
         }
 
         cadastrarAreas("Cultura", "fa fa-book")
-        cadastrarAreas("Saúde","fa-medkit")
-        cadastrarAreas("Educação","fa-book")
-        cadastrarAreas("Turismo","fa-suitcase")
-        cadastrarAreas("Segurança","fa-shield")
-        cadastrarAreas("Meio Ambiente","fa-tree")
-        cadastrarAreas("Transporte","fa-subway")
+        cadastrarAreas("Saúde", "fa-medkit")
+        cadastrarAreas("Educação", "fa-book")
+        cadastrarAreas("Turismo", "fa-suitcase")
+        cadastrarAreas("Segurança", "fa-shield")
+        cadastrarAreas("Meio Ambiente", "fa-tree")
+        cadastrarAreas("Transporte", "fa-subway")
 
-        cadastrarUsuario("João José", "joao.jose@mail.com", "senha")
-        cadastrarUsuario("João Silva", "joao.silva@mail.com", "senha")
+        cadastrarUsuarioPolitico("João José", "joao.jose@mail.com", "senha")
+        cadastrarUsuarioPolitico("João Silva", "joao.silva@mail.com", "senha")
+        cadastrarUsuarioEleitor("Gabriel Faria", "gabrielguima93@gmail.com", "senha")
     }
 
     def destroy = {
@@ -49,16 +51,15 @@ class BootStrap {
     }
 
 
-
-    def cadastrarUsuario(String nome, String email, String senha) {
+    def cadastrarUsuarioPolitico(String nome, String email, String senha) {
         Politico politico = Politico.findByEmail(email)
         if (politico == null) {
-            def partido =  new Partido(bandeira: "/Politica/static/partido/bandeira.png",
-                    sigla:"PQWERT", numero: 555, nome: "PARTIDO DOS TESTES" ).save(flush: true)
+            def partido = new Partido(bandeira: "/Politica/static/partido/bandeira.png",
+                    sigla: "PQWERT", numero: 555, nome: "PARTIDO DOS TESTES").save(flush: true)
 
             Permissao permissao = Permissao.findByAuthority("ROLE_POLITICO")
 
-            politico = new Politico(nome:nome, email: email, dataNascimento: new Date(),isAtivada: true, sexo: EnumSexo.MASCULINO,
+            politico = new Politico(nome: nome, email: email, dataNascimento: new Date(), isAtivada: true, sexo: EnumSexo.MASCULINO,
                     isCandidato: false, isEleito: true, foto: "/Politica/static/images/politico/perfil.jpg",
                     numero: 42)
             politico.usuario = new Usuario(username: email, password: senha,
@@ -70,6 +71,22 @@ class BootStrap {
         }
     }
 
+
+    def cadastrarUsuarioEleitor(String nome, String email, String senha) {
+        def eleitor = Eleitor.findByEmail(email)
+        if (eleitor == null) {
+            Permissao permissao = Permissao.findByAuthority("ROLE_ELEITOR")
+
+            eleitor = new Eleitor(nome: nome, email: email, dataNascimento: new Date(), isAtivada: true,
+                    sexo: EnumSexo.MASCULINO)
+            eleitor.usuario = new Usuario(username: email, password: senha,
+                    enabled: true, accountExpired: false, accountLocked: false,
+                    passwordExpired: false).save(flush: true)
+
+            def usuarioPermissao = new UsuarioPermissao(usuario: eleitor.usuario, permissao: permissao).save(flush: true)
+
+        }
+    }
 
 
 }
