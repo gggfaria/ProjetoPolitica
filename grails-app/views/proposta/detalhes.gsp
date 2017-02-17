@@ -23,7 +23,7 @@
 <body>
 
 <div class="container-fluid">
-    <h2>Proposta nº: #${proposta.id}</h2>
+    <h2>Proposta</h2>
     <hr/>
 
     <div class="col-md-12">
@@ -88,37 +88,44 @@
                     </div>
                 </div>
 
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Status da Proposta
-                    </div>
-
-                    <div class="panel-body">
-                        <g:if test="${proposta.status.toString() == "CANCELADA"}">
-                            <h3 style="color: #8e44ad">${proposta.status.id} <i class="fa fa-frown-o" aria-hidden="true"></i></h3>
-                        </g:if>
-                        <g:if test="${proposta.status.toString() == "RECUSADA"}">
-                            <h3 style="color: #e74c3c">${proposta.status.id} <i class="fa fa-thumbs-down" aria-hidden="true"></i></h3></h3>
-                        </g:if>
-                        <g:if test="${proposta.status.toString() == "AGUARDANDO"}">
-                            <h3 style="color: #2980b9">${proposta.status.id} <i class="fa fa-hourglass-start" aria-hidden="true"></i></h3>
-                        </g:if>
-                        <g:if test="${proposta.status.toString() == "DESENVOLVIMENTO"}">
-                            <h3 style="color: #f39c12">${proposta.status.id} <i class="fa fa-cogs" aria-hidden="true"></i></h3>
-                        </g:if>
-                        <g:if test="${proposta.status.toString() == "CUMPRIDA"}">
-                            <h3 style="color: #27ae60">${proposta.status.id} <i class="fa fa-thumbs-up" aria-hidden="true"></i></h3>
-                        </g:if>
-                        <hr>
-                        <p><b>Autor:</b><i>${proposta.politico.nome}</i> ${proposta.politico.cargo} <b>Nº</b> <i>${proposta.politico.numero} - ${proposta.politico.partido.sigla}</i>
-                            <br>
-                            <b>Data de publicação:</b><i>${proposta.dataPublicacao.format("dd/MM/yyyy hh:mm")}</i>
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
 
+                    <g:if test="${proposta.status.toString() == "CANCELADA"}">
+                        <h3 style="color: #8e44ad">${proposta.status.id} <i class="fa fa-frown-o"
+                                                                            aria-hidden="true"></i></h3>
+                    </g:if>
+                    <g:if test="${proposta.status.toString() == "RECUSADA"}">
+                        <h3 style="color: #e74c3c">${proposta.status.id} <i class="fa fa-thumbs-down"
+                                                                            aria-hidden="true"></i></h3></h3>
+                    </g:if>
+                    <g:if test="${proposta.status.toString() == "AGUARDANDO"}">
+                        <h3 style="color: #2980b9">${proposta.status.id} <i class="fa fa-hourglass-start"
+                                                                            aria-hidden="true"></i></h3>
+                    </g:if>
+                    <g:if test="${proposta.status.toString() == "DESENVOLVIMENTO"}">
+                        <h3 style="color: #f39c12">${proposta.status.id} <i class="fa fa-cogs"
+                                                                            aria-hidden="true"></i>
+                        </h3>
+                    </g:if>
+                    <g:if test="${proposta.status.toString() == "CUMPRIDA"}">
+                        <h3 style="color: #27ae60">${proposta.status.id} <i class="fa fa-thumbs-up"
+                                                                            aria-hidden="true"></i></h3>
+                    </g:if>
+                    <hr>
+                </div>
+
+                <p><b>Autor:</b><i>${proposta.politico.nome}</i> ${proposta.politico.cargo} <b>Partido:</b> <i>${proposta.politico.numero} - ${proposta.politico.partido.sigla}</i>
+                    <br>
+                    <b>Data de publicação: </b><i>${proposta.dataPublicacao.format("dd/MM/yyyy hh:mm")}</i>
+                </p>
+
+            </div>
+        </div>
         <sec:ifAllGranted roles="ROLE_ELEITOR">
             <h2>Enviar pergunta</h2>
             <hr/>
