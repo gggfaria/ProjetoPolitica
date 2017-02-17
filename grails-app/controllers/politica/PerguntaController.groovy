@@ -70,13 +70,20 @@ class PerguntaController {
 
         if (params.id) {
             def pergunta = Pergunta.findById(params.id)
-            if (pergunta.proposta.politico.id != politico.id) {
-                redirect(controller: "proposta", action: "detalhes", id: pergunta.proposta.id + "#ask" + pergunta.id)
-            } else if (pergunta.isRespondida) {
-                redirect(controller: "proposta", action: "detalhes", id: pergunta.proposta.id + "#ask" + pergunta.id)
-            } else {
-                render(view: "responder", model: ["pergunta": pergunta])
+            if(pergunta != null) {
+                if (pergunta.proposta?.politico.id != politico.id) {
+                    redirect(controller: "proposta", action: "detalhes", id: pergunta.proposta.id + "#ask" + pergunta.id)
+                } else if (pergunta.isRespondida) {
+                    redirect(controller: "proposta", action: "detalhes", id: pergunta.proposta.id + "#ask" + pergunta.id)
+                } else {
+                    render(view: "responder", model: ["pergunta": pergunta])
+                }
+            } else
+            {
+                render(view: '/erro404', model: [mensagem: 'Pergunta não encontrada']);
             }
+
+
 
         } else {
             redirect(controller: "politico", action: "perguntas")
