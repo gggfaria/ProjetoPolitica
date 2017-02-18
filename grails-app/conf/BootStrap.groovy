@@ -54,7 +54,7 @@ class BootStrap {
     def cadastrarUsuarioPolitico(String nome, String email, String senha) {
         Politico politico = Politico.findByEmail(email)
         if (politico == null) {
-            def partido = new Partido(bandeira: "/Politica/static/partido/bandeira.png",
+            def partido = new Partido(bandeira: "/Politica/static/images/partido/bandeira.png",
                     sigla: "PQWERT", numero: 555, nome: "PARTIDO DOS TESTES").save(flush: true)
 
             Permissao permissao = Permissao.findByAuthority("ROLE_POLITICO")
@@ -62,9 +62,16 @@ class BootStrap {
             politico = new Politico(nome: nome, email: email, dataNascimento: new Date(), isAtivada: true, sexo: EnumSexo.MASCULINO,
                     isCandidato: false, isEleito: true, foto: "/Politica/static/images/politico/perfil.jpg",
                     numero: 42)
-            politico.usuario = new Usuario(username: email, password: senha,
+            politico.partido = partido
+            Usuario usuario = new Usuario(username: email, password: senha,
                     enabled: true, accountExpired: false, accountLocked: false,
                     passwordExpired: false).save(flush: true)
+            politico.usuario = Usuario.findByUsername(email)
+            politico.validate()
+            if (politico.hasErrors()) {
+                print(politico.errors.allErrors)
+            } else
+                politico.save(flush: true)
 
             def usuarioPermissao = new UsuarioPermissao(usuario: politico.usuario, permissao: permissao).save(flush: true)
 
@@ -79,9 +86,15 @@ class BootStrap {
 
             eleitor = new Eleitor(nome: nome, email: email, dataNascimento: new Date(), isAtivada: true,
                     sexo: EnumSexo.MASCULINO)
-            eleitor.usuario = new Usuario(username: email, password: senha,
+            Usuario usuario = new Usuario(username: email, password: senha,
                     enabled: true, accountExpired: false, accountLocked: false,
                     passwordExpired: false).save(flush: true)
+            eleitor.usuario = Usuario.findByUsername(email)
+            eleitor.validate()
+            if (eleitor.hasErrors()) {
+                print(eleitor.errors.allErrors)
+            } else
+                eleitor.save(flush: true)
 
             def usuarioPermissao = new UsuarioPermissao(usuario: eleitor.usuario, permissao: permissao).save(flush: true)
 
