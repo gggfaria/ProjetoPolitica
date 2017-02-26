@@ -25,7 +25,7 @@ environments {
     test {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop','update'
-            url = "jdbc:mysql://localhost/politica"
+            url = "jdbc:mysql://localhost/politica_teste2"
             username = "politica"
             password = "politicaMunicipal"
         }

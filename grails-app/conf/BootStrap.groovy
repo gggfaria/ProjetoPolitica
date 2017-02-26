@@ -1,5 +1,6 @@
 import politica.Area
 import politica.Eleitor
+import politica.EnumCargo
 import politica.EnumSexo
 import politica.Partido
 import politica.Permissao
@@ -34,8 +35,8 @@ class BootStrap {
         cadastrarAreas("Meio Ambiente", "fa-tree")
         cadastrarAreas("Transporte", "fa-subway")
 
-        cadastrarUsuarioPolitico("João José", "joao.jose@mail.com", "senha")
-        cadastrarUsuarioPolitico("João Silva", "joao.silva@mail.com", "senha")
+        cadastrarUsuarioPolitico("João José", "joao.jose@mail.com", "senha", EnumCargo.Vereador )
+        cadastrarUsuarioPolitico("João Silva", "joao.silva@mail.com", "senha", EnumCargo.Prefeito)
         cadastrarUsuarioEleitor("Gabriel Faria", "gabrielguima93@gmail.com", "senha")
     }
 
@@ -51,7 +52,7 @@ class BootStrap {
     }
 
 
-    def cadastrarUsuarioPolitico(String nome, String email, String senha) {
+    def cadastrarUsuarioPolitico(String nome, String email, String senha, EnumCargo cargo) {
         Politico politico = Politico.findByEmail(email)
         if (politico == null) {
             def partido = new Partido(bandeira: "/Politica/static/images/partido/bandeira.png",
@@ -61,7 +62,7 @@ class BootStrap {
 
             politico = new Politico(nome: nome, email: email, dataNascimento: new Date(), isAtivada: true, sexo: EnumSexo.MASCULINO,
                     isCandidato: false, isEleito: true, foto: "/Politica/static/images/politico/perfil.jpg",
-                    numero: 42)
+                    numero: 42, cargo:cargo)
             politico.partido = partido
             Usuario usuario = new Usuario(username: email, password: senha,
                     enabled: true, accountExpired: false, accountLocked: false,

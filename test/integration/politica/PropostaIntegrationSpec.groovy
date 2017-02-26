@@ -19,12 +19,13 @@ class PropostaIntegrationSpec extends Specification {
     void "Atualizar titulo Proposta"() {
         when:
         def proposta = new Proposta();
-        proposta.titulo = "TITULO DA PROPOSTA TESTE PARA EDITAR"
+        proposta.titulo = "TITULO DA PROPOSTA TESTE PARA EDITAR................."
         proposta.resumo = "RESUMO DA PROPOSTA TESTE PARA EDITAR - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi"
         proposta.descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi. Nulla sed eros euismod, euismod neque eget, facilisis mauris. Mauris gravida suscipit pretium. Phasellus eget quam eget tellus convallis facilisis eu non nulla. Vestibulum euismod eget risus ac laoreet."
         proposta.politico = Politico.findByEmail("joao.silva@mail.com")
         proposta.area = Area.findByNome("Saúde")
         proposta.dataPublicacao = new Date()
+        proposta.status = politica.EnumStatus.AGUARDANDO
 
         proposta.validate()
         if (!proposta.hasErrors())
@@ -56,12 +57,13 @@ class PropostaIntegrationSpec extends Specification {
     void "Avaliar proposta"() {
         when:
         def proposta = new Proposta();
-        proposta.titulo = "TITULO DA PROPOSTA TESTE PARA EDITAR"
+        proposta.titulo = "TITULO DA PROPOSTA TESTE PARA EDITAR................."
         proposta.resumo = "RESUMO DA PROPOSTA TESTE PARA EDITAR - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi"
         proposta.descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi. Nulla sed eros euismod, euismod neque eget, facilisis mauris. Mauris gravida suscipit pretium. Phasellus eget quam eget tellus convallis facilisis eu non nulla. Vestibulum euismod eget risus ac laoreet."
-        proposta.politico = Politico.findByEmail("joao.jose@mail.com")
+        proposta.politico = Politico.findByEmail("joao.silva@mail.com")
         proposta.area = Area.findByNome("Saúde")
         proposta.dataPublicacao = new Date()
+        proposta.status = politica.EnumStatus.AGUARDANDO
 
         proposta.validate()
         if (!proposta.hasErrors())
@@ -73,7 +75,7 @@ class PropostaIntegrationSpec extends Specification {
 
         PropostaController controller = new PropostaController()
 
-        SpringSecurityUtils.doWithAuth("gabrielguima@mail.com") {
+        SpringSecurityUtils.doWithAuth("gabrielguima93@gmail.com") {
 
             controller.params.valor = "4"
             controller.params.id = proposta.id
@@ -91,9 +93,10 @@ class PropostaIntegrationSpec extends Specification {
         proposta.titulo = "TITULO DA PROPOSTA TESTE PARA EDITAR"
         proposta.resumo = "RESUMO DA PROPOSTA TESTE PARA EDITAR - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi"
         proposta.descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi. Nulla sed eros euismod, euismod neque eget, facilisis mauris. Mauris gravida suscipit pretium. Phasellus eget quam eget tellus convallis facilisis eu non nulla. Vestibulum euismod eget risus ac laoreet."
-        proposta.politico = Politico.findByEmail("f3lpz@hotmail.com")
+        proposta.politico = Politico.findByEmail("joao.jose@mail.com")
         proposta.area = Area.findByNome("Saúde")
         proposta.dataPublicacao = new Date()
+        proposta.status = politica.EnumStatus.AGUARDANDO
 
         proposta.validate()
         if (!proposta.hasErrors())
@@ -104,14 +107,15 @@ class PropostaIntegrationSpec extends Specification {
         }
         PropostaController controller = new PropostaController()
 
-        SpringSecurityUtils.doWithAuth("f3lpz@hotmail.com") {
+        SpringSecurityUtils.doWithAuth("joao.silva@mail.com") {
 
             controller.params.status = "AGUARDANDO"
+            controller.params.idProposta = proposta.id
             controller.alterarStatus()
         }
 
         then:
-        controller.response.json.status == "Aguardando Aprovação"
+        controller.response.json.status == "Aguardando aprovação"
 
     }
 

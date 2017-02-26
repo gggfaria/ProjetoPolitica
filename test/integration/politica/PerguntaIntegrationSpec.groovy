@@ -20,9 +20,10 @@ class PerguntaIntegrationSpec extends Specification {
         proposta.titulo = "TITULO DA PROPOSTA TESTE PARA EDITAR"
         proposta.resumo = "RESUMO DA PROPOSTA TESTE PARA EDITAR - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi"
         proposta.descricao = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in pretium mi. Nulla sed eros euismod, euismod neque eget, facilisis mauris. Mauris gravida suscipit pretium. Phasellus eget quam eget tellus convallis facilisis eu non nulla. Vestibulum euismod eget risus ac laoreet."
-        proposta.politico = Politico.findByEmail("joao.jose@mail.com")
+        proposta.politico = Politico.findByEmail("joao.silva@mail.com")
         proposta.area = Area.findByNome("Saúde")
         proposta.dataPublicacao = new Date()
+        proposta.status = politica.EnumStatus.AGUARDANDO
 
         proposta.validate()
         if (!proposta.hasErrors())
